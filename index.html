@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Belenon: Battle of the Bands</title>
+<meta name="description" content="A custom Magic: The Gathering set: the card gallery, a booster pack opener and the set's mechanics.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+:root { --bg: #eceef1; --surface: #fff; --ink: #17191d; --ink-soft: #5b606b; --line: #d3d7de; --accent: #6b3fa0; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #15161a; --surface: #1f2126; --ink: #ecedf0; --ink-soft: #a3a8b3; --line: #33363d; --accent: #b48ae6; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.55 "Crimson Pro", Georgia, serif; }
+main { max-width: 980px; margin: 0 auto; padding: 48px 16px 64px; }
+h1 { font: 700 clamp(2rem, 6vw, 3.2rem)/1.1 "Philosopher", Georgia, serif; margin: 0 0 12px; }
+.lede { font-size: 1.2rem; color: var(--ink-soft); max-width: 60ch; margin: 0 0 36px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+a.tile { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+  overflow: hidden; color: inherit; text-decoration: none; transition: transform .15s, box-shadow .15s; }
+a.tile:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.14); }
+a.tile:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+a.tile img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; display: block; background: var(--line); }
+.tile div { padding: 14px 16px 18px; }
+.tile h2 { font: 700 1.25rem/1.2 "Philosopher", Georgia, serif; margin: 0 0 6px; }
+.tile p { margin: 0; color: var(--ink-soft); font-size: 1rem; }
+footer { margin-top: 40px; color: var(--ink-soft); font: 14px/1.5 "Source Sans 3", Helvetica, Arial, sans-serif; }
+</style>
+<main>
+  <h1>Belenon: Battle of the Bands</h1>
+  <p class="lede">A fan-made Magic: The Gathering set about a plane where music is magic and the great genres compete for the crowd. Browse the cards, crack a pack, or read up on how the set plays.</p>
+  <div class="grid">
+    <a class="tile" href="card-gallery.html"><img src="gallery-art/CW04.jpg" alt=""><div><h2>Card gallery</h2><p>Every card in the set, with filters and full card text.</p></div></a>
+    <a class="tile" href="sample-pack.html"><img src="gallery-art/CU06.jpg" alt=""><div><h2>Open a pack</h2><p>A random 15-card booster. Open as many as you like.</p></div></a>
+    <a class="tile" href="mechanics-article.html"><img src="gallery-art/CW07.jpg" alt=""><div><h2>Mechanics preview</h2><p>A guided tour of the set's new mechanics, with example cards.</p></div></a>
+    <a class="tile" href="mechanics-guide.html"><img src="gallery-art/CU03.jpg" alt=""><div><h2>Mechanics reference</h2><p>The rules for each mechanic and the guilds that use them.</p></div></a>
+  </div>
+  <footer>Unofficial fan content, not approved or endorsed by Wizards of the Coast. Magic: The Gathering is a trademark of Wizards of the Coast LLC.</footer>
+</main>
+</html>
