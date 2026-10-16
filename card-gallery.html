@@ -428,7 +428,7 @@ body { background: var(--bg); color: var(--ink); font-family: var(--ui); font-si
 /* Greatest Hits (GH, Collector Booster): the album hangs framed on the wall of its guild's listening room. Each guild has a
    painted room plate (art/room-<guild>.jpg, BR14–BR23 on the art queue), lamp-lit by a lantern of notes, with the record player
    and gear on a low cabinet. The name bar runs across the top and the type bar below the square parody cover, which hangs
-   between them, uncropped, in a dark wooden frame. A "Greatest Hits" imprint runs up the left edge beside it, and the rules
+   between them, smaller than a full art box, framed and matted like a print hung on the wall. A "Greatest Hits" imprint runs up the left edge beside it, and the rules
    text sits on a pale, see-through panel of sleeve stock (tinted by color) through which the cabinet's gear shows faintly. */
 .card.lp-sleeve { background: #0b0b0c none !important; --card-ink: #221e19; --card-ink-soft: #4a443b; color: var(--card-ink); --sleeve: #ece5d3;
   --gold-leaf: linear-gradient(100deg, #9c6c1a 0%, #e2b955 16%, #a8761d 33%, #e9c66a 45%, #fff6d1 50%, #e9c66a 55%, #a8761d 67%, #e2b955 84%, #9c6c1a 100%); }
@@ -438,9 +438,30 @@ body { background: var(--bg); color: var(--ink); font-family: var(--ui); font-si
 .card.lp-sleeve[data-color="G"] { --sleeve: #dde6d3; }
 .lp-stock { position: absolute; inset: 1.6cqw; border-radius: 3.4cqw; background: #2a2119 center / cover no-repeat;
   box-shadow: inset 0 0 1.6cqw rgba(0, 0, 0, .45); }
-/* the frame: dark wood with a thin gold fillet at the opening, casting a soft shadow down and to the left, away from the lantern */
-.card.lp-sleeve .art { left: 10cqw; top: 12.4cqw; width: 74.4cqw; height: 74.4cqw; border-radius: 0; overflow: hidden;
-  box-shadow: 0 0 0 .25cqw #c9a253, 0 0 0 1.5cqw #2a1d14, 0 0 0 1.75cqw #120c08, -1.2cqw 1.8cqw 2.6cqw rgba(0, 0, 0, .55); }
+/* the frame: a framed print hung on the room's wall by a picture wire from a brass nail. Wooden moulding (.lp-frame), a mat
+   tinted by color (::after), and the cover in the mat's opening, smaller than a normal art box so the room shows around it.
+   It casts a soft shadow down and to the left, away from the lantern. Geometry: cover 50 cqw centered at (47.5, 49.5);
+   mat 4.5 cqw; moulding 3.2 cqw. */
+.lp-frame { position: absolute; left: 14.8cqw; top: 16.8cqw; width: 65.4cqw; height: 65.4cqw; box-sizing: border-box;
+  background: linear-gradient(135deg, #6b4528 0%, #3a2414 35%, #2a190d 60%, #573720 100%);
+  box-shadow: inset 0 0 0 .25cqw #170d06, inset .45cqw .45cqw .5cqw rgba(255, 214, 160, .28), inset -.45cqw -.45cqw .6cqw rgba(0, 0, 0, .55),
+              -1.4cqw 2.2cqw 3.2cqw rgba(0, 0, 0, .62), -.3cqw .5cqw .8cqw rgba(0, 0, 0, .4); }
+.lp-frame::after { content: ""; position: absolute; inset: 3.2cqw; background: color-mix(in srgb, var(--sleeve) 70%, #fbf8f0);
+  box-shadow: inset .55cqw .55cqw .9cqw rgba(0, 0, 0, .38), inset -.2cqw -.2cqw .3cqw rgba(255, 255, 255, .5), inset 0 0 0 .12cqw rgba(0, 0, 0, .35); }
+/* picture wire and nail above the frame */
+.lp-frame::before { content: ""; position: absolute; left: 18%; right: 18%; top: -4.4cqw; height: 4.6cqw; pointer-events: none;
+  background: radial-gradient(circle at 50% .9cqw, #f3d79a 0 .25cqw, #9a6f2c .45cqw, #4a3313 .7cqw, rgba(0,0,0,.45) .78cqw, transparent 1.1cqw),
+              url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0 100 L50 18 L100 100' fill='none' stroke='%23c9b58a' stroke-width='1.4' vector-effect='non-scaling-stroke'/%3E%3Cpath d='M0 100 L50 18 L100 100' fill='none' stroke='rgba(0,0,0,.35)' stroke-width='1.4' vector-effect='non-scaling-stroke' transform='translate(-.6 1.5)'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat; }
+.card.lp-sleeve .art { left: 22.5cqw; top: 24.5cqw; width: 50cqw; height: 50cqw; border-radius: 0; overflow: hidden;
+  box-shadow: 0 0 0 .3cqw rgba(255, 255, 255, .55), 0 0 0 .45cqw rgba(0, 0, 0, .22), .3cqw .4cqw .7cqw rgba(0, 0, 0, .3); }
+/* the sleeve as a physical object: printed card stock with a bevelled edge, ring wear where the record inside presses
+   through, and a glare across the glass. Pointer events pass through to the art. */
+.card.lp-sleeve .art::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(118deg, rgba(255,255,255,0) 22%, rgba(255,255,255,.16) 30%, rgba(255,255,255,.04) 37%, rgba(255,255,255,0) 44%),
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0) 44.6%, rgba(255,255,255,.10) 45.6%, rgba(255,255,255,.16) 46.4%, rgba(0,0,0,.10) 47.4%, rgba(0,0,0,0) 48.6%),
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0) 7%, rgba(255,255,255,.08) 8%, rgba(0,0,0,.06) 9.2%, rgba(0,0,0,0) 10.4%);
+  box-shadow: inset .25cqw .25cqw .3cqw rgba(255,255,255,.28), inset -.35cqw -.35cqw .55cqw rgba(0,0,0,.4); }
 .lp-panel { position: absolute; left: 5cqw; top: 95.4cqw; width: 90cqw; height: 33.6cqw; border-radius: 1.6cqw;
   background: color-mix(in srgb, var(--sleeve) 66%, transparent); -webkit-backdrop-filter: blur(.15cqw); backdrop-filter: blur(.15cqw);
   box-shadow: 0 .3cqw 1cqw rgba(0, 0, 0, .3), inset 0 0 0 .2cqw rgba(255, 255, 255, .25); }
@@ -923,7 +944,7 @@ body { background: var(--bg); color: var(--ink); font-family: var(--ui); font-si
     const inner = `
       ${card.variant === "gold-record" ? '<div class="gr-shine" aria-hidden="true"></div><div class="gr-seal" title="Certified Gold">Certified<b>Gold</b></div>' : ""}
       ${bill ? billHTML(card, face, cost) : ""}
-      ${sleeve ? '<div class="lp-stock" aria-hidden="true"></div><div class="lp-panel" aria-hidden="true"></div><div class="lp-label"><span>Greatest Hits</span></div>' : ""}
+      ${sleeve ? '<div class="lp-stock" aria-hidden="true"></div><div class="lp-panel" aria-hidden="true"></div><div class="lp-frame" aria-hidden="true"></div><div class="lp-label"><span>Greatest Hits</span></div>' : ""}
       ${face.overlay ? `<div class="voverlay" style="background-image:${img(face.overlay)}"></div>` : ""}
       ${face.crown ? `<div class="crown" style="background-image:${img(face.crown)}"></div>` : ""}
       ${dfc ? `<div class="dfc-mark${idx && saga ? " back-right" : ""}" title="${idx ? "Back face" : "Front face"}">${markHTML(face.frame, idx > 0)}</div>` : ""}
