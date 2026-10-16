@@ -328,6 +328,14 @@ body { background: var(--bg); color: var(--ink); font-family: var(--ui); font-si
 .filters > label, .search { display: none !important; }
 .pack-btn { font: inherit; font-weight: 600; padding: 8px 16px; border-radius: 8px; border: 1px solid var(--ink); background: var(--ink); color: var(--bg, #fff); cursor: pointer; }
 .pack-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+/* Battles as Scryfall shows them: one grid cell, the same width as every other card, landscape on both faces.
+   The transformed back (a portrait card) is turned a quarter turn counterclockwise, as it lies when a sideways battle is
+   flipped over. Vertical margins keep the landscape card centred in a portrait-height slot so captions line up. */
+.grid > .tile { grid-column: auto !important; }
+.tile-card.landscape .flipper { aspect-ratio: 88 / 63; }
+.tile-card.landscape.flipped .side.back { inset: auto; left: 50%; top: 50%; width: 71.591%; height: 139.683%; transform: translate(-50%, -50%) rotate(-90deg); }
+.grid .tile-card.landscape { margin: 34.046% 0; }
+.sheet-card .tile-card.landscape { max-width: 500px; }
 .tile.foil .tile-card { position: relative; }
 .tile.foil .tile-card::after { content: ""; position: absolute; inset: 0; border-radius: 4.5%/3.3%; pointer-events: none; mix-blend-mode: screen;
   background: linear-gradient(115deg, transparent 15%, rgba(255,80,190,.22) 32%, rgba(80,210,255,.22) 50%, rgba(255,235,90,.22) 68%, transparent 85%); }
@@ -825,11 +833,14 @@ body { background: var(--bg); color: var(--ink); font-family: var(--ui); font-si
     if (land) el = land;
     const ratio = Math.max(2, (land ? 1466 : 1050) / el.offsetWidth);       // about 1050 px wide portrait (1466 landscape), like a high-res scan
     // html-to-image ignores a style override on the root, so unturn the live layer just for the render
-    const saved = land && land.getAttribute("style");
+    // (a battle front's landscape layer, or a back face a page has turned sideways, as the sample pack does)
+    const turned = land || (getComputedStyle(el).transform !== "none" ? el : null);
+    const saved = turned && turned.getAttribute("style");
     if (land) Object.assign(land.style, { transform: "none", left: "0px", top: "0px" });
+    else if (turned) turned.style.transform = "none";
     let blob;
     try { blob = await lib.toBlob(el, { pixelRatio: ratio, cacheBust: false }); }
-    finally { if (land) { if (saved === null) land.removeAttribute("style"); else land.setAttribute("style", saved); } }
+    finally { if (turned) { if (saved === null) turned.removeAttribute("style"); else turned.setAttribute("style", saved); } }
     if (!blob) throw new Error("render");
     return { blob, face };
   }
