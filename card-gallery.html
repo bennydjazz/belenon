@@ -575,28 +575,38 @@ body { background: var(--bg); color: var(--ink); font-family: var(--ui); font-si
     repeating-linear-gradient(90deg, rgba(0,0,0,.42) 0 .45cqw, transparent .45cqw 1.35cqw) calc(100% - 1.6cqw) 2.4cqw / 4.2cqw calc(100% - 4.2cqw) no-repeat,
     linear-gradient(180deg, #b07e52 0 1.1cqw, #6f4729 1.1cqw 1.4cqw, #7b5031 1.4cqw, #5c3a21 100%);
   box-shadow: 0 1cqw 1.6cqw rgba(0, 0, 0, .45), inset 0 0 0 .15cqw rgba(0, 0, 0, .35); }
-/* the console's slatted sliding door, recessed in the walnut frame; the liner-notes card is taped onto it */
+/* the console's open shelf: a dark recessed back, the shelf board along the bottom, and a few books standing upright at
+   each end (cloth spines in muted colors with gilt bands), bookending the stack of rules-text books in the middle */
 .lp-panel::before { content: ""; position: absolute; left: 2.2cqw; right: 2.2cqw; top: 2.4cqw; bottom: 1.8cqw; border-radius: .3cqw;
-  background: repeating-linear-gradient(90deg, #6a4327 0 .9cqw, #3b2414 .9cqw 1.35cqw, #7b5031 1.35cqw 1.5cqw), #4a2d19;
-  box-shadow: inset .3cqw .3cqw .6cqw rgba(0, 0, 0, .5), inset -.1cqw -.1cqw .15cqw rgba(255, 255, 255, .15); }
+  background:
+    linear-gradient(180deg, transparent 10%, rgba(222, 184, 96, .7) 10% 11.5%, transparent 11.5% 85%, rgba(222, 184, 96, .7) 85% 86.5%, transparent 86.5%) 1cqw 100% / 8.4cqw 88% no-repeat,
+    linear-gradient(90deg, #6b2a25 0 1.7cqw, #24395a 1.7cqw 3.1cqw, #8a6a26 3.1cqw 4.3cqw, #2e4932 4.3cqw 6.4cqw, #5b3a5d 6.4cqw 8.4cqw) 1cqw 100% / 8.4cqw 88% no-repeat,
+    linear-gradient(180deg, transparent 14%, rgba(222, 184, 96, .7) 14% 15.5%, transparent 15.5% 82%, rgba(222, 184, 96, .7) 82% 83.5%, transparent 83.5%) calc(100% - 1cqw) 100% / 7.6cqw 80% no-repeat,
+    linear-gradient(90deg, #2e4932 0 2.1cqw, #8a6a26 2.1cqw 3.3cqw, #6b2a25 3.3cqw 5.6cqw, #24395a 5.6cqw 7.6cqw) calc(100% - 1cqw) 100% / 7.6cqw 80% no-repeat,
+    linear-gradient(180deg, rgba(0, 0, 0, .55), rgba(0, 0, 0, .15) 30%, rgba(0, 0, 0, .3)),
+    #3a2314;
+  box-shadow: inset .4cqw .4cqw .8cqw rgba(0, 0, 0, .6); }
 .lp-panel::after { content: ""; position: absolute; left: 4%; right: 4%; top: 100%; height: 5.2cqw; pointer-events: none;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'%3E%3Cpath d='M3 0 H6 L4 10 H2.6 Z M94 0 H97 L97.4 10 H96 Z' fill='%234e301b'/%3E%3Cpath d='M3 0 H4 L2.9 10 H2.6 Z M94 0 H95 L96.2 10 H96 Z' fill='%23a5764a'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat; }
-/* the rules text is the collector's liner notes, typed on a cream index card (red header rule) taped a little crooked to the
-   door: the card and its text are one element, so they tilt together; tape strips overlap its top corners */
+/* the rules text is a stack of books lying on the shelf, one book per paragraph: each paragraph is a cloth spine with gilt
+   bands and gilt lettering, thicker the more lines it wraps to, the stack staggered and resting on the shelf board */
 .card.lp-sleeve .watermark { display: none; }
-.card.lp-sleeve .textbox { left: 11.5cqw; top: 97cqw; width: 77cqw; height: 30.4cqw; padding: 3.2cqw 3cqw 2cqw; overflow: visible; justify-content: safe center;
-  font-family: "Poster Typewriter", "American Typewriter", "Courier New", monospace; line-height: 1.06; --card-ink: #2d2924; color: #2d2924;
-  text-shadow: 0 0 .06cqw rgba(45, 41, 36, .55);
-  background: linear-gradient(180deg, transparent 2.2cqw, rgba(196, 70, 58, .6) 2.2cqw 2.4cqw, transparent 2.4cqw),
-              radial-gradient(ellipse at 25% 15%, rgba(255, 255, 255, .45), transparent 60%),
-              linear-gradient(180deg, #f8f2e3, #eee4cc);
-  transform: rotate(-1.2deg); box-shadow: .3cqw .7cqw 1cqw rgba(0, 0, 0, .5), inset 0 0 1.2cqw rgba(150, 110, 50, .2); }
-.card.lp-sleeve.has-pt .textbox { padding-bottom: 3.6cqw; }
-.card.lp-sleeve .textbox::before, .card.lp-sleeve .textbox::after { content: ""; position: absolute; top: -1.3cqw; width: 9cqw; height: 3cqw; pointer-events: none;
-  background: linear-gradient(180deg, rgba(246, 238, 210, .72), rgba(232, 222, 190, .62)); box-shadow: 0 .1cqw .25cqw rgba(0, 0, 0, .2);
-  -webkit-mask: linear-gradient(90deg, transparent 0, #000 .25cqw calc(100% - .25cqw), transparent 100%); mask: linear-gradient(90deg, transparent 0, #000 .25cqw calc(100% - .25cqw), transparent 100%); }
-.card.lp-sleeve .textbox::before { left: -2.4cqw; transform: rotate(-24deg); }
-.card.lp-sleeve .textbox::after { right: -2.4cqw; transform: rotate(21deg); }
+.card.lp-sleeve .textbox { left: 14.4cqw; top: 96.4cqw; width: 71.2cqw; height: 31.2cqw; padding: .6cqw 0 .2cqw; justify-content: safe flex-end; gap: .25cqw;
+  font-size: 5.3cqw; line-height: 1.05; color: #f1e2b4; --card-ink: #f1e2b4; text-shadow: 0 .08cqw .1cqw rgba(0, 0, 0, .6); }
+.card.lp-sleeve .textbox p { margin: 0; padding: .8cqw 2.6cqw .7cqw; border-radius: .5cqw 1cqw 1cqw .5cqw; background-color: var(--spine, #6b2a25);
+  background-image: linear-gradient(90deg, transparent 1.3cqw, rgba(222, 184, 96, .85) 1.3cqw 1.65cqw, transparent 1.65cqw calc(100% - 1.65cqw), rgba(222, 184, 96, .85) calc(100% - 1.65cqw) calc(100% - 1.3cqw), transparent calc(100% - 1.3cqw)),
+                    linear-gradient(180deg, rgba(255, 255, 255, .16), rgba(255, 255, 255, 0) 30%, rgba(0, 0, 0, 0) 65%, rgba(0, 0, 0, .35)),
+                    repeating-linear-gradient(90deg, rgba(255, 255, 255, .03) 0 .12cqw, rgba(0, 0, 0, .03) .12cqw .3cqw);
+  box-shadow: 0 .25cqw .3cqw rgba(0, 0, 0, .55); }
+.card.lp-sleeve .textbox p:nth-child(4n+1) { --spine: #6b2a25; margin-right: 1.4cqw; }
+.card.lp-sleeve .textbox p:nth-child(4n+2) { --spine: #24395a; margin-left: 1.8cqw; }
+.card.lp-sleeve .textbox p:nth-child(4n+3) { --spine: #2e4932; margin-right: 2.2cqw; margin-left: .6cqw; }
+.card.lp-sleeve .textbox p:nth-child(4n+4) { --spine: #7a5d22; margin-left: 1cqw; }
+.card.lp-sleeve .textbox i { color: #e6d3a0; }
+/* a small potted plant standing on the upright books at the right end of the shelf (outside the text flow) */
+.lp-plant { position: absolute; left: 85.4cqw; top: 95.8cqw; width: 7.6cqw; height: 6.6cqw; pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Cg fill='%234f7a3a'%3E%3Cellipse cx='30' cy='18' rx='5' ry='14'/%3E%3Cellipse cx='19' cy='24' rx='4.5' ry='12' transform='rotate(-35 19 24)'/%3E%3Cellipse cx='41' cy='24' rx='4.5' ry='12' transform='rotate(35 41 24)'/%3E%3Cellipse cx='12' cy='33' rx='3.5' ry='10' transform='rotate(-62 12 33)'/%3E%3Cellipse cx='48' cy='33' rx='3.5' ry='10' transform='rotate(62 48 33)'/%3E%3C/g%3E%3Cg fill='%2365924a'%3E%3Cellipse cx='25' cy='22' rx='3' ry='10' transform='rotate(-15 25 22)'/%3E%3Cellipse cx='36' cy='22' rx='3' ry='10' transform='rotate(18 36 22)'/%3E%3C/g%3E%3Cpath d='M17 38 H43 L39 59 H21 Z' fill='%23b0613b'/%3E%3Crect x='15' y='36' width='30' height='5' rx='1.5' fill='%23c4744b'/%3E%3Cpath d='M21 59 H39 L39.6 56 H20.4 Z' fill='%23874425'/%3E%3C/svg%3E") center bottom / contain no-repeat; filter: drop-shadow(-.3cqw .2cqw .3cqw rgba(0, 0, 0, .5)); }
+.card.lp-sleeve.has-pt .textbox { padding-bottom: .2cqw; }
 .card.lp-sleeve .collector, .card.lp-sleeve .collector * { color: #f3ead8; text-shadow: 0 0 .5cqw rgba(0, 0, 0, .9); }
 .card.lp-sleeve .col-code, .card.lp-sleeve .col-set { left: 14cqw; }
 .card.lp-sleeve .col-legal { right: 14cqw; }
@@ -1065,7 +1075,7 @@ body { background: var(--bg); color: var(--ink); font-family: var(--ui); font-si
     const inner = `
       ${card.variant === "gold-record" ? '<div class="gr-shine" aria-hidden="true"></div><div class="gr-seal" title="Certified Gold">Certified<b>Gold</b></div>' : ""}
       ${bill ? billHTML(card, face, cost) : ""}
-      ${sleeve ? '<div class="lp-stock" aria-hidden="true"></div><div class="lp-panel" aria-hidden="true"></div><div class="lp-ledge" aria-hidden="true"></div><div class="lp-label"><span>Greatest Hits</span></div>' : ""}
+      ${sleeve ? '<div class="lp-stock" aria-hidden="true"></div><div class="lp-panel" aria-hidden="true"></div><div class="lp-ledge" aria-hidden="true"></div><div class="lp-plant" aria-hidden="true"></div><div class="lp-label"><span>Greatest Hits</span></div>' : ""}
       ${face.overlay ? `<div class="voverlay" style="background-image:${img(face.overlay)}"></div>` : ""}
       ${face.crown ? `<div class="crown" style="background-image:${img(face.crown)}"></div>` : ""}
       ${dfc ? `<div class="dfc-mark${idx && saga ? " back-right" : ""}" title="${idx ? "Back face" : "Front face"}">${markHTML(face.frame, idx > 0)}</div>` : ""}
