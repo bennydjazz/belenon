@@ -792,6 +792,8 @@ body { font-size: 18px; }
 .guild h3 { margin-top: 4px; }
 .gtag { display: flex; align-items: center; gap: 10px; font-family: var(--ui); font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); margin: 18px 0 0 !important; }
 .gtag .rt { display: inline-flex; gap: 2px; }
+.gtag .rt .pip { width: 18px; height: 18px; font-size: 18px; }
+.gtag .rt .pip svg { width: 100%; height: 100%; display: block; }
 .sigil { width: 34px; height: 34px; flex: none; background: var(--ink); -webkit-mask: var(--sym) center / contain no-repeat; mask: var(--sym) center / contain no-repeat; }
 .ex { display: flex; flex-wrap: wrap; justify-content: center; gap: 22px 18px; margin: 26px 0 30px; }
 .ex .tile { width: min(236px, calc(50% - 9px)); }
@@ -1058,8 +1060,7 @@ body { background: var(--bg); font-family: var(--body); margin: 0; }
 
 </article>
 <script>
-// Mechanic names in the text link to their sections (first mention in each other section), the bar lights up the one in view,
-// and a #mechanic link from elsewhere lands on it
+// Mechanic names in the text link to their sections (first mention in each other section)
 (() => {
   // first mention of each other mechanic in every section, in bold or plain text, outside card renders and existing links
   const terms = [[/\bcompos(e|es|ing)\b/i, "compose"], [/\bEtudes?\b/, "etudes"], [/(?<!Seat of )\bbreath(e|es|s)?\b/i, "breath"],
@@ -1088,6 +1089,10 @@ body { background: var(--bg); font-family: var(--body); margin: 0; }
       node = rest;
     }
   }
+})();
+</script>
+<script>
+(() => {
   const links = Object.fromEntries([...document.querySelectorAll(".mx-jump a")].map(a => [a.hash.slice(1), a]));
   // light up the last mechanic whose heading has passed the top third of the screen
   const ids = Object.keys(links).filter(id => document.getElementById(id));
