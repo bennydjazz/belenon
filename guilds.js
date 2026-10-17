@@ -1,6 +1,8 @@
 // The ten guilds for the public site: the homepage's Guilds tab shows name, genre, creed and blurb; guilds.html shows everything.
 // Each guild's song is its rare legend's Saga back, played as Apple Music's official 30-second preview (no ads; the clip is from mid-song),
 // with a Listen on Apple Music link as Apple's preview terms ask (looked up 2026-10-16 with the iTunes Search API; Loopwerk's became Björk's Army of Me when she became the Electronic rare).
+// performers: the guild's Guest Performers, its real-world musician legends as [card code, name], common to mythic; each
+// previews its card on hover (site-art/performers/<code>.jpg, the front face rendered from the gallery).
 // Drafted from world.md and lore.md (2026-10-16). The Headbanga Mob's Phyrexian secret is only hinted at here; the story page tells it.
 const WINDS = { W: "the Dawn Wind", U: "the High Wind", B: "the Last Breath", R: "the Storm Wind", G: "the Ground Wind" };
 const GUILDS = [
@@ -12,7 +14,7 @@ const GUILDS = [
     gale: "The establishment and the defending favorites. They wrote the War Anthem, and they expect to keep the Seat of Breath. That the judges are knights of the same court is a question nobody at the Conservatory likes to hear.",
     play: "Slow control built on Etudes. Compose to find your study pieces, cast Sagas, and win the long game by sticking to the plan.",
     people: "Aven choristers, and Leonin students and scholars.",
-    legends: ["Bach, Fugue Master", "Clara, Keyboard Virtuoso", "Tchaikovsky, the Romantic", "Salieri, Court Composer"],
+    performers: [["CW04", "Tchaikovsky, the Romantic"], ["UZ02", "Clara, Keyboard Virtuoso"], ["RZ01", "Bach, Fugue Master"], ["MZ02", "Salieri, Court Composer"]],
     art: "Bach, Fugue Master" },
   { id: "lyriq", song: { preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/fd/ee/93/fdee93a2-846d-6231-1d47-619d1718e974/mzaf_13773148999538215038.plus.aac.p.m4a", link: "https://music.apple.com/us/album/hypnotize/217613303?i=217613319", title: "Hypnotize", artist: "The Notorious B.I.G." },
     name: "Lyriq Crew", genre: "Rap", colors: "UB", colorName: "Blue-Black",
@@ -22,7 +24,7 @@ const GUILDS = [
     gale: "The hungry newcomers. To the Crew every Contest is a cypher, and an MC who has rehearsed the verse they'll drop slips past the crowd and lands the line that wins it.",
     play: "Evasive attackers that hit players and battles, library stacking to win Contest reveals, and disses that tear rivals down.",
     people: "Ratfolk MCs, hustlers and crews, sharp-tongued Aven, and wind-spirit ghostwriters.",
-    legends: ["Nas, Street Disciple", "Missy, Supa Dupa Fly", "Biggie, the Notorious"],
+    performers: [["CU03", "Nas, Street Disciple"], ["UZ04", "Missy, Supa Dupa Fly"], ["RZ02", "Biggie, the Notorious"]],
     art: "Biggie, the Notorious" },
   { id: "headbanga", song: { preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/33/60/47/33604765-23dd-96bc-9c7a-8cee07a26799/mzaf_13429965221142623245.plus.aac.p.m4a", link: "https://music.apple.com/us/album/master-of-puppets/1275600311?i=1275600554", title: "Master of Puppets", artist: "Metallica" },
     name: "Headbanga Mob", genre: "Metal", colors: "BR", colorName: "Black-Red",
@@ -32,7 +34,7 @@ const GUILDS = [
     gale: "They don't care about the Seat. They play so Belenon never goes quiet again, and they've been very busy whispering in the other guilds' ears about who deserves to be challenged.",
     play: "Sacrifice creature tokens for value, and amass Fanatics into one ever-growing army.",
     people: "Mostly Rhoxes, built for the pit, with Leonin promoters and fans of every people.",
-    legends: ["Ozzy, Prince of Darkness", "Ronnie, Horns Up", "Metallica, Four Horsemen"],
+    performers: [["CB04", "Ozzy, Prince of Darkness"], ["UZ06", "Ronnie, Horns Up"], ["RZ03", "Metallica, Four Horsemen"]],
     art: "Metallica, Four Horsemen" },
   { id: "stadiax", song: { preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/17/fc/1e/17fc1eba-946d-84a9-710b-a0e88ea64209/mzaf_3049006317693088799.plus.aac.p.m4a", link: "https://music.apple.com/us/album/bohemian-rhapsody/6781024026?i=6781024437", title: "Bohemian Rhapsody", artist: "Queen" },
     name: "Stadiax Tour", genre: "Rock 'n' Roll", colors: "RG", colorName: "Red-Green",
@@ -42,7 +44,7 @@ const GUILDS = [
     gale: "Crowd favorites who think the loudest cheer should win.",
     play: "Big creatures: having a creature with power 4 or greater turns on bonuses, and trample carries the show into the crowd.",
     people: "Rhoxes, Leonin guitar heroes and techs, the great beasts that haul the caravans, and Loxodon brass sections on the biggest stages.",
-    legends: ["Tina, Queen of Rock", "Chuck, Father of Rock", "Freddie, the Champion"],
+    performers: [["CR02", "Tina, Queen of Rock"], ["UZ08", "Chuck, Father of Rock"], ["RZ04", "Freddie, the Champion"]],
     art: "Freddie, the Champion" },
   { id: "twangwood", song: { preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ae/d2/c8/aed2c8b6-e128-eeac-9a3a-6a68f8df592b/mzaf_12713988576886515664.plus.aac.p.m4a", link: "https://music.apple.com/us/album/coat-of-many-colors/217532812?i=217532827", title: "Coat of Many Colors", artist: "Dolly Parton" },
     name: "Twangwood Jamboree", genre: "Country", colors: "GW", colorName: "Green-White",
@@ -52,7 +54,7 @@ const GUILDS = [
     gale: "They bring the plane's oldest songs and remind everyone where the music came from.",
     play: "Enchantments: every enchantment that enters pays off (Etudes count), with +1/+1 counters building over the game.",
     people: "Loxodon homesteaders and porch singers, Leonin storytellers and fiddlers, and Aven songbirds on every porch.",
-    legends: ["Johnny, the Man in Black", "Patsy, Grand Ole Opry Star", "Dolly, Iron Butterfly"],
+    performers: [["CG02", "Johnny, the Man in Black"], ["UZ10", "Patsy, Grand Ole Opry Star"], ["RZ05", "Dolly, Iron Butterfly"]],
     art: "Dolly, Iron Butterfly" },
   { id: "gospelle", song: { preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/59/4b/88/594b880c-4744-0510-775c-73d8b06567e8/mzaf_14855748840810986812.plus.aac.p.m4a", link: "https://music.apple.com/us/album/superstition/1440808973?i=1440808985", title: "Superstition", artist: "Stevie Wonder" },
     name: "Gospelle Choir", genre: "Soul", colors: "WB", colorName: "White-Black",
@@ -62,7 +64,7 @@ const GUILDS = [
     gale: "The most popular guild in Bellmouth, and quietly the most ambitious.",
     play: "Breath: the more breaths you hold, the more life your spells gain and drain.",
     people: "Vampire night choirs above all, wind spirits, and Aven singers.",
-    legends: ["Stevie, Boy Genius", "Smokey, the Miracle Man", "The Supremes, Royalty", "Ilsa Morrowsigh, Breathtaker", "Nyx Echoveil, Nightsong"],
+    performers: [["CB06", "Smokey, the Miracle Man"], ["UZ12", "The Supremes, Royalty"], ["RZ06", "Stevie, Boy Genius"]],
     art: "Stevie, Boy Genius" },
   { id: "improvisari", song: { preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/c1/23/e1/c123e186-2cc0-d270-c4c6-7c32a2355e7c/mzaf_2966595274066493817.plus.aac.p.m4a", link: "https://music.apple.com/us/album/ornithology/1518867397?i=1518868059", title: "Ornithology", artist: "Charlie Parker" },
     name: "The Improvisari", genre: "Jazz", colors: "UR", colorName: "Blue-Red",
@@ -72,7 +74,7 @@ const GUILDS = [
     gale: "Wild cards. Nobody, including them, knows what they'll play.",
     play: "Breath and modal spells: with three or more breaths, a spell that says choose one lets you choose more, and rares copy spells and draw on impulse.",
     people: "Leonin, the cool cats of the Lantern Quarter, plus Aven horn players.",
-    legends: ["Ella, First Lady of Song", "Satchmo, Jazz Ambassador", "Bird, Bebop Pioneer", "Vashti Brassflame, Soloist", "Ben, Band Director"],
+    performers: [["CR03", "Ella, First Lady of Song"], ["UZ14", "Satchmo, Jazz Ambassador"], ["RZ07", "Bird, Bebop Pioneer"]],
     art: "Bird, Bebop Pioneer" },
   { id: "loopwerk", song: { preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/e1/13/98/e113989e-5155-be2e-db69-6345f490e60f/mzaf_948457787749352695.plus.aac.p.m4a", link: "https://music.apple.com/us/album/army-of-me/300205609?i=300205685", title: "Army of Me", artist: "Björk" },
     name: "Loopwerk Collective", genre: "Electronic", colors: "BG", colorName: "Black-Green",
@@ -82,7 +84,7 @@ const GUILDS = [
     gale: "They plan to time one drop so big that the whole Gale ends up on their dance floor.",
     play: "Sagas are the build-up: big temporary boosts when a Saga's final chapter triggers.",
     people: "Loxodon producers, selectors and bass-stompers, a few Vampire ravers who ride the wind above the floor, and odd creatures from the wild edges.",
-    legends: ["Kraftwerk, Man-Machine", "Daft Punk, Robot Duo", "Björk, Avant-Garde Icon"],
+    performers: [["CG03", "Kraftwerk, Man-Machine"], ["UZ16", "Daft Punk, Robot Duo"], ["RZ08", "Björk, Avant-Garde Icon"]],
     art: "Björk, Avant-Garde Icon" },
   { id: "anarkos", song: { preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/f1/9c/de/f19cde29-7830-1a65-131c-584d842cb343/mzaf_4722769021732212787.plus.aac.p.m4a", link: "https://music.apple.com/us/album/because-the-night/209671876?i=209671962", title: "Because the Night", artist: "Patti Smith Group" },
     name: "Anarkos Riot", genre: "Punk", colors: "RW", colorName: "Red-White",
@@ -92,7 +94,7 @@ const GUILDS = [
     gale: "Gatecrashers. They weren't invited, and they came anyway.",
     play: "Go wide and attack with equipped creatures, passing Instruments to new members of the band.",
     people: "The Broken Swords (Human knights who defected with Amadeus), a few Ratfolk scavengers, and young Rhoxes.",
-    legends: ["Amadeus, Punk Prodigy", "The Ramones, Fast & Loud", "Sid, No Future", "Patti, Punk Poet Laureate"],
+    performers: [["CW07", "The Ramones, Fast & Loud"], ["UZ18", "Sid, No Future"], ["RZ09", "Patti, Punk Poet Laureate"], ["MZ01", "Amadeus, Punk Prodigy"]],
     art: "Patti, Punk Poet Laureate" },
   { id: "deltari", song: { preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/be/4e/64/be4e6468-8e92-2e6e-2110-bd37f6dbadfc/mzaf_250364790696050311.plus.aac.p.m4a", link: "https://music.apple.com/us/album/the-thrill-is-gone/1469584475?i=1469584492", title: "The Thrill Is Gone", artist: "B.B. King" },
     name: "Deltari Wanderers", genre: "Blues", colors: "GU", colorName: "Green-Blue",
@@ -102,7 +104,7 @@ const GUILDS = [
     gale: "They don't compete for the Seat. They come to be heard.",
     play: "Breath-powered creatures that grow and unlock thresholds, with flash for tempo.",
     people: "Frogfolk of the swamps and Loxodon riverboat hands.",
-    legends: ["Bessie, Empress of the Blues", "Muddy, Rollin' Stone", "B.B., King of the Blues"],
+    performers: [["CU06", "Bessie, Empress of the Blues"], ["UZ20", "Muddy, Rollin' Stone"], ["RZ10", "B.B., King of the Blues"]],
     art: "B.B., King of the Blues" },
 ];
 // The ring of grudges: each guild challenges one rival and is challenged by another (lore.md, approved 2026-10-13)

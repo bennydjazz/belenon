@@ -49,6 +49,12 @@
   opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .15s, transform .15s, visibility .15s; }
 .battle-pop img { display: block; width: 100%; aspect-ratio: 900 / 645; border-radius: 4.2% / 5.9%; box-shadow: 0 18px 44px rgba(0,0,0,.65); }
 .rival .contest span:hover + .battle-pop, .rival .contest span:focus + .battle-pop { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+/* Hovering (or focusing, or tapping) a Guest Performer shows their card, in one shared box placed by script */
+.performer { border-bottom: 1px dotted var(--gold); cursor: help; outline: none; }
+.performer:focus-visible { box-shadow: 0 0 0 2px var(--gold); border-radius: 2px; }
+.card-pop { position: fixed; z-index: 60; width: 250px; pointer-events: none; opacity: 0; visibility: hidden; transition: opacity .15s, visibility .15s; }
+.card-pop.on { opacity: 1; visibility: visible; }
+.card-pop img { display: block; width: 100%; aspect-ratio: 500 / 698; border-radius: 4.75% / 3.4%; box-shadow: 0 18px 44px rgba(0,0,0,.65); background: #0b0b0c; }
 .battle-pop.below { bottom: auto; top: calc(100% + 10px); transform: translate(-50%, -6px); }   /* no room above, under the sticky bars */
 .rival p { margin: 0; color: var(--ink-soft); font-size: 16px; }
 .next { text-align: center; padding-block: 56px; }
@@ -107,14 +113,14 @@
 <nav class="site-subnav" aria-label="More from Belenon"><h2>Explore Belenon</h2><ul><li><a href="index.html">Home</a></li><li><a href="story.html">The Story</a></li><li><span aria-current="page">The Guilds</span></li><li><a href="mechanics-article.html">Mechanics</a></li><li><a href="draft-archetypes.html">Draft Archetypes</a></li><li><a href="card-gallery.html">Card Gallery</a></li><li><a href="showcase-article.html">Showcase Treatments</a></li><li><a href="sample-pack.html">Crack a Pack</a></li></ul></nav>
 <footer class="wrap">Unofficial fan content, not approved or endorsed by Wizards of the Coast. Magic: The Gathering is a trademark of Wizards of the Coast LLC.</footer>
 
-<script src="guilds.js?v=f20a5b89"></script>
+<script src="guilds.js?v=94e2d570"></script>
 <script>
 const byId = Object.fromEntries(GUILDS.map(g => [g.id, g]));
 const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
 // Each contest is the challenger's battle card; site-art/battles/<challenger>.jpg is that card rendered from the gallery
 const rival = (label, other, [challenger, , contest, why]) => `<div class="rival"><p class="label">${label}</p>
   <h4><a href="#${other.id}">${esc(other.name)}</a></h4><p class="contest"><span tabindex="0">${esc(contest)}</span><span class="battle-pop" aria-hidden="true">
-  <img data-src="site-art/battles/${challenger}.jpg?v=5cddf504" alt=""></span></p><p>${esc(why)}</p></div>`;
+  <img data-src="site-art/battles/${challenger}.jpg?v=15c0b5b4" alt=""></span></p><p>${esc(why)}</p></div>`;
 
 document.getElementById("jump").innerHTML = GUILDS.map(g =>
   `<li><a href="#${g.id}" title="${esc(g.name)}"><img src="site-art/emblems/${g.id}.jpg" alt="${esc(g.name)}"></a></li>`).join("");
@@ -130,7 +136,7 @@ document.getElementById("guilds").innerHTML = GUILDS.map(g => {
     </div>
     <p class="creed">“${esc(g.creed)}”</p>
     <div class="body">
-      <figure><img src="site-art/guilds/${g.id}.jpg?v=5cddf504" alt="Card art for ${esc(g.art)}" loading="lazy"><figcaption>${esc(g.art)}</figcaption></figure>
+      <figure><img src="site-art/guilds/${g.id}.jpg?v=15c0b5b4" alt="Card art for ${esc(g.art)}" loading="lazy"><figcaption>${esc(g.art)}</figcaption></figure>
       <div>
         <h3>Who they are</h3><p>${esc(g.who)}</p>
         <h3>At the Gale</h3><p>${esc(g.gale)}</p>
@@ -139,7 +145,7 @@ document.getElementById("guilds").innerHTML = GUILDS.map(g => {
           <dt>Home</dt><dd>${esc(g.seat)}</dd>
           <dt>Winds</dt><dd>${winds[0].toUpperCase() + winds.slice(1)}</dd>
           <dt>Peoples</dt><dd>${esc(g.people)}</dd>
-          <dt>Legends</dt><dd>${g.legends.map(esc).join(" · ")}</dd>
+          <dt>Guest Performers</dt><dd>${g.performers.map(([code, name]) => `<span class="performer" tabindex="0" data-card="${code}">${esc(name)}</span>`).join(" · ")}</dd>
         </dl>
       </div>
     </div>
@@ -163,6 +169,25 @@ const placePop = e => {
   pop.classList.toggle("below", box.top - bars < pop.offsetHeight + 16);
 };
 document.querySelectorAll(".rival .contest span[tabindex]").forEach(s => { s.addEventListener("mouseenter", placePop); s.addEventListener("focus", placePop); });
+
+// Guest Performer previews: one box, placed above the name (or below, when the sticky bars are in the way), kept on screen
+const cardPop = document.body.appendChild(Object.assign(document.createElement("div"), { className: "card-pop", ariaHidden: "true",
+  innerHTML: '<img alt="">' }));
+const showCard = e => {
+  const t = e.currentTarget, r = t.getBoundingClientRect(), img = cardPop.firstChild, w = cardPop.offsetWidth, h = w * 698 / 500;
+  img.src = `site-art/performers/${t.dataset.card}.jpg?v=15c0b5b4`;
+  const bars = document.querySelector(".jump").getBoundingClientRect().bottom;
+  const top = r.top - bars >= h + 12 ? r.top - h - 10 : r.bottom + 10;
+  cardPop.style.left = Math.max(8, Math.min(innerWidth - w - 8, r.left + r.width / 2 - w / 2)) + "px";
+  cardPop.style.top = top + "px";
+  cardPop.classList.add("on");
+};
+const hideCard = () => cardPop.classList.remove("on");
+document.querySelectorAll(".performer").forEach(p => {
+  p.addEventListener("mouseenter", showCard); p.addEventListener("focus", showCard);
+  p.addEventListener("mouseleave", () => { if (document.activeElement !== p) hideCard(); }); p.addEventListener("blur", hideCard);
+});
+addEventListener("scroll", hideCard, { passive: true });
 
 // Light up the strip's emblem for the guild in view
 const links = Object.fromEntries([...document.querySelectorAll(".jump a")].map(a => [a.hash.slice(1), a]));
