@@ -801,6 +801,12 @@ body { font-size: 18px; }
 .ex .tile-cap b { font-weight: 600; }
 /* Battles: the gallery draws their fronts landscape (a wider tile) and their prizes portrait */
 .ex .tile:has(.tile-card.landscape:not(.flipped)) { width: min(330px, 100%); }
+/* Card names in the text pop up their card (articles with data-card-hovers) */
+.cref { text-decoration: underline dotted var(--accent); text-underline-offset: 3px; cursor: help; }
+.cref:hover, .cref:focus-visible { color: var(--accent); outline: none; }
+.card-pop { position: fixed; z-index: 50; width: 250px; pointer-events: none; filter: drop-shadow(0 8px 24px rgba(0,0,0,.55)); }
+.card-pop[hidden] { display: none; }
+.card-pop .turn { display: none; }
 .fine { font-size: 14px; color: var(--ink-soft); margin-top: 40px !important; }
 </style>
 <script>document.documentElement.dataset.theme = "dark";</script>
@@ -837,16 +843,26 @@ body { background: var(--bg); font-family: var(--body); margin: 0; }
 .mx-foot { border-top: 1px solid var(--line); padding: 28px 16px 40px; color: var(--ink-soft); font-size: 14px; text-align: center; font-family: var(--body); }
 @media (max-width: 760px) { .mx-top img { height: 40px; } .mx-jump ul { justify-content: flex-start; } }
 </style>
+<style>
+.mx-jump a { display: flex; align-items: center; gap: 7px; }
+.mx-jump .sigil { width: 20px; height: 20px; background: currentColor; }
+.mx-jump .rt { display: inline-flex; gap: 1px; }
+.mx-jump .pip { width: 15px; height: 15px; font-size: 15px; }
+.mx-jump .pip svg { width: 100%; height: 100%; display: block; }
+.guild h3 { scroll-margin-top: 170px; }
+@media (min-width: 761px) { .mx-jump ul { flex-wrap: wrap; max-width: 1060px; } }
+@media (max-width: 760px) { .guild h3 { scroll-margin-top: 110px; } }
+</style>
 
 
 <main id="grid">
 <div class="mx-top"><a href="index.html"><img src="site-art/logo.png" alt="Belenon: Battle of the Bands, home"></a><a class="crumb" href="index.html">← Home</a></div>
 <header class="mx-head"><img src="site-art/gale.jpg" alt="">
   <div class="in"><p class="eyebrow">Limited</p><h1>Belenon Draft Archetypes</h1><p class="lede">Ten guilds, ten genres, ten ways to draft <i>Belenon: Battle of the Bands</i>.</p></div></header>
-<nav class="mx-jump" aria-label="Jump to an archetype"><ul><li><a href="#cadenza">Classical</a></li><li><a href="#lyriq">Rap</a></li><li><a href="#headbanga">Metal</a></li><li><a href="#stadiax">Rock 'n' Roll</a></li><li><a href="#twangwood">Country</a></li><li><a href="#gospelle">Soul</a></li><li><a href="#improvisari">Jazz</a></li><li><a href="#loopwerk">Electronic</a></li><li><a href="#anarkos">Punk</a></li><li><a href="#deltari">Blues</a></li></ul></nav>
+<nav class="mx-jump" aria-label="Jump to a guild"><ul><li><a href="#cadenza" title="Cadenza Conservatory · Classical"><span class="sigil" style="--sym:url(guild-symbols/cadenza-silhouette.png)" aria-hidden="true"></span>Cadenza<span class="rt" aria-hidden="true">{W}{U}</span></a></li><li><a href="#lyriq" title="Lyriq Crew · Rap"><span class="sigil" style="--sym:url(guild-symbols/lyriq-silhouette.png)" aria-hidden="true"></span>Lyriq<span class="rt" aria-hidden="true">{U}{B}</span></a></li><li><a href="#headbanga" title="Headbanga Mob · Metal"><span class="sigil" style="--sym:url(guild-symbols/headbanga-silhouette.png)" aria-hidden="true"></span>Headbanga<span class="rt" aria-hidden="true">{B}{R}</span></a></li><li><a href="#stadiax" title="Stadiax Tour · Rock 'n' Roll"><span class="sigil" style="--sym:url(guild-symbols/stadiax-silhouette.png)" aria-hidden="true"></span>Stadiax<span class="rt" aria-hidden="true">{R}{G}</span></a></li><li><a href="#twangwood" title="Twangwood Jamboree · Country"><span class="sigil" style="--sym:url(guild-symbols/twangwood-silhouette.png)" aria-hidden="true"></span>Twangwood<span class="rt" aria-hidden="true">{G}{W}</span></a></li><li><a href="#gospelle" title="Gospelle Choir · Soul"><span class="sigil" style="--sym:url(guild-symbols/gospelle-silhouette.png)" aria-hidden="true"></span>Gospelle<span class="rt" aria-hidden="true">{W}{B}</span></a></li><li><a href="#improvisari" title="The Improvisari · Jazz"><span class="sigil" style="--sym:url(guild-symbols/improvisari-silhouette.png)" aria-hidden="true"></span>Improvisari<span class="rt" aria-hidden="true">{U}{R}</span></a></li><li><a href="#loopwerk" title="Loopwerk Collective · Electronic"><span class="sigil" style="--sym:url(guild-symbols/loopwerk-silhouette.png)" aria-hidden="true"></span>Loopwerk<span class="rt" aria-hidden="true">{B}{G}</span></a></li><li><a href="#anarkos" title="Anarkos Riot · Punk"><span class="sigil" style="--sym:url(guild-symbols/anarkos-silhouette.png)" aria-hidden="true"></span>Anarkos<span class="rt" aria-hidden="true">{R}{W}</span></a></li><li><a href="#deltari" title="Deltari Wanderers · Blues"><span class="sigil" style="--sym:url(guild-symbols/deltari-silhouette.png)" aria-hidden="true"></span>Deltari<span class="rt" aria-hidden="true">{G}{U}</span></a></li></ul></nav>
 
 
-<article class="story">
+<article class="story" data-card-hovers>
 
 <p class="lede">Archetypes are the heart of Limited. Each one tells you what a color pair does well, how its decks play and how they usually win. <i>Belenon: Battle of the Bands</i> has ten two-color draft archetypes, one for each of the plane's musical guilds, and each plays the way its music sounds.</p>
 
@@ -1446,6 +1462,48 @@ body { background: var(--bg); font-family: var(--body); margin: 0; }
     });
     root.querySelectorAll(".rt").forEach(el => { el.innerHTML = withPips(el.innerHTML); });
     paint(root);
+    if (root.querySelector("[data-card-hovers]")) cardHovers(root);
+  }
+  // Card names in the article's paragraphs pop up the card on hover, focus or tap
+  function cardHovers(root) {
+    const byName = new Map();  // the regular card, not an alternate-art version (codes like UZ02-CP)
+    cards.forEach(c => { if (/^[A-Z]{2}\d{2}$/.test(c.code) && !byName.has(c.faces[0].name)) byName.set(c.faces[0].name, c); });
+    const names = [...byName.keys()].sort((a, b) => b.length - a.length);
+    const re = new RegExp("(?<![\\w'])(" + names.map(n => n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|") + ")(?![\\w'])", "g");
+    root.querySelectorAll("[data-card-hovers] p:not(.gtag):not(.fine)").forEach(p => {
+      if (p.closest(".ex")) return;
+      const walker = document.createTreeWalker(p, NodeFilter.SHOW_TEXT);
+      const nodes = []; for (let n = walker.nextNode(); n; n = walker.nextNode()) nodes.push(n);
+      nodes.forEach(n => {
+        if (!re.test(n.data)) return; re.lastIndex = 0;
+        const frag = document.createDocumentFragment(); let at = 0;
+        n.data.replace(re, (m, _name, i) => {
+          frag.append(n.data.slice(at, i));
+          const span = document.createElement("span");
+          span.className = "cref"; span.tabIndex = 0; span.dataset.code = byName.get(m).code; span.textContent = m;
+          frag.append(span); at = i + m.length; return m;
+        });
+        frag.append(n.data.slice(at)); n.replaceWith(frag);
+      });
+    });
+    const pop = document.createElement("div"); pop.className = "card-pop"; pop.hidden = true; pop.setAttribute("aria-hidden", "true");
+    document.body.appendChild(pop);
+    let cur = null;
+    const show = el => {
+      if (cur === el) return; cur = el;
+      pop.innerHTML = tileCardHTML(cards.find(c => c.code === el.dataset.code)); pop.hidden = false; paint(pop);
+      const r = el.getClientRects()[0], w = pop.offsetWidth, h = pop.offsetHeight;
+      pop.style.left = Math.max(8, Math.min(r.left + r.width / 2 - w / 2, innerWidth - w - 8)) + "px";
+      pop.style.top = (r.top - h - 10 >= 8 ? r.top - h - 10 : Math.min(r.bottom + 10, innerHeight - h - 8)) + "px";
+    };
+    const hide = () => { cur = null; pop.hidden = true; };
+    root.addEventListener("mouseover", e => { const el = e.target.closest(".cref"); if (el) show(el); });
+    root.addEventListener("mouseout", e => { if (e.target.closest(".cref") && !e.relatedTarget?.closest?.(".cref")) hide(); });
+    root.addEventListener("focusin", e => { const el = e.target.closest(".cref"); if (el) show(el); });
+    root.addEventListener("focusout", e => { if (e.target.closest(".cref")) hide(); });
+    document.addEventListener("click", e => { const el = e.target.closest(".cref"); if (el) show(el); else hide(); });  // a tap shows it; tapping elsewhere hides it
+    addEventListener("scroll", hide, { passive: true });
+    addEventListener("keydown", e => { if (e.key === "Escape") hide(); });
   }
 
   function render() {
