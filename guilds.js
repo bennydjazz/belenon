@@ -1,6 +1,6 @@
 // The ten guilds for the public site: the homepage's Guilds tab shows name, genre, creed and blurb; guilds.html shows everything.
 // Each guild's song is its rare legend's Saga back, played as Apple Music's official 30-second preview (no ads; the clip is from mid-song),
-// with a Listen on Apple Music link as Apple's preview terms ask (looked up 2026-10-16 with the iTunes Search API).
+// with a Listen on Apple Music link as Apple's preview terms ask (looked up 2026-10-16 with the iTunes Search API; Loopwerk's became Björk's Army of Me when she became the Electronic rare).
 // Drafted from world.md and lore.md (2026-10-16). The Headbanga Mob's Phyrexian secret is only hinted at here; the story page tells it.
 const WINDS = { W: "the Dawn Wind", U: "the High Wind", B: "the Last Breath", R: "the Storm Wind", G: "the Ground Wind" };
 const GUILDS = [
@@ -72,9 +72,9 @@ const GUILDS = [
     gale: "Wild cards. Nobody, including them, knows what they'll play.",
     play: "Breath and modal spells: with three or more breaths, a spell that says choose one lets you choose more, and rares copy spells and draw on impulse.",
     people: "Leonin, the cool cats of the Lantern Quarter, plus Aven horn players.",
-    legends: ["Satchmo, Jazz Ambassador", "Ella, First Lady of Song", "Bird, Bebop Pioneer", "Vashti Brassflame, Soloist"],
+    legends: ["Ella, First Lady of Song", "Satchmo, Jazz Ambassador", "Bird, Bebop Pioneer", "Vashti Brassflame, Soloist"],
     art: "Bird, Bebop Pioneer" },
-  { id: "loopwerk", song: { preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/4c/a5/d7/4ca5d77c-d5d9-efeb-9838-600f5b60bde8/mzaf_7271503176898847087.plus.aac.p.m4a", link: "https://music.apple.com/us/album/around-the-world/696884422?i=696886431", title: "Around the World", artist: "Daft Punk" },
+  { id: "loopwerk", song: { preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/e1/13/98/e113989e-5155-be2e-db69-6345f490e60f/mzaf_948457787749352695.plus.aac.p.m4a", link: "https://music.apple.com/us/album/army-of-me/300205609?i=300205685", title: "Army of Me", artist: "Björk" },
     name: "Loopwerk Collective", genre: "Electronic", colors: "BG", colorName: "Black-Green",
     creed: "Wait for it.", seat: "The spheres of the Edge of Malacol",
     blurb: "Producers and ravers in the spheres at the Edge of Malacol, who build a track for hours and then drop it all at once. Their plan for the Gale: one drop so big that the whole contest ends up on their dance floor.",
@@ -82,8 +82,8 @@ const GUILDS = [
     gale: "They plan to time one drop so big that the whole Gale ends up on their dance floor.",
     play: "Sagas are the build-up: big temporary boosts when a Saga's final chapter triggers.",
     people: "Loxodon producers, selectors and bass-stompers, a few Vampire ravers who ride the wind above the floor, and odd creatures from the wild edges.",
-    legends: ["Kraftwerk, Man-Machine", "Björk, Avant-Garde Icon", "Daft Punk, Robot Duo"],
-    art: "Daft Punk, Robot Duo" },
+    legends: ["Kraftwerk, Man-Machine", "Daft Punk, Robot Duo", "Björk, Avant-Garde Icon"],
+    art: "Björk, Avant-Garde Icon" },
   { id: "anarkos", song: { preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/f1/9c/de/f19cde29-7830-1a65-131c-584d842cb343/mzaf_4722769021732212787.plus.aac.p.m4a", link: "https://music.apple.com/us/album/because-the-night/209671876?i=209671962", title: "Because the Night", artist: "Patti Smith Group" },
     name: "Anarkos Riot", genre: "Punk", colors: "RW", colorName: "Red-White",
     creed: "Anyone can play.", seat: "The Scrapyards",
@@ -102,7 +102,7 @@ const GUILDS = [
     gale: "They don't compete for the Seat. They come to be heard.",
     play: "Breath-powered creatures that grow and unlock thresholds, with flash for tempo.",
     people: "Frogfolk of the swamps and Loxodon riverboat hands.",
-    legends: ["Muddy, Rollin' Stone", "Bessie, Empress of the Blues", "B.B., King of the Blues"],
+    legends: ["Bessie, Empress of the Blues", "Muddy, Rollin' Stone", "B.B., King of the Blues"],
     art: "B.B., King of the Blues" },
 ];
 // The ring of grudges: each guild challenges one rival and is challenged by another (lore.md, approved 2026-10-13)
