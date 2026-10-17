@@ -1329,6 +1329,8 @@ body { background: var(--bg); color: var(--ink); font-family: var(--ui); font-si
     const d2 = roll([["mythic", pM], ["rare", pR], ["uncommon", 1 - pR - pM]]);
     take(dfc2[d2], "DFC slot (" + d2 + ")");
     pack.reverse();  // shown best first, commons last (user, 2026-10-16); drawn commons first so the duplicate check runs in slot order
+    const e = pack.findIndex(p => p.label === "Etude slot");
+    pack.splice(2, 0, ...pack.splice(e, 1));  // the Etude right after the two DFC slots (user, 2026-10-16)
   }
   function renderPack() {
     if (!pack.length) openPack();
