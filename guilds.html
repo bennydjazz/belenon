@@ -40,7 +40,16 @@
 .rival .label { font-family: var(--head); text-transform: uppercase; letter-spacing: normal; font-weight: 600; color: var(--gold); margin: 0 0 4px; font-size: 1rem; }
 .rival h4 { font-family: var(--head); text-transform: uppercase; font-size: 1.4rem; margin: 0 0 4px; letter-spacing: normal; }
 .rival h4 a { color: var(--ink); text-decoration: none; } .rival h4 a:hover { color: var(--gold); }
+.rival { position: relative; }
 .rival .contest { font-style: italic; color: var(--ink); margin: 0 0 8px; }
+/* Hovering (or focusing, or tapping) a contest's name shows its battle card above the box (user, 2026-10-16) */
+.rival .contest span { border-bottom: 1px dotted var(--gold); cursor: help; outline: none; }
+.rival .contest span:focus-visible { box-shadow: 0 0 0 2px var(--gold); border-radius: 2px; }
+.battle-pop { position: absolute; z-index: 60; left: 50%; bottom: calc(100% + 10px); width: min(440px, 92vw); transform: translate(-50%, 6px);
+  opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .15s, transform .15s, visibility .15s; }
+.battle-pop img { display: block; width: 100%; aspect-ratio: 900 / 645; border-radius: 4.2% / 5.9%; box-shadow: 0 18px 44px rgba(0,0,0,.65); }
+.rival .contest span:hover + .battle-pop, .rival .contest span:focus + .battle-pop { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+.battle-pop.below { bottom: auto; top: calc(100% + 10px); transform: translate(-50%, -6px); }   /* no room above, under the sticky bars */
 .rival p { margin: 0; color: var(--ink-soft); font-size: 16px; }
 .next { text-align: center; padding-block: 56px; }
 .next .btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
@@ -102,8 +111,10 @@
 <script>
 const byId = Object.fromEntries(GUILDS.map(g => [g.id, g]));
 const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
-const rival = (label, other, [, , contest, why]) => `<div class="rival"><p class="label">${label}</p>
-  <h4><a href="#${other.id}">${esc(other.name)}</a></h4><p class="contest">${esc(contest)}</p><p>${esc(why)}</p></div>`;
+// Each contest is the challenger's battle card; site-art/battles/<challenger>.jpg is that card rendered from the gallery
+const rival = (label, other, [challenger, , contest, why]) => `<div class="rival"><p class="label">${label}</p>
+  <h4><a href="#${other.id}">${esc(other.name)}</a></h4><p class="contest"><span tabindex="0">${esc(contest)}</span><span class="battle-pop" aria-hidden="true">
+  <img data-src="site-art/battles/${challenger}.jpg?v=5cddf504" alt=""></span></p><p>${esc(why)}</p></div>`;
 
 document.getElementById("jump").innerHTML = GUILDS.map(g =>
   `<li><a href="#${g.id}" title="${esc(g.name)}"><img src="site-art/emblems/${g.id}.jpg" alt="${esc(g.name)}"></a></li>`).join("");
@@ -119,7 +130,7 @@ document.getElementById("guilds").innerHTML = GUILDS.map(g => {
     </div>
     <p class="creed">“${esc(g.creed)}”</p>
     <div class="body">
-      <figure><img src="site-art/guilds/${g.id}.jpg" alt="Card art for ${esc(g.art)}" loading="lazy"><figcaption>${esc(g.art)}</figcaption></figure>
+      <figure><img src="site-art/guilds/${g.id}.jpg?v=5cddf504" alt="Card art for ${esc(g.art)}" loading="lazy"><figcaption>${esc(g.art)}</figcaption></figure>
       <div>
         <h3>Who they are</h3><p>${esc(g.who)}</p>
         <h3>At the Gale</h3><p>${esc(g.gale)}</p>
@@ -142,6 +153,16 @@ document.getElementById("guilds").innerHTML = GUILDS.map(g => {
 // The sections are built after load, so jump to a #guild link from the homepage by hand
 const jumpToHash = () => { const t = location.hash && document.getElementById(location.hash.slice(1)); if (t) t.scrollIntoView({ behavior: "instant" }); };
 jumpToHash(); addEventListener("load", jumpToHash);
+
+// Load a battle card on first hover (a lazy image never loads while hidden), and show it below its box when the sticky
+// bars leave too little room above it
+const placePop = e => {
+  const pop = e.target.nextElementSibling, box = e.target.closest(".rival").getBoundingClientRect(), img = pop.querySelector("img");
+  if (!img.src) img.src = img.dataset.src;
+  const bars = document.querySelector(".jump").getBoundingClientRect().bottom;
+  pop.classList.toggle("below", box.top - bars < pop.offsetHeight + 16);
+};
+document.querySelectorAll(".rival .contest span[tabindex]").forEach(s => { s.addEventListener("mouseenter", placePop); s.addEventListener("focus", placePop); });
 
 // Light up the strip's emblem for the guild in view
 const links = Object.fromEntries([...document.querySelectorAll(".jump a")].map(a => [a.hash.slice(1), a]));
