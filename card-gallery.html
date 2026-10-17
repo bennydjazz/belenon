@@ -766,7 +766,7 @@ body { background: var(--bg); color: var(--ink); font-family: var(--ui); font-si
 .note { margin-top: 36px; font-size: 13px; color: var(--ink-soft); max-width: 72ch; }
 </style>
 
-<a class="bel-banner" href="index.html" style="display:block;position:relative;height:clamp(110px,20vw,260px);overflow:hidden;background:#0d0e13"><img src="site-art/banner-gallery.jpg" alt="A painted map of Belenon: the Windriddle Palaces, the Long Delta and the harbor of Bellmouth" style="width:100%;height:100%;object-fit:cover;display:block"><img src="site-art/logo.png" alt="Belenon: Battle of the Bands, home" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(46%,420px);height:auto;filter:drop-shadow(0 3px 10px rgba(10,10,30,.7))"></a>
+<a class="bel-banner" href="index.html" style="display:block;position:relative;height:clamp(110px,20vw,260px);overflow:hidden;background:#0d0e13"><img src="site-art/banner-gallery.jpg" alt="A painted map of Belenon: the Windriddle Palaces, the Long Delta and the harbor of Bellmouth" style="width:100%;height:100%;object-fit:cover;display:block"><img src="site-art/logo.png" alt="Belenon: Battle of the Bands, home" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(46%,420px);height:auto;filter:drop-shadow(0 3px 10px rgba(10,10,30,.7))"><span style="position:absolute;left:16px;top:14px;padding:6px 14px;border-radius:999px;background:rgba(13,14,19,.72);color:#f1ede4;font:800 15px/1 'Mona Sans','Arial Narrow',sans-serif;font-stretch:92%;text-transform:uppercase">← Home</span></a>
 <header class="topbar">
   <div class="topbar-in">
     <div class="brand"><h1>Belenon: Battle of the Bands</h1><span id="total"></span></div>
@@ -1454,3 +1454,16 @@ body { background: var(--bg); color: var(--ink); font-family: var(--ui); font-si
   let t; window.addEventListener("resize", () => { clearTimeout(t); t = setTimeout(() => fit(document), 120); });
 })();
 </script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..100,500..900&family=Open+Sans:wght@400..700&display=swap">
+<style>
+.site-subnav { background: #0d0e13; border-top: 1px solid #2c303c; padding: 28px 16px 8px; text-align: center; }
+.site-subnav h2 { margin: 0 0 14px; color: #e8b64c; font: 800 1rem/1 "Mona Sans", "Arial Narrow", sans-serif; font-stretch: 92%; text-transform: uppercase; letter-spacing: normal; border: 0; padding: 0; }
+.site-subnav ul { list-style: none; margin: 0 auto; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; max-width: 1000px; }
+.site-subnav a, .site-subnav span { display: block; padding: 9px 16px; border-radius: 999px; font: 700 1rem/1 "Mona Sans", "Arial Narrow", sans-serif; font-stretch: 92%;
+  text-transform: uppercase; text-decoration: none; color: #f1ede4; box-shadow: inset 0 0 0 1.5px #e8b64c; }
+.site-subnav a:hover { background: #e8b64c; color: #1a1206; }
+.site-subnav span { color: #b9b4a8; box-shadow: inset 0 0 0 1.5px #2c303c; }
+.site-foot { background: #0d0e13; color: #b9b4a8; padding: 20px 16px 36px; font: 14px/1.5 "Open Sans", Helvetica, Arial, sans-serif; text-align: center; }
+</style>
+<nav class="site-subnav" aria-label="More from Belenon"><h2>Explore Belenon</h2><ul><li><a href="index.html">Home</a></li><li><a href="story.html">The Story</a></li><li><a href="guilds.html">The Guilds</a></li><li><a href="mechanics-article.html">Mechanics</a></li><li><a href="draft-archetypes.html">Draft Archetypes</a></li><li><span aria-current="page">Card Gallery</span></li><li><a href="sample-pack.html">Open a Pack</a></li></ul></nav>
+<footer class="site-foot">Unofficial fan content, not approved or endorsed by Wizards of the Coast. Magic: The Gathering is a trademark of Wizards of the Coast LLC.</footer>
