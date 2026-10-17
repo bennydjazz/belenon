@@ -777,7 +777,19 @@ body { background: var(--bg); color: var(--ink); font-family: var(--ui); font-si
   background: linear-gradient(115deg, transparent 15%, rgba(255,80,190,.22) 32%, rgba(80,210,255,.22) 50%, rgba(255,235,90,.22) 68%, transparent 85%); }
 </style>
 
-<a class="bel-banner" href="index.html" style="display:block;position:relative;height:clamp(110px,20vw,260px);overflow:hidden;background:#0d0e13"><img src="site-art/banner-pack.jpg" alt="Every guild plays together on the great stage of the Gale" style="width:100%;height:100%;object-fit:cover;display:block"><img src="site-art/logo.png" alt="Belenon: Battle of the Bands, home" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(46%,420px);height:auto;filter:drop-shadow(0 3px 10px rgba(10,10,30,.7))"><span style="position:absolute;left:16px;top:14px;padding:6px 14px;border-radius:999px;background:rgba(13,14,19,.72);color:#f1ede4;font:800 15px/1 'Mona Sans','Arial Narrow',sans-serif;font-stretch:92%;text-transform:uppercase">← Home</span></a>
+<style>
+:root { --site-bar: 56px; }
+.site-bar { position: sticky; top: 0; z-index: 19; height: var(--site-bar); box-sizing: border-box; background: rgba(13,14,19,.94);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); border-bottom: 1px solid #2c303c; }
+.site-bar .in { max-width: 1120px; height: 100%; margin: 0 auto; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.site-bar .logo img { height: 40px; width: auto; display: block; }
+.site-bar .home { padding: 8px 14px; border-radius: 999px; color: #f1ede4; text-decoration: none; box-shadow: inset 0 0 0 1.5px #e8b64c;
+  font: 700 15px/1 "Mona Sans", "Arial Narrow", sans-serif; font-stretch: 92%; text-transform: uppercase; letter-spacing: normal; }
+.site-bar .home:hover { background: #e8b64c; color: #1a1206; }
+.site-bar a:focus-visible { outline: 3px solid #e8b64c; outline-offset: 2px; }
+</style>
+<header class="site-bar"><div class="in"><a class="logo" href="index.html"><img src="site-art/logo.png" alt="Belenon: Battle of the Bands, home"></a><a class="home" href="index.html">← Home</a></div></header>
+<a class="bel-banner" href="index.html" style="display:block;position:relative;height:clamp(110px,20vw,260px);overflow:hidden;background:#0d0e13"><img src="site-art/banner-pack.jpg" alt="Every guild plays together on the great stage of the Gale" style="width:100%;height:100%;object-fit:cover;display:block"><img src="site-art/logo.png" alt="Belenon: Battle of the Bands, home" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(46%,420px);height:auto;filter:drop-shadow(0 3px 10px rgba(10,10,30,.7))"></a>
 <header class="topbar">
   <div class="topbar-in">
     <div class="brand"><h1>Belenon Sample Pack</h1><span id="total"></span></div>

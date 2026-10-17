@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..100,500..900&family=Open+Sans:ital,wght@0,400..700;1,400..600&display=swap">
-<link rel="stylesheet" href="site.css?v=b2ac2867">
+<link rel="stylesheet" href="site.css?v=d7923649">
 <style>
 /* Story chapters: art and text side by side, alternating sides */
 .chapter { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: center; padding-block: 56px; border-bottom: 1px solid var(--line); }
@@ -28,11 +28,18 @@
 }
 </style>
 
-<div class="wrap topbar">
-  <a href="index.html"><img src="site-art/logo.png" alt="Belenon: Battle of the Bands, home"></a>
-  <a class="crumb" href="index.html">← Home</a>
-</div>
-
+<style>
+:root { --site-bar: 56px; }
+.site-bar { position: sticky; top: 0; z-index: 19; height: var(--site-bar); box-sizing: border-box; background: rgba(13,14,19,.94);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); border-bottom: 1px solid #2c303c; }
+.site-bar .in { max-width: 1120px; height: 100%; margin: 0 auto; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.site-bar .logo img { height: 40px; width: auto; display: block; }
+.site-bar .home { padding: 8px 14px; border-radius: 999px; color: #f1ede4; text-decoration: none; box-shadow: inset 0 0 0 1.5px #e8b64c;
+  font: 700 15px/1 "Mona Sans", "Arial Narrow", sans-serif; font-stretch: 92%; text-transform: uppercase; letter-spacing: normal; }
+.site-bar .home:hover { background: #e8b64c; color: #1a1206; }
+.site-bar a:focus-visible { outline: 3px solid #e8b64c; outline-offset: 2px; }
+</style>
+<header class="site-bar"><div class="in"><a class="logo" href="index.html"><img src="site-art/logo.png" alt="Belenon: Battle of the Bands, home"></a><a class="home" href="index.html">← Home</a></div></header>
 <header class="pagehead">
   <img src="site-art/key-art-wide.jpg" alt="" style="object-position: 50% 25%">
   <div class="wrap">

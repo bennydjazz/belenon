@@ -193,7 +193,7 @@ body { background: var(--bg); color: var(--ink); font-family: var(--ui); font-si
 .card.back-face .name, .card.back-face .type, .card.back-face .ptbox span { color: #fff; }
 .setsym { flex: none; width: 2.05cqw; height: 5.4cqw; position: relative; top: .26cqw; }
 .textbox {
-  position: absolute; left: 7.2cqw; top: 87.2cqw; width: 85.4cqw; height: 41.07cqw; box-sizing: border-box; padding: 1.6cqw 2.4cqw 2cqw 2cqw;  /* keeps text ~2.3 cqw inside the frame's box border on every side, like printed cards */
+  position: absolute; left: 7.2cqw; top: 87.2cqw; width: 85.4cqw; height: 41.07cqw; box-sizing: border-box; padding: 1.6cqw 1.8cqw 2cqw 1.6cqw;  /* text measure matched to printed scans (Tidal Terror, Get Out, Cram Session at 745 px): ink starts ~1.5 cqw inside the box and runs to within ~1.5 cqw of its right edge; wider margins wrapped crowded cards a line early and shrank them */
   font-family: var(--card-rules); font-size: 4.98cqw; line-height: 1; overflow: hidden;  /* printed cards: line pitch ≈ 1.0 × the rules size (DSK, BLB, FDN at 744 px) */
   display: flex; flex-direction: column; justify-content: center;
 }
@@ -204,11 +204,14 @@ body { background: var(--bg); color: var(--ink); font-family: var(--ui); font-si
 .textbox p { margin: 0 0 .3em; }  /* paragraph break ≈ .3 of a line on printed cards */
 .textbox p:last-child { margin-bottom: 0; }
 .textbox i { color: var(--card-ink); }
+/* modal bullets: a hanging indent so wrapped lines align after the bullet, and half the usual paragraph space between modes (Live or Die, Get Out, Split Up) */
+.textbox p.mode { padding-left: .62em; text-indent: -.62em; }
+.textbox p:has(+ p.mode) { margin-bottom: .15em; }
 /* flavor text: a hairline bar with faded ends between rules and flavor (as on FDN/DSK commons), italic text, upright emphasis */
-.flavor-bar { flex: none; height: .06em; margin: .12em .6em .16em; background: linear-gradient(90deg, transparent, var(--card-ink) 12%, var(--card-ink) 88%, transparent); opacity: .55; }
+.flavor-bar { flex: none; height: .06em; margin: .22em .6em .22em; background: linear-gradient(90deg, transparent, var(--card-ink) 12%, var(--card-ink) 88%, transparent); opacity: .55; }
 .flavor { font-style: italic; }
 .flavor p { margin: 0; }
-.flavor p.attrib { padding-left: 1em; }
+.flavor p.attrib { padding-left: 0; }  /* attributions sit flush left on printed cards (Wildfire Wickerfolk, Excavated Wall, Live or Die) */
 .flavor i { font-style: normal; }
 .card.lp-sleeve .flavor, .card.lp-sleeve .flavor-bar { display: none; }  /* the LP sleeve's book-spine stack holds rules only */
 .ptbox { position: absolute; left: 72.8cqw; top: 124.27cqw; width: 21.6cqw; height: 11.2cqw; background: center / 100% 100% no-repeat; }
@@ -770,7 +773,19 @@ body { background: var(--bg); color: var(--ink); font-family: var(--ui); font-si
 .note { margin-top: 36px; font-size: 13px; color: var(--ink-soft); max-width: 72ch; }
 </style>
 
-<a class="bel-banner" href="index.html" style="display:block;position:relative;height:clamp(110px,20vw,260px);overflow:hidden;background:#0d0e13"><img src="site-art/banner-gallery.jpg" alt="A painted map of Belenon: the Windriddle Palaces, the Long Delta and the harbor of Bellmouth" style="width:100%;height:100%;object-fit:cover;display:block"><img src="site-art/logo.png" alt="Belenon: Battle of the Bands, home" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(46%,420px);height:auto;filter:drop-shadow(0 3px 10px rgba(10,10,30,.7))"><span style="position:absolute;left:16px;top:14px;padding:6px 14px;border-radius:999px;background:rgba(13,14,19,.72);color:#f1ede4;font:800 15px/1 'Mona Sans','Arial Narrow',sans-serif;font-stretch:92%;text-transform:uppercase">← Home</span></a>
+<style>
+:root { --site-bar: 56px; }
+.site-bar { position: sticky; top: 0; z-index: 19; height: var(--site-bar); box-sizing: border-box; background: rgba(13,14,19,.94);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); border-bottom: 1px solid #2c303c; }
+.site-bar .in { max-width: 1120px; height: 100%; margin: 0 auto; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.site-bar .logo img { height: 40px; width: auto; display: block; }
+.site-bar .home { padding: 8px 14px; border-radius: 999px; color: #f1ede4; text-decoration: none; box-shadow: inset 0 0 0 1.5px #e8b64c;
+  font: 700 15px/1 "Mona Sans", "Arial Narrow", sans-serif; font-stretch: 92%; text-transform: uppercase; letter-spacing: normal; }
+.site-bar .home:hover { background: #e8b64c; color: #1a1206; }
+.site-bar a:focus-visible { outline: 3px solid #e8b64c; outline-offset: 2px; }
+</style>
+<header class="site-bar"><div class="in"><a class="logo" href="index.html"><img src="site-art/logo.png" alt="Belenon: Battle of the Bands, home"></a><a class="home" href="index.html">← Home</a></div></header>
+<a class="bel-banner" href="index.html" style="display:block;position:relative;height:clamp(110px,20vw,260px);overflow:hidden;background:#0d0e13"><img src="site-art/banner-gallery.jpg" alt="A painted map of Belenon: the Windriddle Palaces, the Long Delta and the harbor of Bellmouth" style="width:100%;height:100%;object-fit:cover;display:block"><img src="site-art/logo.png" alt="Belenon: Battle of the Bands, home" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(46%,420px);height:auto;filter:drop-shadow(0 3px 10px rgba(10,10,30,.7))"></a>
 <header class="topbar">
   <div class="topbar-in">
     <div class="brand"><h1>Belenon: Battle of the Bands</h1><span id="total"></span></div>
@@ -1046,7 +1061,7 @@ body { background: var(--bg); color: var(--ink); font-family: var(--ui); font-si
       const m = saga && l.match(ROMAN);
       if (m) return `<div class="chapter"><div class="ch-icons">${m[1].split(/,\s*/).map(x => `<span class="ch" role="img" aria-label="Chapter ${x}" style="background-image:${img("chapter" + CH[x] + ".png")}"></span>`).join("")}</div><div>${withPips(m[2])}</div></div>`;
       if (saga && /^<i>\(As this Saga/.test(l)) return `<p class="reminder">${l}</p>`;
-      return `<p>${withPips(l)}</p>`;
+      return `<p${/^•/.test(l) ? ' class="mode"' : ""}>${withPips(l)}</p>`;
     }).join("") + flavorHTML(face);
   }
   // Flavor text, as printed: a thin flavor bar under the rules, then italic text; each line after the first is its own

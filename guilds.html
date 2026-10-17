@@ -7,16 +7,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..100,500..900&family=Open+Sans:ital,wght@0,400..700;1,400..600&display=swap">
-<link rel="stylesheet" href="site.css?v=b2ac2867">
+<link rel="stylesheet" href="site.css?v=d7923649">
 <style>
 /* Emblem strip that sticks to the top and jumps to each guild */
-.jump { position: sticky; top: 0; z-index: 5; background: rgba(13,14,19,.92); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+.jump { position: sticky; top: var(--site-bar, 0px); z-index: 5; background: rgba(13,14,19,.92); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
 .jump ul { list-style: none; margin: 0 auto; padding: 10px 16px; display: flex; justify-content: center; gap: 10px; overflow-x: auto; max-width: 1120px; }
 .jump a { display: block; width: 52px; height: 52px; border-radius: 50%; overflow: hidden; box-shadow: 0 0 0 2px var(--line); opacity: .7; flex: none; }
 .jump a:hover, .jump a.on { opacity: 1; box-shadow: 0 0 0 3px var(--gold); }
 .jump img { width: 100%; height: 100%; object-fit: cover; }
 
-.guild { padding-block: 64px; border-bottom: 1px solid var(--line); scroll-margin-top: 80px; }
+.guild { padding-block: 64px; border-bottom: 1px solid var(--line); scroll-margin-top: calc(80px + var(--site-bar, 0px)); }
 .guild-head { display: grid; grid-template-columns: 140px 1fr; gap: 24px; align-items: center; margin-bottom: 28px; }
 .guild-head > img { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 3px var(--gold); }
 .guild-head h2 { margin: 0 0 6px; font-size: clamp(2.2rem, 6vw, 3.4rem); }
@@ -52,11 +52,18 @@
 }
 </style>
 
-<div class="wrap topbar">
-  <a href="index.html"><img src="site-art/logo.png" alt="Belenon: Battle of the Bands, home"></a>
-  <a class="crumb" href="index.html">← Home</a>
-</div>
-
+<style>
+:root { --site-bar: 56px; }
+.site-bar { position: sticky; top: 0; z-index: 19; height: var(--site-bar); box-sizing: border-box; background: rgba(13,14,19,.94);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); border-bottom: 1px solid #2c303c; }
+.site-bar .in { max-width: 1120px; height: 100%; margin: 0 auto; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.site-bar .logo img { height: 40px; width: auto; display: block; }
+.site-bar .home { padding: 8px 14px; border-radius: 999px; color: #f1ede4; text-decoration: none; box-shadow: inset 0 0 0 1.5px #e8b64c;
+  font: 700 15px/1 "Mona Sans", "Arial Narrow", sans-serif; font-stretch: 92%; text-transform: uppercase; letter-spacing: normal; }
+.site-bar .home:hover { background: #e8b64c; color: #1a1206; }
+.site-bar a:focus-visible { outline: 3px solid #e8b64c; outline-offset: 2px; }
+</style>
+<header class="site-bar"><div class="in"><a class="logo" href="index.html"><img src="site-art/logo.png" alt="Belenon: Battle of the Bands, home"></a><a class="home" href="index.html">← Home</a></div></header>
 <header class="pagehead">
   <img src="site-art/gale.jpg" alt="">
   <div class="wrap">
