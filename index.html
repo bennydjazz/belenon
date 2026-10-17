@@ -45,16 +45,16 @@
 .guild-pick:hover { opacity: .9; transform: scale(1.06); }
 .guild-pick[aria-checked="true"] { opacity: 1; box-shadow: 0 0 0 3px var(--gold); transform: scale(1.1); }
 .guild-pick:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
-/* Guild music: each guild's signature song, from an official YouTube upload, in a small visible player */
+/* Guild music: each guild's signature song, as Apple Music's 30-second preview */
 .now { width: min(100%, 500px); margin: 22px auto 0; }
 .now-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .now-label { font-family: var(--head); text-transform: uppercase; letter-spacing: .08em; font-weight: 600; color: var(--gold); margin: 0; }
 .now-toggle { appearance: none; background: none; border: 0; box-shadow: inset 0 0 0 1.5px var(--line); color: var(--ink); border-radius: 999px;
   font: 600 14px/1 var(--body); padding: 7px 14px; cursor: pointer; }
 .now-toggle[aria-pressed="false"] { color: var(--ink-soft); }
-.now-title { margin: 6px 0 10px; color: var(--ink); font-size: 16px; }
-.player { aspect-ratio: 16 / 9; min-height: 200px; border-radius: 4px; overflow: hidden; background: #000; }
-.player iframe, .player > div { width: 100%; height: 100%; display: block; border: 0; }
+.now-title { margin: 6px 0 6px; color: var(--ink); font-size: 16px; }
+.now-link { font-size: 15px; }
+.now-credit { margin: 4px 0 0; color: var(--ink-soft); font-size: 13px; }
 .panel .genre { font-family: var(--head); text-transform: uppercase; letter-spacing: .06em; font-weight: 600; color: var(--gold); font-size: 1.15rem; margin: -6px 0 14px; }
 .panel blockquote { margin: 0 0 14px; font-style: italic; font-size: 1.2rem; color: var(--ink); }
 
@@ -112,7 +112,9 @@
               <button class="now-toggle" id="music-toggle" aria-pressed="true">Music on</button>
             </div>
             <p class="now-title" id="now-title"></p>
-            <div class="player"><div id="yt"></div></div>
+            <audio id="guild-audio" loop preload="none"></audio>
+            <a class="now-link" id="now-link" href="#" target="_blank" rel="noopener">Listen on Apple Music</a>
+            <p class="now-credit">Previews courtesy of Apple Music.</p>
           </div>
         </div>
         <div aria-live="polite">
@@ -160,7 +162,7 @@ function showTab(t) {
     document.getElementById(x.getAttribute("aria-controls")).hidden = !on;
   });
   guildsOpen = t.id === "tab-guilds";
-  guildsOpen ? playCurrent() : player && player.pauseVideo && player.pauseVideo();
+  guildsOpen ? playCurrent() : audio.pause();
 }
 tabs.forEach((t, i) => {
   t.addEventListener("click", () => showTab(t));
@@ -190,14 +192,16 @@ function pickGuild(i, focus) {
   const link = document.getElementById("guild-link");
   link.href = `guilds.html#${g.id}`; link.textContent = `More on the ${g.name.replace(/^The /, "")}`;
   document.getElementById("now-title").textContent = `${g.song.title} · ${g.song.artist}`;
+  document.getElementById("now-link").href = g.song.link;
   current = g;
   if (focus) picks[i].focus();
   playCurrent();
 }
 
-// Guild music: the player loads the first time the Guilds tab opens (a click, so the browser lets it play with sound);
-// switching guilds switches songs, leaving the tab pauses, and the toggle is remembered for this viewer
-let player, current, guildsOpen = false, apiLoading = false;
+// Guild music: the song starts when the Guilds tab opens (a click, so the browser lets it play with sound), switches with the
+// guild and fades in, pauses when you leave the tab; the on/off toggle is remembered for this viewer
+const audio = document.getElementById("guild-audio");
+let current, guildsOpen = false, fade;
 let musicOn = true;
 try { musicOn = localStorage.getItem("belenon-music") !== "off"; } catch (e) {}
 const toggle = document.getElementById("music-toggle");
@@ -206,26 +210,15 @@ showToggle();
 toggle.addEventListener("click", () => {
   musicOn = !musicOn; showToggle();
   try { localStorage.setItem("belenon-music", musicOn ? "on" : "off"); } catch (e) {}
-  if (!player || !player.playVideo) return playCurrent();
-  musicOn ? player.playVideo() : player.pauseVideo();
+  musicOn ? playCurrent() : audio.pause();
 });
 function playCurrent() {
-  if (!guildsOpen || !current) return;
-  if (!player) {
-    if (!apiLoading) { apiLoading = true; const s = document.createElement("script"); s.src = "https://www.youtube.com/iframe_api"; document.head.appendChild(s); }
-    return;
-  }
-  if (!player.loadVideoById) return;
-  if (player.getVideoData && player.getVideoData().video_id === current.song.video) { if (musicOn) player.playVideo(); return; }
-  musicOn ? player.loadVideoById(current.song.video) : player.cueVideoById(current.song.video);
+  if (!guildsOpen || !current || !musicOn) return;
+  if (audio.dataset.song !== current.id) { audio.src = current.song.preview; audio.dataset.song = current.id; }
+  clearInterval(fade); audio.volume = 0;
+  audio.play().catch(() => {});
+  fade = setInterval(() => { audio.volume = Math.min(1, audio.volume + 0.08); if (audio.volume >= 1) clearInterval(fade); }, 60);
 }
-window.onYouTubeIframeAPIReady = () => {
-  player = new YT.Player("yt", {
-    videoId: current.song.video,
-    playerVars: { autoplay: musicOn ? 1 : 0, playsinline: 1, rel: 0 },
-    events: { onReady: e => { if (musicOn && guildsOpen) e.target.playVideo(); } },
-  });
-};
 picks.forEach((b, i) => {
   b.addEventListener("click", () => pickGuild(i));
   b.addEventListener("keydown", e => {
