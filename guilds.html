@@ -6,8 +6,8 @@
 <meta name="description" content="The ten guilds of Belenon: Battle of the Bands, from the Cadenza Conservatory to the Deltari Wanderers: who they are, how they play, and who they're feuding with.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap">
-<link rel="stylesheet" href="site.css?v=d7edf004">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..100,500..900&family=Open+Sans:ital,wght@0,400..700;1,400..600&display=swap">
+<link rel="stylesheet" href="site.css?v=b2ac2867">
 <style>
 /* Emblem strip that sticks to the top and jumps to each guild */
 .jump { position: sticky; top: 0; z-index: 5; background: rgba(13,14,19,.92); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
@@ -20,7 +20,7 @@
 .guild-head { display: grid; grid-template-columns: 140px 1fr; gap: 24px; align-items: center; margin-bottom: 28px; }
 .guild-head > img { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 3px var(--gold); }
 .guild-head h2 { margin: 0 0 6px; font-size: clamp(2.2rem, 6vw, 3.4rem); }
-.guild-head .genre { font-family: var(--head); text-transform: uppercase; letter-spacing: .06em; font-weight: 600; color: var(--gold); font-size: 1.2rem; margin: 0; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.guild-head .genre { font-family: var(--head); text-transform: uppercase; letter-spacing: normal; font-weight: 600; color: var(--gold); font-size: 1.2rem; margin: 0; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .pips { display: inline-flex; gap: 4px; }
 .pip { width: 18px; height: 18px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px rgba(0,0,0,.35); }
 .pip.W { background: #f6eecb; } .pip.U { background: #3d7fd6; } .pip.B { background: #2a2330; box-shadow: inset 0 0 0 1.5px #8d8296; } .pip.R { background: #d9442c; } .pip.G { background: #2f8f4e; }
@@ -29,16 +29,16 @@
 .body figure { margin: 0; }
 .body figure img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; box-shadow: 0 18px 40px rgba(0,0,0,.5); }
 .body figcaption { font-size: 14px; color: var(--ink-soft); margin-top: 8px; }
-.body h3 { font-family: var(--head); text-transform: uppercase; letter-spacing: .05em; font-size: 1.25rem; color: var(--gold); margin: 22px 0 6px; }
+.body h3 { font-family: var(--head); text-transform: uppercase; letter-spacing: normal; font-size: 1.25rem; color: var(--gold); margin: 22px 0 6px; }
 .body h3:first-child { margin-top: 0; }
 .body p { margin: 0; color: var(--ink-soft); }
 .facts { display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; margin: 18px 0 0; font-size: 16px; }
-.facts dt { font-family: var(--head); text-transform: uppercase; letter-spacing: .05em; color: var(--ink); font-weight: 600; }
+.facts dt { font-family: var(--head); text-transform: uppercase; letter-spacing: normal; color: var(--ink); font-weight: 600; }
 .facts dd { margin: 0; color: var(--ink-soft); }
 .rivals { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
 .rival { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 18px 20px; }
-.rival .label { font-family: var(--head); text-transform: uppercase; letter-spacing: .06em; font-weight: 600; color: var(--gold); margin: 0 0 4px; font-size: 1rem; }
-.rival h4 { font-family: var(--head); text-transform: uppercase; font-size: 1.4rem; margin: 0 0 4px; letter-spacing: .03em; }
+.rival .label { font-family: var(--head); text-transform: uppercase; letter-spacing: normal; font-weight: 600; color: var(--gold); margin: 0 0 4px; font-size: 1rem; }
+.rival h4 { font-family: var(--head); text-transform: uppercase; font-size: 1.4rem; margin: 0 0 4px; letter-spacing: normal; }
 .rival h4 a { color: var(--ink); text-decoration: none; } .rival h4 a:hover { color: var(--gold); }
 .rival .contest { font-style: italic; color: var(--ink); margin: 0 0 8px; }
 .rival p { margin: 0; color: var(--ink-soft); font-size: 16px; }

@@ -7,8 +7,8 @@
 <link rel="preload" as="image" href="site-art/key-art-wide.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap">
-<link rel="stylesheet" href="site.css?v=d7edf004">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..100,500..900&family=Open+Sans:ital,wght@0,400..700;1,400..600&display=swap">
+<link rel="stylesheet" href="site.css?v=b2ac2867">
 <style>
 /* Hero: key art with the logo on the open stage floor */
 .hero { position: relative; margin: 0 auto; aspect-ratio: 3 / 2; max-height: 86vh; width: 100%; overflow: hidden; background: #8fb4dc; }
@@ -18,7 +18,8 @@
 .hero h1 img { width: 100%; height: auto; filter: drop-shadow(0 4px 14px rgba(10, 10, 30, .6)); }
 
 .intro { text-align: center; padding-block: 28px 56px; }
-.intro p.lede { max-width: 62ch; margin: 0 auto; color: var(--ink-soft); font-size: 1.15rem; }
+/* 85ch: four lines on desktop with a well-filled last line (measured 2026-10-16; re-measure if the copy or font changes) */
+.intro p.lede { max-width: 85ch; margin: 0 auto; color: var(--ink-soft); font-size: 1.15rem; text-wrap: pretty; }
 
 /* Feature tabs: each is a teaser with a link to its own page */
 .features { background: var(--band); padding: 0 0 64px; border-top: 1px solid var(--line); }
@@ -27,7 +28,8 @@
   border-bottom: 4px solid transparent; cursor: pointer; }
 .tab:hover { color: var(--ink); }
 .tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--gold); }
-.panel { display: grid; grid-template-columns: 1.15fr 1fr; gap: 40px; align-items: center; min-height: 420px; }
+/* text tops line up across the tabs (the Guilds tab's ring is taller than the other tabs' pictures) */
+.panel { display: grid; grid-template-columns: 1.15fr 1fr; gap: 40px; align-items: start; min-height: 420px; }
 .panel[hidden] { display: none; }
 .panel > img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 4px; box-shadow: 0 18px 40px rgba(0,0,0,.5); }
 .panel h3 { font-size: 2.2rem; line-height: 1.05; margin: 0 0 14px; }
@@ -48,14 +50,14 @@
 /* Guild music: each guild's signature song, as Apple Music's 30-second preview */
 .now { width: min(100%, 500px); margin: 22px auto 0; }
 .now-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.now-label { font-family: var(--head); text-transform: uppercase; letter-spacing: .08em; font-weight: 600; color: var(--gold); margin: 0; }
+.now-label { font-family: var(--head); text-transform: uppercase; letter-spacing: normal; font-weight: 600; color: var(--gold); margin: 0; }
 .now-toggle { appearance: none; background: none; border: 0; box-shadow: inset 0 0 0 1.5px var(--line); color: var(--ink); border-radius: 999px;
   font: 600 14px/1 var(--body); padding: 7px 14px; cursor: pointer; }
 .now-toggle[aria-pressed="false"] { color: var(--ink-soft); }
 .now-title { margin: 6px 0 6px; color: var(--ink); font-size: 16px; }
 .now-link { font-size: 15px; }
 .now-credit { margin: 4px 0 0; color: var(--ink-soft); font-size: 13px; }
-.panel .genre { font-family: var(--head); text-transform: uppercase; letter-spacing: .06em; font-weight: 600; color: var(--gold); font-size: 1.15rem; margin: -6px 0 14px; }
+.panel .genre { font-family: var(--head); text-transform: uppercase; letter-spacing: normal; font-weight: 600; color: var(--gold); font-size: 1.15rem; margin: -6px 0 14px; }
 .panel blockquote { margin: 0 0 14px; font-style: italic; font-size: 1.2rem; color: var(--ink); }
 
 /* Gallery and pack */

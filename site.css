@@ -3,18 +3,21 @@
 :root {
   --bg: #0d0e13; --band: #15171f; --panel: #1c1f29; --ink: #f1ede4; --ink-soft: #b9b4a8; --line: #2c303c;
   --gold: #e8b64c; --gold-deep: #b9792a;
-  --head: "Barlow Condensed", "Arial Narrow", sans-serif; --body: "Source Sans 3", Helvetica, Arial, sans-serif;
+  /* WotC's set pages set display type in Gotham Narrow and text in Open Sans. Gotham Narrow isn't free, so Mona Sans stands in,
+     narrowed to Gotham Narrow's measured widths: 82% for headings, 92% for small labels and buttons (2026-10-16). */
+  --head: "Mona Sans", "Arial Narrow", sans-serif; --body: "Open Sans", Helvetica, Arial, sans-serif;
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-body { margin: 0; background: var(--bg); color: var(--ink); font: 18px/1.6 var(--body); }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.65 var(--body); }
 img { max-width: 100%; display: block; }
 a { color: var(--gold); }
 .wrap { max-width: 1120px; margin: 0 auto; padding-inline: 16px; }
-h2, h3, .eyebrow, .btn, .tab, .crumb { font-family: var(--head); text-transform: uppercase; letter-spacing: .04em; }
-h2 { font-size: clamp(2.2rem, 6vw, 3.6rem); line-height: 1; margin: 0 0 18px; font-weight: 700; }
-h3 { font-weight: 700; }
+h2, h3, .eyebrow, .btn, .tab, .crumb { font-family: var(--head); text-transform: uppercase; letter-spacing: normal; }
+h1, h2, h3, h4 { font-stretch: 82%; font-weight: 800; }
+.eyebrow, .btn, .tab, .crumb, .genre, .num, .label, .now-label, dt, .body h3 { font-stretch: 92%; }
+h2 { font-size: clamp(2.2rem, 6vw, 3.6rem); line-height: 1; margin: 0 0 18px; }
 .eyebrow { font-size: 1.05rem; font-weight: 600; color: var(--gold); margin: 0 0 10px; }
 .btn { display: inline-block; background: linear-gradient(180deg, var(--gold), var(--gold-deep)); color: #1a1206; font-weight: 700; font-size: 1.15rem;
   padding: 12px 28px; border-radius: 3px; text-decoration: none; margin-top: 6px; border: 0; }
@@ -32,5 +35,5 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
 .pagehead > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .pagehead::after { content: ""; position: absolute; inset: 0; background: linear-gradient(rgba(13,14,19,.15), rgba(13,14,19,.35) 50%, var(--bg)); }
 .pagehead .wrap { position: relative; z-index: 1; width: 100%; padding-bottom: 28px; }
-.pagehead h1 { font-family: var(--head); text-transform: uppercase; letter-spacing: .03em; font-size: clamp(2.4rem, 7vw, 4rem); line-height: 1; margin: 0 0 14px; }
+.pagehead h1 { font-family: var(--head); text-transform: uppercase; letter-spacing: normal; font-size: clamp(2.4rem, 7vw, 4rem); line-height: 1; margin: 0 0 14px; }
 .pagehead p.lede { max-width: 60ch; color: var(--ink); font-size: 1.15rem; margin: 0; text-shadow: 0 1px 8px rgba(0,0,0,.7); }
