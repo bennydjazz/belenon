@@ -3,29 +3,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Belenon: Battle of the Bands</title>
-<meta name="description" content="A fan-made Magic: The Gathering set about a plane where music is magic: the ten guilds, the story, the mechanics, the card gallery and a booster pack opener.">
+<meta name="description" content="A fan-made Magic: The Gathering set about a plane where music is magic: the story, the ten guilds, the mechanics, the card gallery and a booster pack opener.">
 <link rel="preload" as="image" href="site-art/key-art-wide.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap">
+<link rel="stylesheet" href="site.css">
 <style>
-/* Modeled on Wizards' Strixhaven product page (see mtg-custom-set/public-site-plan.md): dark full-bleed bands, uppercase display heads, gold from the logo */
-:root {
-  --bg: #0d0e13; --band: #15171f; --panel: #1c1f29; --ink: #f1ede4; --ink-soft: #b9b4a8; --line: #2c303c;
-  --gold: #e8b64c; --gold-deep: #b9792a; --navy: #1b2a55;
-  --head: "Barlow Condensed", "Arial Narrow", sans-serif; --body: "Source Sans 3", Helvetica, Arial, sans-serif;
-}
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-body { margin: 0; background: var(--bg); color: var(--ink); font: 18px/1.6 var(--body); }
-img { max-width: 100%; display: block; }
-a { color: var(--gold); }
-.wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
-h2, h3, .eyebrow, .btn, .tab { font-family: var(--head); text-transform: uppercase; letter-spacing: .04em; }
-h2 { font-size: clamp(2.2rem, 6vw, 3.6rem); line-height: 1; margin: 0 0 18px; font-weight: 700; }
-.eyebrow { font-size: 1.05rem; font-weight: 600; color: var(--gold); margin: 0 0 10px; }
-
 /* Hero: key art with the logo on the open stage floor */
 .hero { position: relative; margin: 0 auto; aspect-ratio: 3 / 2; max-height: 86vh; width: 100%; overflow: hidden; background: #8fb4dc; }
 .hero > img.key { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
@@ -33,61 +17,48 @@ h2 { font-size: clamp(2.2rem, 6vw, 3.6rem); line-height: 1; margin: 0 0 18px; fo
 .hero h1 { position: absolute; left: 50%; bottom: 9%; transform: translateX(-50%); width: min(44%, 620px); margin: 0; z-index: 1; }
 .hero h1 img { width: 100%; height: auto; filter: drop-shadow(0 4px 14px rgba(10, 10, 30, .6)); }
 
-/* Intro */
 .intro { text-align: center; padding-block: 28px 56px; }
 .intro p.lede { max-width: 62ch; margin: 0 auto; color: var(--ink-soft); font-size: 1.15rem; }
 
-/* Feature tabs */
+/* Feature tabs: each is a teaser with a link to its own page */
 .features { background: var(--band); padding: 0 0 64px; border-top: 1px solid var(--line); }
-.tabs { display: flex; justify-content: center; gap: 0; border-bottom: 1px solid var(--line); margin-bottom: 40px; flex-wrap: wrap; }
+.tabs { display: flex; justify-content: center; border-bottom: 1px solid var(--line); margin-bottom: 40px; flex-wrap: wrap; }
 .tab { appearance: none; background: none; border: 0; color: var(--ink-soft); font-size: 1.3rem; font-weight: 700; padding: 20px 26px 16px;
-  border-bottom: 4px solid transparent; cursor: pointer; text-decoration: none; }
+  border-bottom: 4px solid transparent; cursor: pointer; }
 .tab:hover { color: var(--ink); }
 .tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--gold); }
-.tab:focus-visible, .btn:focus-visible, .guild-pick:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
-.panel { display: grid; grid-template-columns: 1.15fr 1fr; gap: 40px; align-items: center; }
+.panel { display: grid; grid-template-columns: 1.15fr 1fr; gap: 40px; align-items: center; min-height: 420px; }
 .panel[hidden] { display: none; }
-.panel img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 4px; box-shadow: 0 18px 40px rgba(0,0,0,.5); }
+.panel > img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 4px; box-shadow: 0 18px 40px rgba(0,0,0,.5); }
 .panel h3 { font-size: 2.2rem; line-height: 1.05; margin: 0 0 14px; }
 .panel p { color: var(--ink-soft); margin: 0 0 14px; }
 
-.btn { display: inline-block; background: linear-gradient(180deg, var(--gold), var(--gold-deep)); color: #1a1206; font-weight: 700; font-size: 1.15rem;
-  padding: 12px 28px; border-radius: 3px; text-decoration: none; margin-top: 6px; }
-.btn:hover { filter: brightness(1.08); }
-.btn.ghost { background: none; color: var(--ink); box-shadow: inset 0 0 0 2px var(--gold); }
-
-/* The ten guilds: pick an emblem, read the guild */
-.guilds { padding-block: 72px; text-align: center; scroll-margin-top: 8px; }
-.guild-row { display: grid; grid-template-columns: repeat(10, 1fr); gap: 10px; margin: 28px 0 36px; }
-.guild-pick { appearance: none; padding: 0; border: 0; background: none; cursor: pointer; border-radius: 50%; overflow: hidden; aspect-ratio: 1;
-  opacity: .55; transition: opacity .15s, transform .15s; box-shadow: 0 0 0 2px var(--line); }
+/* The Guilds tab: ten emblems in a ring around the chosen guild */
+.ring { position: relative; aspect-ratio: 1; width: min(100%, 500px); margin: 0 auto; }
+.ring .center { position: absolute; left: 50%; top: 50%; width: 46%; aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; overflow: hidden;
+  box-shadow: 0 0 0 4px var(--gold), 0 16px 40px rgba(0,0,0,.6); }
+.ring .center img { width: 100%; height: 100%; object-fit: cover; }
+.guild-pick { position: absolute; width: 17%; aspect-ratio: 1; left: calc(50% + 41% * cos(var(--a)) - 8.5%); top: calc(50% + 41% * sin(var(--a)) - 8.5%);
+  appearance: none; padding: 0; border: 0; background: none; cursor: pointer; border-radius: 50%; overflow: hidden;
+  opacity: .6; box-shadow: 0 0 0 2px var(--line); transition: opacity .15s, transform .15s, box-shadow .15s; }
 .guild-pick img { width: 100%; height: 100%; object-fit: cover; }
-.guild-pick:hover { opacity: .85; }
-.guild-pick[aria-selected="true"] { opacity: 1; box-shadow: 0 0 0 3px var(--gold); transform: scale(1.06); }
-.guild { display: grid; grid-template-columns: 360px 1fr; gap: 40px; align-items: center; text-align: left; background: var(--panel);
-  border: 1px solid var(--line); border-radius: 6px; padding: 28px; }
-.guild[hidden] { display: none; }
-.guild > img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 4px; }
-.guild h3 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1; margin: 0 0 6px; }
-.guild .genre { font-family: var(--head); text-transform: uppercase; letter-spacing: .06em; font-weight: 600; color: var(--gold); font-size: 1.15rem; margin: 0 0 16px; }
-.guild blockquote { margin: 0 0 14px; font-style: italic; font-size: 1.2rem; color: var(--ink); }
-.guild p { margin: 0; color: var(--ink-soft); }
+.guild-pick:hover { opacity: .9; transform: scale(1.06); }
+.guild-pick[aria-checked="true"] { opacity: 1; box-shadow: 0 0 0 3px var(--gold); transform: scale(1.1); }
+.guild-pick:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.panel .genre { font-family: var(--head); text-transform: uppercase; letter-spacing: .06em; font-weight: 600; color: var(--gold); font-size: 1.15rem; margin: -6px 0 14px; }
+.panel blockquote { margin: 0 0 14px; font-style: italic; font-size: 1.2rem; color: var(--ink); }
 
 /* Gallery and pack */
 .cards { position: relative; padding: 96px 0; text-align: center; overflow: hidden; }
 .cards > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .38; }
 .cards::before { content: ""; position: absolute; inset: 0; background: linear-gradient(var(--bg), transparent 30%, transparent 70%, var(--bg)); z-index: 1; }
 .cards .wrap { position: relative; z-index: 2; }
-.cards p { max-width: 56ch; margin: 0 auto 22px; color: var(--ink); }
+.cards p { max-width: 56ch; margin: 0 auto 22px; }
 .cards .btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-
-footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var(--ink-soft); font-size: 14px; text-align: center; }
 
 @media (max-width: 760px) {
   .hero { aspect-ratio: 4 / 3; } .hero > img.key { object-position: 30% 30%; } .hero h1 { width: 80%; bottom: 6%; }
-  .panel, .guild { grid-template-columns: 1fr; gap: 22px; }
-  .guild { padding: 18px; } .guild > img { max-width: 320px; margin: 0 auto; }
-  .guild-row { grid-template-columns: repeat(5, 1fr); }
+  .panel { grid-template-columns: 1fr; gap: 22px; min-height: 0; }
   .tab { font-size: 1.1rem; padding: 16px 14px 12px; }
 }
 </style>
@@ -107,7 +78,7 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
   <section class="features" aria-label="About the set">
     <div class="tabs" role="tablist">
       <button class="tab" role="tab" id="tab-story" aria-controls="panel-story" aria-selected="true">The Story</button>
-      <a class="tab" href="#guilds">The Guilds</a>
+      <button class="tab" role="tab" id="tab-guilds" aria-controls="panel-guilds" aria-selected="false" tabindex="-1">The Guilds</button>
       <button class="tab" role="tab" id="tab-mech" aria-controls="panel-mech" aria-selected="false" tabindex="-1">The Mechanics</button>
     </div>
     <div class="wrap">
@@ -117,6 +88,19 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
           <h3>The Gale</h3>
           <p>Once a generation, Belenon's Royal Knights call the Gale. The winner's song becomes the Anthem, sung across the plane until the next Gale, and the winning guild takes the Seat of Breath at court and keeps the War Anthem horn: the jeweled soprano saxophone that played Belenon through the Hush.</p>
           <p>This is the first Gale since the invasion. Salieri, court composer of the Cadenza Conservatory, expects to win, until his former student Amadeus crashes the contest with a punk band built from Phyrexian scrap.</p>
+          <a class="btn" href="story.html">Read the story</a>
+        </div>
+      </div>
+      <div class="panel" id="panel-guilds" role="tabpanel" aria-labelledby="tab-guilds" hidden>
+        <div class="ring" role="radiogroup" aria-label="Choose a guild">
+          <div class="center"><img id="guild-center" src="site-art/emblems/cadenza.jpg" alt=""></div>
+        </div>
+        <div aria-live="polite">
+          <h3 id="guild-name"></h3>
+          <p class="genre" id="guild-genre"></p>
+          <blockquote id="guild-creed"></blockquote>
+          <p id="guild-blurb"></p>
+          <a class="btn" id="guild-link" href="guilds.html">Meet the guilds</a>
         </div>
       </div>
       <div class="panel" id="panel-mech" role="tabpanel" aria-labelledby="tab-mech" hidden>
@@ -129,13 +113,6 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
         </div>
       </div>
     </div>
-  </section>
-
-  <section class="guilds wrap" id="guilds" aria-labelledby="guilds-h">
-    <p class="eyebrow">Ten genres, one stage</p>
-    <h2 id="guilds-h">The Guilds of Belenon</h2>
-    <div class="guild-row" role="tablist" aria-label="Choose a guild"></div>
-    <div class="guild-panels"></div>
   </section>
 
   <section class="cards" aria-labelledby="cards-h">
@@ -153,52 +130,52 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
 
 <footer class="wrap">Unofficial fan content, not approved or endorsed by Wizards of the Coast. Magic: The Gathering is a trademark of Wizards of the Coast LLC.</footer>
 
+<script src="guilds.js"></script>
 <script>
-// The ten guilds (blurbs drafted from world.md and lore.md; the Mob's Phyrexian secret stays hidden here)
-const GUILDS = [
-  ["cadenza", "Cadenza Conservatory", "Classical · White-Blue", "Perfection is practiced.",
-   "The court musicians of the Royal Knights train Belenon's finest composers and conductors high in the Windriddle Palaces. They wrote the War Anthem, they rehearse every piece before it's played, and they fully expect to keep the Seat of Breath."],
-  ["lyriq", "Lyriq Crew", "Rap · Blue-Black", "Whoever has the last word wins.",
-   "MCs, crews and producers from the Cypher Stacks of Bellmouth, where every feud is settled in a cypher and every great line is fair game to sample. The hungry newcomers mean to prove that street poetry belongs in the palace."],
-  ["headbanga", "Headbanga Mob", "Metal · Black-Red", "Louder than death.",
-   "The guild that never forgot the Hush. Down in the Kilnpits their shows are fierce wakes for the fallen, the pit is where grief burns off, and the Mob's fans are devoted to the very end. They don't care about the Seat; they play so Belenon never goes quiet again."],
-  ["stadiax", "Stadiax Tour", "Rock 'n' Roll · Red-Green", "Turn it up.",
-   "Guitar heroes and roaring crowds, forever on the road between the Roarbowls with great beasts hauling the caravans. Fame is the point, the crowd is part of the band, and the Tour thinks the loudest cheer should win."],
-  ["twangwood", "Twangwood Jamboree", "Country · Green-White", "Every song is somebody's story.",
-   "Farmers, fiddlers and porch singers whose ballads keep a community's memory alive. Every verse pays off down the road, and at the Gale they'll bring Belenon's oldest songs to remind everyone where the music came from."],
-  ["gospelle", "Gospelle Choir", "Soul · White-Black", "No voice sings alone.",
-   "A choir from Bellmouth's Hymnhall that became a hit factory: polished, beloved, and quietly the most ambitious guild in the city. Its singers grow stronger with every Wind they've breathed, and one of their hits can heal a city."],
-  ["improvisari", "The Improvisari", "Jazz · Blue-Red", "Never play it the same way twice.",
-   "Combos, big bands and late-night virtuosos from the Lantern Quarter, home of Belenon's most revered instrument, the saxophone. Master the theory, then break it: the more Winds they've breathed, the more ideas they play at once. Nobody, including them, knows what they'll do at the Gale."],
-  ["loopwerk", "Loopwerk Collective", "Electronic · Black-Green", "Wait for it.",
-   "Producers and ravers in the spheres at the Edge of Malacol, who build a track for hours and then drop it all at once. Their plan for the Gale: one drop so big that the whole contest ends up on their dance floor."],
-  ["anarkos", "Anarkos Riot", "Punk · Red-White", "Anyone can play.",
-   "Kids who grew up in the Hush's wreckage and built instruments from Phyrexian scrap, joined by the Broken Swords, knights who snapped their blades and followed Amadeus out of the court. Loud, fast and uninvited, they hand their gear to whoever wants to play next."],
-  ["deltari", "Deltari Wanderers", "Blues · Green-Blue", "Sing it from the bottom.",
-   "Traveling players on the riverboats and back roads of the Long Delta, and the oldest sound on Belenon. The further down they are, the harder the song pulls them back up. They aren't here for the Seat; they've come to be heard."],
-];
-const row = document.querySelector(".guild-row"), panels = document.querySelector(".guild-panels");
-GUILDS.forEach(([id, name, genre, creed, blurb], i) => {
-  row.insertAdjacentHTML("beforeend", `<button class="guild-pick" role="tab" id="pick-${id}" aria-controls="guild-${id}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}" aria-label="${name}"><img src="site-art/emblems/${id}.jpg" alt=""></button>`);
-  panels.insertAdjacentHTML("beforeend", `<article class="guild" id="guild-${id}" role="tabpanel" aria-labelledby="pick-${id}"${i ? " hidden" : ""}><img src="site-art/emblems/${id}.jpg" alt="The ${name} emblem" loading="lazy"><div><h3>${name}</h3><p class="genre">${genre}</p><blockquote>“${creed}”</blockquote><p>${blurb}</p></div></article>`);
-});
-
-// Accessible tabs: click or arrow keys switch panels within one tablist
-function tabs(list, selector) {
-  const items = [...list.querySelectorAll(selector)];
-  const pick = t => items.forEach(x => {
+// Feature tabs: click or arrow keys
+const tabs = [...document.querySelectorAll(".tab")];
+function showTab(t) {
+  tabs.forEach(x => {
     const on = x === t; x.setAttribute("aria-selected", on); x.tabIndex = on ? 0 : -1;
     document.getElementById(x.getAttribute("aria-controls")).hidden = !on;
   });
-  items.forEach((t, i) => {
-    t.addEventListener("click", () => pick(t));
-    t.addEventListener("keydown", e => {
-      const d = { ArrowRight: 1, ArrowLeft: -1 }[e.key]; if (!d) return;
-      const n = items[(i + d + items.length) % items.length]; pick(n); n.focus(); e.preventDefault();
-    });
-  });
 }
-tabs(document.querySelector(".tabs"), "button.tab");
-tabs(row, ".guild-pick");
+tabs.forEach((t, i) => {
+  t.addEventListener("click", () => showTab(t));
+  t.addEventListener("keydown", e => {
+    const d = { ArrowRight: 1, ArrowLeft: -1 }[e.key]; if (!d) return;
+    const n = tabs[(i + d + tabs.length) % tabs.length]; showTab(n); n.focus(); e.preventDefault();
+  });
+});
+
+// The guild ring: ten emblems clockwise from the top; picking one fills the teaser and points the link at that guild
+const ring = document.querySelector(".ring");
+const picks = GUILDS.map((g, i) => {
+  const b = document.createElement("button");
+  b.className = "guild-pick"; b.setAttribute("role", "radio"); b.setAttribute("aria-label", g.name);
+  b.style.setProperty("--a", `${-90 + i * 36}deg`);
+  b.innerHTML = `<img src="site-art/emblems/${g.id}.jpg" alt="">`;
+  ring.appendChild(b); return b;
+});
+function pickGuild(i, focus) {
+  const g = GUILDS[i];
+  picks.forEach((b, j) => { b.setAttribute("aria-checked", i === j); b.tabIndex = i === j ? 0 : -1; });
+  document.getElementById("guild-center").src = `site-art/emblems/${g.id}.jpg`;
+  document.getElementById("guild-name").textContent = g.name;
+  document.getElementById("guild-genre").textContent = `${g.genre} · ${g.colorName}`;
+  document.getElementById("guild-creed").textContent = `“${g.creed}”`;
+  document.getElementById("guild-blurb").textContent = g.blurb;
+  const link = document.getElementById("guild-link");
+  link.href = `guilds.html#${g.id}`; link.textContent = `More on the ${g.name.replace(/^The /, "")}`;
+  if (focus) picks[i].focus();
+}
+picks.forEach((b, i) => {
+  b.addEventListener("click", () => pickGuild(i));
+  b.addEventListener("keydown", e => {
+    const d = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key]; if (!d) return;
+    pickGuild((i + d + picks.length) % picks.length, true); e.preventDefault();
+  });
+});
+pickGuild(0);
 </script>
 </html>

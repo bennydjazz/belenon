@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Story of the Gale · Belenon</title>
+<meta name="description" content="The story of Belenon: Battle of the Bands, from the Hush to the first Gale since the Phyrexian invasion.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap">
+<link rel="stylesheet" href="site.css">
+<style>
+/* Story chapters: art and text side by side, alternating sides */
+.note { text-align: center; color: var(--ink-soft); font-style: italic; margin: 28px auto 0; max-width: 60ch; }
+.chapter { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: center; padding-block: 56px; border-bottom: 1px solid var(--line); }
+.chapter:nth-child(even) > figure { order: 2; }
+.chapter figure { margin: 0; }
+.chapter figure img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; box-shadow: 0 18px 40px rgba(0,0,0,.5); }
+.chapter figcaption { font-size: 14px; color: var(--ink-soft); margin-top: 8px; }
+.chapter .num { font-family: var(--head); text-transform: uppercase; letter-spacing: .08em; color: var(--gold); font-weight: 600; margin: 0 0 4px; }
+.chapter h3 { font-size: clamp(1.9rem, 4vw, 2.6rem); line-height: 1.05; margin: 0 0 16px; text-transform: uppercase; font-family: var(--head); }
+.chapter p { margin: 0 0 14px; color: var(--ink-soft); }
+.chapter p:last-child { margin-bottom: 0; }
+.next { text-align: center; padding-block: 56px; }
+.next .btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+@media (max-width: 760px) {
+  .chapter { grid-template-columns: 1fr; gap: 20px; padding-block: 40px; }
+  .chapter:nth-child(even) > figure { order: 0; }
+  .topbar img { height: 40px; }
+}
+</style>
+
+<div class="wrap topbar">
+  <a href="index.html"><img src="site-art/logo.png" alt="Belenon: Battle of the Bands, home"></a>
+  <a class="crumb" href="index.html">← Home</a>
+</div>
+
+<header class="pagehead">
+  <img src="site-art/key-art-wide.jpg" alt="" style="object-position: 50% 25%">
+  <div class="wrap">
+    <p class="eyebrow">The story</p>
+    <h1>The First Gale Since the Hush</h1>
+    <p class="lede">A plane that survived Phyrexia on one song now means to settle everything with music. Not everyone on stage wants the same thing.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="note">This is the whole story, ending included.</p>
+
+  <div class="chapters">
+    <section class="chapter">
+      <figure><img src="site-art/story/MB03.jpg" alt="A Phyrexian horror with a great horn for a mouth drains the color and song from a meadow as musicians cower." loading="lazy"><figcaption>Hushmaw Devourer</figcaption></figure>
+      <div>
+        <p class="num">Prologue</p>
+        <h3>The Hush</h3>
+        <p>For generations, Belenon's people believed in the Sacred Winds: the wind is the breath of the world, and music is that breath given shape. Then New Phyrexia invaded, and its engines did what no army had done before. They stilled the wind. Across the plane the air went dead and heavy, and the singing palaces fell silent.</p>
+        <p>The Royal Knights made their stand at the Windriddle Palaces. Without wind, their war horns wouldn't sound. One soprano saxophone still played, and knights, Aven, Loxodons and Rhoxes sang its anthem together until the old song held the line. When the invasion collapsed, the wind came back. Belenon believes the music brought it home, and since that day the court has decreed that quarrels between the guilds are settled with songs, not swords.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <figure><img src="site-art/story/MZ02.jpg" alt="Salieri writes at his desk in the Windriddle Palaces while a Leonin scholar and an Aven chorister look on." loading="lazy"><figcaption>Salieri, Court Composer</figcaption></figure>
+      <div>
+        <p class="num">Chapter I</p>
+        <h3>The Call</h3>
+        <p>Once a generation, the court calls the Gale, Belenon's Battle of the Bands. Every guild sends its best to the Windriddle Palaces. The winner's song becomes the Anthem, sung across the plane until the next Gale, and the winning guild takes the Seat of Breath at court and keeps the War Anthem horn, the saxophone that played through the Hush.</p>
+        <p>This is the first Gale since the invasion, and everyone agrees the stakes have never been higher. Everyone also agrees on the favorite: Salieri, court composer of the Cadenza Conservatory, devout, diligent and correct in every bar. The Conservatory wrote the War Anthem. It fully expects to keep the Seat.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <figure><img src="site-art/story/MZ01.jpg" alt="Amadeus, red-haired and grinning in tartan and safety pins, leaps onto a harpsichord painted with the Anarkos A." loading="lazy"><figcaption>Amadeus, Punk Prodigy</figcaption></figure>
+      <div>
+        <p class="num">Chapter II</p>
+        <h3>The Prodigy</h3>
+        <p>Amadeus was the Conservatory's brightest student: crude, impulsive, brilliant, and bored. On the night of his last court opera he walked out mid-premiere, and the knights assigned to guard him followed him all the way to the Scrapyards. They snapped their ceremonial blades and became the Broken Swords.</p>
+        <p>Now Amadeus plays for the Anarkos Riot, on instruments built from Phyrexian wreckage, and the Riot has crashed every Conservatory premiere since. Nobody invited them to the Gale. They're coming anyway, with music made of scrap that is somehow better than anything the court has written in years.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <figure><img src="site-art/story/MB02.jpg" alt="Salieri grips a gallery rail above a court performance, dark purple wind curling from his hands toward the stage." loading="lazy"><figcaption>Envy of the Court</figcaption></figure>
+      <div>
+        <p class="num">Chapter III</p>
+        <h3>Envy</h3>
+        <p>Salieri can't stop listening. He is skilled enough to hear exactly what Amadeus has and exactly what he himself will never have, and his admiration curdles. He spreads rumors about the Riot. He quietly arranges for rivals to stumble. Entries go missing; stages are double-booked.</p>
+        <p>And one night, alone in the palace chapel, he asks the Last Breath, the Wind of endings and ambition, for a greater voice of his own.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <figure><img src="site-art/story/UB07.jpg" alt="A masked figure in a black hood reaches from a theater box toward a performer on the stage below." loading="lazy"><figcaption>Grim Impresario</figcaption></figure>
+      <div>
+        <p class="num">Chapter IV</p>
+        <h3>The Requiem</h3>
+        <p>A masked patron arrives in the Scrapyards with a purse of gold and a strange commission: a Requiem, a mass for the dead, to be finished before the Gale. Amadeus takes the money. He never learns who paid it, and the patron never takes off the mask.</p>
+        <p>The work wears him down. The deeper he goes, the darker the music grows, and the Riot starts to worry about the circles under its prodigy's eyes. Behind the mask, Salieri listens to every draft.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <figure><img src="site-art/story/MR02.jpg" alt="Vorhaxa, a towering Phyrexian horror built like a pipe organ, conducts a roaring metal crowd in the Kilnpits." loading="lazy"><figcaption>Vorhaxa, Hush Maestro</figcaption></figure>
+      <div>
+        <p class="num">Chapter V</p>
+        <h3>The Ring of Grudges</h3>
+        <p>By old custom, each guild names one rival to challenge at the Gale. This year the ten challenges close into a perfect ring, every guild a challenger and every guild challenged. It is no accident. Agents of the Headbanga Mob whispered in every guild's ear, and the Mob's maestro, Vorhaxa, built the bracket so no one could stand aside.</p>
+        <p>The Mob is a front. Beneath the battle vests and the grief-wakes of the Kilnpits are Phyrexian survivors of the invasion, recruiting grieving fans into a following that moves as one mass. The Metal legends who headline their shows have no idea. The Phyrexians don't need to win the Gale. They only need every guild to try to drown out every other.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <figure><img src="site-art/story/MR03.jpg" alt="The Still Engine, a Phyrexian war machine studded with speakers, rolls across a meadow and drains it to gray." loading="lazy"><figcaption>The Still Engine</figcaption></figure>
+      <div>
+        <p class="num">Chapter VI</p>
+        <h3>The Silence Returns</h3>
+        <p>In the middle of the Gale, with ten guilds playing at once and each playing louder than the last, the air above the Windriddle Palaces goes dead. A Still Zone, the gray scar the Hush left behind, opens over the courtyard and spreads. Banners hang limp. Notes fall like dead leaves.</p>
+        <p>Everyone knows who asked the Last Breath for a greater voice; Salieri's sabotage has been gossip for weeks. The court and the guilds turn on him. But Salieri didn't make the silence. The Gale did. Ten guilds crushing the Winds between them made the same dead air Phyrexia's engines made, and the Mob rolled its Still Engine onto the field to finish the job.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <figure><img src="site-art/story/MA01.jpg" alt="Musicians of every guild play together on the great stage of the Gale before a packed crowd, colored winds braiding overhead." loading="lazy"><figcaption>The Gale</figcaption></figure>
+      <div>
+        <p class="num">Chapter VII</p>
+        <h3>All Together</h3>
+        <p>No guild can fill the silence alone, and so, for the first time, they stop trying. All ten guilds play together, the way the knights once sang the War Anthem: Classical and Punk, Rap and Blues, Metal's own unwitting legends turning their amps toward the Still Engine. The five Winds stir. It isn't enough.</p>
+        <p>Amadeus walks into the heart of the Still Zone carrying his unfinished Requiem. He plays it there, where sound shouldn't carry, and gives the Winds his last breath. The wind comes back. Amadeus doesn't.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <figure><img src="site-art/story/MA01-back.jpg" alt="The Seat of Breath, an ornate piano bench, sits on its dais with ten guild tokens laid in a ring before it." loading="lazy"><figcaption>The Seat of Breath</figcaption></figure>
+      <div>
+        <p class="num">Epilogue</p>
+        <h3>The Seat of Breath</h3>
+        <p>Nobody wins the Gale. It ends with all ten guilds still playing, and the court decrees that the Seat of Breath belongs to all of them. The guilds go home with a lesson the judges had printed in the rules all along: volume doesn't win.</p>
+        <p>Months later, a finished Requiem in D minor is performed at the Windriddle Palaces, and Belenon weeps. Someone completed it from Amadeus's drafts, in a hand that knew every one of them. Nobody remembers who. Salieri never says.</p>
+      </div>
+    </section>
+  </div>
+
+  <section class="next">
+    <h2>Pick a Side</h2>
+    <div class="btns">
+      <a class="btn" href="guilds.html">Meet the guilds</a>
+      <a class="btn ghost" href="card-gallery.html">View the cards</a>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">Unofficial fan content, not approved or endorsed by Wizards of the Coast. Magic: The Gathering is a trademark of Wizards of the Coast LLC.</footer>
+</html>
