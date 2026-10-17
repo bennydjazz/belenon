@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Belenon: Battle of the Bands</title>
-<meta name="description" content="A fan-made Magic: The Gathering set about a plane where music is magic: the story, the ten guilds, the mechanics, the card gallery and a booster pack opener.">
+<meta name="description" content="A fan-made Magic: The Gathering set about a plane where music is magic: the story, the ten guilds, the mechanics, the card gallery, the showcase treatments and a booster pack opener.">
 <link rel="preload" as="image" href="site-art/key-art-wide.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,14 +60,6 @@
 .panel .genre { font-family: var(--head); text-transform: uppercase; letter-spacing: normal; font-weight: 600; color: var(--gold); font-size: 1.15rem; margin: -6px 0 14px; }
 .panel blockquote { margin: 0 0 14px; font-style: italic; font-size: 1.2rem; color: var(--ink); }
 
-/* Gallery and pack */
-.cards { position: relative; padding: 96px 0; text-align: center; overflow: hidden; }
-.cards > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .38; }
-.cards::before { content: ""; position: absolute; inset: 0; background: linear-gradient(var(--bg), transparent 30%, transparent 70%, var(--bg)); z-index: 1; }
-.cards .wrap { position: relative; z-index: 2; }
-.cards p { max-width: 56ch; margin: 0 auto 22px; }
-.cards .btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-
 @media (max-width: 760px) {
   .hero { aspect-ratio: 4 / 3; } .hero > img.key { object-position: 30% 30%; } .hero h1 { width: 80%; bottom: 6%; }
   .panel { grid-template-columns: 1fr; gap: 22px; min-height: 0; }
@@ -92,6 +84,7 @@
       <button class="tab" role="tab" id="tab-story" aria-controls="panel-story" aria-selected="true">The Story</button>
       <button class="tab" role="tab" id="tab-guilds" aria-controls="panel-guilds" aria-selected="false" tabindex="-1">The Guilds</button>
       <button class="tab" role="tab" id="tab-mech" aria-controls="panel-mech" aria-selected="false" tabindex="-1">The Mechanics</button>
+      <button class="tab" role="tab" id="tab-cards" aria-controls="panel-cards" aria-selected="false" tabindex="-1">The Cards</button>
     </div>
     <div class="wrap">
       <div class="panel" id="panel-story" role="tabpanel" aria-labelledby="tab-story">
@@ -136,20 +129,18 @@
           <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn" href="mechanics-article.html">Read the mechanics</a><a class="btn ghost" href="draft-archetypes.html">Draft archetypes</a></div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <section class="cards" aria-labelledby="cards-h">
-    <img src="site-art/gale.jpg" alt="" loading="lazy">
-    <div class="wrap">
-      <h2 id="cards-h">Card Image Gallery</h2>
-      <p>Browse every card in Belenon: Battle of the Bands, with full card text and filters for color, rarity and guild, or crack a 15-card booster and see what you open.</p>
-      <div class="btns">
-        <a class="btn" href="card-gallery.html">View the cards</a>
-        <a class="btn ghost" href="sample-pack.html">Open a pack</a>
+      <div class="panel" id="panel-cards" role="tabpanel" aria-labelledby="tab-cards" hidden>
+        <img src="site-art/gale.jpg" alt="Every guild plays together on the great stage of the Gale." loading="lazy">
+        <div>
+          <h3>Every Card on the Bill</h3>
+          <p>Browse all 290 cards in Belenon: Battle of the Bands, with full card text and filters for color, rarity and guild.</p>
+          <p>Then see the showcase treatments: legends billed on genre-perfect <strong>Concert Posters</strong>, Magic favorites pressed as <strong>Vinyl Classics</strong>, and 20 full-art basics that join into one map of Belenon. Or crack a 15-card booster and see what you open.</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn" href="card-gallery.html">Card Gallery</a><a class="btn ghost" href="showcase-article.html">Showcase Treatments</a><a class="btn ghost" href="sample-pack.html">Crack a Pack</a></div>
+        </div>
       </div>
     </div>
   </section>
+
 </main>
 
 <footer class="wrap">Unofficial fan content, not approved or endorsed by Wizards of the Coast. Magic: The Gathering is a trademark of Wizards of the Coast LLC.</footer>
