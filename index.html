@@ -4,6 +4,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Belenon: Battle of the Bands</title>
 <meta name="description" content="A custom Magic: The Gathering set: the card gallery, a booster pack opener and the set's mechanics.">
+<link rel="preload" as="image" href="site-art/key-art-wide.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;600;700&display=swap">
@@ -14,8 +15,13 @@
 }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.55 "Crimson Pro", Georgia, serif; }
-main { max-width: 980px; margin: 0 auto; padding: 48px 16px 64px; }
-h1 { font: 700 clamp(2rem, 6vw, 3.2rem)/1.1 "Philosopher", Georgia, serif; margin: 0 0 12px; }
+main { max-width: 980px; margin: 0 auto; padding: 28px 16px 64px; }
+.hero { position: relative; margin: 0 auto; max-width: 1400px; aspect-ratio: 3 / 2; max-height: 78vh; overflow: hidden; background: #8fb4dc; }
+.hero > img.key { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; display: block; }
+.hero::after { content: ""; position: absolute; inset: auto 0 0 0; height: 22%; background: linear-gradient(transparent, var(--bg)); pointer-events: none; }
+.hero h1 { position: absolute; left: 50%; bottom: 9%; transform: translateX(-50%); width: min(44%, 600px); margin: 0; z-index: 1; }
+.hero h1 img { width: 100%; height: auto; display: block; filter: drop-shadow(0 4px 14px rgba(10, 10, 30, .6)); }
+@media (max-width: 640px) { .hero { aspect-ratio: 4 / 3; } .hero > img.key { object-position: 30% 30%; } .hero h1 { width: 78%; bottom: 4%; } }
 .lede { font-size: 1.2rem; color: var(--ink-soft); max-width: 60ch; margin: 0 0 36px; }
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
 a.tile { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
@@ -28,8 +34,11 @@ a.tile img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; display: block
 .tile p { margin: 0; color: var(--ink-soft); font-size: 1rem; }
 footer { margin-top: 40px; color: var(--ink-soft); font: 14px/1.5 "Source Sans 3", Helvetica, Arial, sans-serif; }
 </style>
+<header class="hero">
+  <img class="key" src="site-art/key-art-wide.jpg" alt="Amadeus, a punk violinist, faces Salieri, a conductor, across the stage of the Gale, with the War Anthem saxophone on its dais between them.">
+  <h1><img src="site-art/logo.png" alt="Belenon: Battle of the Bands"></h1>
+</header>
 <main>
-  <h1>Belenon: Battle of the Bands</h1>
   <p class="lede">A fan-made Magic: The Gathering set about a plane where music is magic and the great genres compete for the crowd. Browse the cards, crack a pack, or read up on how the set plays.</p>
   <div class="grid">
     <a class="tile" href="card-gallery.html"><img src="gallery-art/CW04.jpg" alt=""><div><h2>Card gallery</h2><p>Every card in the set, with filters and full card text.</p></div></a>
