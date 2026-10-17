@@ -1,7 +1,8 @@
 // The ten guilds for the public site: the homepage's Guilds tab shows name, genre, creed and blurb; guilds.html shows everything.
 // Each guild's song is its rare legend's Saga back, played as Apple Music's official 30-second preview (no ads; the clip is from mid-song),
 // with a Listen on Apple Music link as Apple's preview terms ask (looked up 2026-10-16 with the iTunes Search API; Loopwerk's became Björk's Army of Me when she became the Electronic rare).
-// performers: the guild's Guest Performers, its real-world musician legends as [card code, name], common to mythic; each
+// performers: the guild's Guest Performers, its real-world musician legends as [card code, name]: one common, uncommon and rare
+// each (the mythic story leads, Amadeus and Salieri, are left out; user, 2026-10-16). Each
 // previews its card on hover (site-art/performers/<code>.jpg, the front face rendered from the gallery).
 // Drafted from world.md and lore.md (2026-10-16). The Headbanga Mob's Phyrexian secret is only hinted at here; the story page tells it.
 const WINDS = { W: "the Dawn Wind", U: "the High Wind", B: "the Last Breath", R: "the Storm Wind", G: "the Ground Wind" };
@@ -14,7 +15,7 @@ const GUILDS = [
     gale: "The establishment and the defending favorites. They wrote the War Anthem, and they expect to keep the Seat of Breath. That the judges are knights of the same court is a question nobody at the Conservatory likes to hear.",
     play: "Slow control built on Etudes. Compose to find your study pieces, cast Sagas, and win the long game by sticking to the plan.",
     people: "Aven choristers, and Leonin students and scholars.",
-    performers: [["CW04", "Tchaikovsky, the Romantic"], ["UZ02", "Clara, Keyboard Virtuoso"], ["RZ01", "Bach, Fugue Master"], ["MZ02", "Salieri, Court Composer"]],
+    performers: [["CW04", "Tchaikovsky, the Romantic"], ["UZ02", "Clara, Keyboard Virtuoso"], ["RZ01", "Bach, Fugue Master"]],
     art: "Bach, Fugue Master" },
   { id: "lyriq", song: { preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/fd/ee/93/fdee93a2-846d-6231-1d47-619d1718e974/mzaf_13773148999538215038.plus.aac.p.m4a", link: "https://music.apple.com/us/album/hypnotize/217613303?i=217613319", title: "Hypnotize", artist: "The Notorious B.I.G." },
     name: "Lyriq Crew", genre: "Rap", colors: "UB", colorName: "Blue-Black",
@@ -94,7 +95,7 @@ const GUILDS = [
     gale: "Gatecrashers. They weren't invited, and they came anyway.",
     play: "Go wide and attack with equipped creatures, passing Instruments to new members of the band.",
     people: "The Broken Swords (Human knights who defected with Amadeus), a few Ratfolk scavengers, and young Rhoxes.",
-    performers: [["CW07", "The Ramones, Fast & Loud"], ["UZ18", "Sid, No Future"], ["RZ09", "Patti, Punk Poet Laureate"], ["MZ01", "Amadeus, Punk Prodigy"]],
+    performers: [["CW07", "The Ramones, Fast & Loud"], ["UZ18", "Sid, No Future"], ["RZ09", "Patti, Punk Poet Laureate"]],
     art: "Patti, Punk Poet Laureate" },
   { id: "deltari", song: { preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/be/4e/64/be4e6468-8e92-2e6e-2110-bd37f6dbadfc/mzaf_250364790696050311.plus.aac.p.m4a", link: "https://music.apple.com/us/album/the-thrill-is-gone/1469584475?i=1469584492", title: "The Thrill Is Gone", artist: "B.B. King" },
     name: "Deltari Wanderers", genre: "Blues", colors: "GU", colorName: "Green-Blue",
