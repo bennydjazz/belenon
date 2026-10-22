@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Songbook · Belenon</title>
+<meta name="description" content="The real songs behind Belenon's Saga creatures: what each one is about, a little music history, and how every chapter on the card tells its part of the song.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..100,500..900&family=Open+Sans:ital,wght@0,400..700;1,400..600&display=swap">
+<link rel="stylesheet" href="site.css?v=d7923649">
+<style>
+/* The Songbook (built by tools/build_songbook.py from songbook.md and the card files) */
+.intro { max-width: 760px; padding-block: 40px 8px; }
+.intro p { color: var(--ink-soft); margin: 0 0 14px; }
+.intro b { color: var(--ink); }
+.jump { position: sticky; top: var(--site-bar, 0px); z-index: 18; background: rgba(13,14,19,.92); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+.jump ul { list-style: none; margin: 0 auto; padding: 10px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 1120px; }
+.jump a { display: flex; align-items: center; gap: 7px; white-space: nowrap; font-family: var(--head); font-stretch: 92%; text-transform: uppercase; font-weight: 700; font-size: 1rem;
+  color: var(--ink-soft); text-decoration: none; padding: 7px 13px; border-radius: 999px; box-shadow: inset 0 0 0 1.5px var(--line); }
+.jump a:hover, .jump a.on { color: #1a1206; background: var(--gold); box-shadow: none; }
+.sigil { display: inline-block; width: 20px; height: 20px; flex: none; background: currentColor; -webkit-mask: var(--sym) center / contain no-repeat; mask: var(--sym) center / contain no-repeat; }
+.guild { scroll-margin-top: calc(70px + var(--site-bar, 0px)); }
+.guild > h2 { display: flex; align-items: center; gap: 14px; font-size: clamp(1.9rem, 5vw, 2.8rem); padding-top: 56px; margin: 0 0 4px; border-bottom: 3px solid var(--gold); padding-bottom: 8px; }
+.guild > h2 .sigil { width: 40px; height: 40px; color: var(--gold); }
+.song { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); grid-template-areas: "fig body" "card card"; gap: 28px 44px;
+  padding-block: 44px; border-bottom: 1px solid var(--line); scroll-margin-top: calc(70px + var(--site-bar, 0px)); }
+.song:nth-of-type(even) { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); grid-template-areas: "body fig" "card card"; }
+.song figure { grid-area: fig; margin: 0; align-self: start; }
+.song figure img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; box-shadow: 0 18px 40px rgba(0,0,0,.5); }
+.song figcaption { font-size: 14px; color: var(--ink-soft); margin-top: 8px; }
+.song .body { grid-area: body; }
+.song .num, .song .label { font-family: var(--head); font-stretch: 92%; text-transform: uppercase; color: var(--gold); font-weight: 600; margin: 0 0 4px; }
+.song h3 { font-family: var(--head); text-transform: uppercase; font-size: clamp(1.8rem, 4vw, 2.5rem); line-height: 1.05; margin: 0 0 6px; }
+.song .credit { color: var(--ink); font-weight: 600; margin: 0 0 14px; }
+.song .body > p { color: var(--ink-soft); margin: 0 0 14px; }
+.liner { border-left: 3px solid var(--gold); background: var(--panel); padding: 14px 18px; border-radius: 0 4px 4px 0; }
+.liner p { margin: 0; color: var(--ink-soft); font-size: 16px; }
+.liner p.label { margin-bottom: 4px; }
+.oncard { grid-area: card; background: var(--band); border: 1px solid var(--line); border-radius: 6px; padding: 20px 22px; }
+.oncard .label { display: flex; align-items: center; gap: 10px; }
+.chapters { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 14px; }
+.chapters li { display: grid; grid-template-columns: 64px 1fr; gap: 14px; align-items: start; }
+.chapters .ch { display: flex; align-items: center; justify-content: center; min-height: 40px; padding: 4px 6px; border-radius: 4px; background: #262a36; color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif; font-weight: 700; font-size: 15px; text-align: center; }
+.chapters li.flip .ch { background: linear-gradient(180deg, var(--gold), var(--gold-deep)); color: #1a1206; }
+.chapters p { margin: 0; }
+.chapters .fx { font-size: 15px; color: var(--ink-soft); font-style: italic; }
+.chapters .tale { color: var(--ink); }
+.oncard .aside { color: var(--ink-soft); font-size: 15px; margin: 10px 0 0; }
+.back { margin: 16px 0 0; padding-top: 14px; border-top: 1px dashed var(--line); color: var(--ink); }
+.back .label { display: block; }
+.back .ab { display: block; color: var(--ink-soft); font-size: 15px; font-style: italic; }
+.pip { display: inline-flex; align-items: center; justify-content: center; width: 1.25em; height: 1.25em; border-radius: 50%; font: 700 .72em/1 var(--body); font-style: normal;
+  vertical-align: .08em; color: #111; background: #cbc4b6; margin: 0 1px; }
+.pip.pw { background: #f6efd6; } .pip.pu { background: #9fd0ef; } .pip.pb { background: #b9aeaa; } .pip.pr { background: #f0a17f; } .pip.pg { background: #99cfa3; }
+.next { text-align: center; padding-block: 56px; }
+.next .btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+@media (max-width: 760px) {
+  .jump ul { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; }
+  .song, .song:nth-of-type(even) { grid-template-columns: 1fr; grid-template-areas: "fig" "body" "card"; gap: 20px; padding-block: 36px; }
+  .oncard { padding: 16px; }
+  .chapters li { grid-template-columns: 52px 1fr; gap: 10px; }
+}
+</style>
+
+<style>
+:root { --site-bar: 56px; }
+.site-bar { position: sticky; top: 0; z-index: 19; height: var(--site-bar); box-sizing: border-box; background: rgba(13,14,19,.94);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); border-bottom: 1px solid #2c303c; }
+.site-bar .in { max-width: 1120px; height: 100%; margin: 0 auto; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.site-bar .logo img { height: 40px; width: auto; display: block; }
+.site-bar .home { padding: 8px 14px; border-radius: 999px; color: #f1ede4; text-decoration: none; box-shadow: inset 0 0 0 1.5px #e8b64c;
+  font: 700 15px/1 "Mona Sans", "Arial Narrow", sans-serif; font-stretch: 92%; text-transform: uppercase; letter-spacing: normal; }
+.site-bar .home:hover { background: #e8b64c; color: #1a1206; }
+.site-bar a:focus-visible { outline: 3px solid #e8b64c; outline-offset: 2px; }
+</style>
+<header class="site-bar"><div class="in"><a class="logo" href="index.html"><img src="site-art/logo.png" alt="Belenon: Battle of the Bands, home"></a><a class="home" href="index.html">← Home</a></div></header>
+<header class="pagehead">
+  <img src="site-art/gale.jpg" alt="" style="object-position: 50% 40%">
+  <div class="wrap">
+    <p class="eyebrow">Liner notes</p>
+    <h1>The Songbook</h1>
+    <p class="lede">The real songs behind Belenon's Saga creatures: what each one is about, a little music history, and how every chapter on the card plays its part.</p>
+  </div>
+</header>
+<nav class="jump" aria-label="Jump to a guild"><ul><li><a href="#cadenza" title="Cadenza Conservatory · Classical"><span class="sigil" style="--sym:url(guild-symbols/cadenza-silhouette.png)" aria-hidden="true"></span>Cadenza</a></li><li><a href="#lyriq" title="Lyriq Crew · Rap"><span class="sigil" style="--sym:url(guild-symbols/lyriq-silhouette.png)" aria-hidden="true"></span>Lyriq</a></li><li><a href="#headbanga" title="Headbanga Mob · Metal"><span class="sigil" style="--sym:url(guild-symbols/headbanga-silhouette.png)" aria-hidden="true"></span>Headbanga</a></li><li><a href="#stadiax" title="Stadiax Tour · Rock &#x27;n&#x27; Roll"><span class="sigil" style="--sym:url(guild-symbols/stadiax-silhouette.png)" aria-hidden="true"></span>Stadiax</a></li><li><a href="#twangwood" title="Twangwood Jamboree · Country"><span class="sigil" style="--sym:url(guild-symbols/twangwood-silhouette.png)" aria-hidden="true"></span>Twangwood</a></li><li><a href="#gospelle" title="Gospelle Choir · Soul"><span class="sigil" style="--sym:url(guild-symbols/gospelle-silhouette.png)" aria-hidden="true"></span>Gospelle</a></li><li><a href="#improvisari" title="The Improvisari · Jazz"><span class="sigil" style="--sym:url(guild-symbols/improvisari-silhouette.png)" aria-hidden="true"></span>Improvisari</a></li><li><a href="#loopwerk" title="Loopwerk Collective · Electronic"><span class="sigil" style="--sym:url(guild-symbols/loopwerk-silhouette.png)" aria-hidden="true"></span>Loopwerk</a></li><li><a href="#anarkos" title="Anarkos Riot · Punk"><span class="sigil" style="--sym:url(guild-symbols/anarkos-silhouette.png)" aria-hidden="true"></span>Anarkos</a></li><li><a href="#deltari" title="Deltari Wanderers · Blues"><span class="sigil" style="--sym:url(guild-symbols/deltari-silhouette.png)" aria-hidden="true"></span>Deltari</a></li><li><a href="#finale" title="Finale">Finale</a></li></ul></nav>
+
+<main class="wrap">
+  <section class="intro">
+<p><b>Every song tells a story.</b> Magic's Sagas tell theirs a chapter at a time: a lore counter each turn, a new chapter, and the tale moves on. The best Sagas follow their story's shape, with setup, conflict and aftermath, and mechanics that match what happens (a reanimation for a return from the dead, a sweeper that grows as an eruption builds). Some repeat a chapter when the story repeats, and a few even take their chapter count from the source.</p>
+<p><b>On Belenon, the songs are real.</b> The Seam, a broken Omenpath torn loose by the returning Winds, points past the Multiverse into the storied worlds, and it opens to music. When Belenon's musicians play a famous song to its final bar, the song's own performer steps through. So every Saga creature here is two things: the song, performed by Belenon's guilds, and on its back the legend who wrote or made it famous, called through by the ending.</p>
+<p><b>How to read an entry:</b> the story of the song, a few liner notes from music history, and then the card chapter by chapter: what each one does, and which part of the song it plays.</p>
+  </section>
+
+<section class="guild" id="cadenza"><h2><span class="sigil" style="--sym:url(guild-symbols/cadenza-silhouette.png)" aria-hidden="true"></span>Cadenza Conservatory · Classical</h2>
+    <article class="song" id="cw04">
+      <figure><img src="site-art/songs/CW04.jpg" alt="Belenon's musicians perform Swan Lake." loading="lazy"><figcaption>Swan Lake</figcaption></figure>
+      <div class="body">
+        <p class="num">Common · Ballet</p>
+        <h3>Swan Lake</h3>
+        <p class="credit">Pyotr Ilyich Tchaikovsky · 1877</p>
+        <p>Prince Siegfried, told he must choose a bride, wanders to a moonlit lake and finds Odette, a princess cursed by the sorcerer Rothbart to live as a swan by day. Only a vow of true love can break the spell. At the palace ball, Rothbart brings his daughter Odile, disguised as Odette, and Siegfried pledges himself to the wrong swan. The ballet ends at the lake, in grief, with the lovers lost to the water.</p>
+        <div class="liner"><p class="label">Liner notes</p><p>Tchaikovsky's first ballet premiered at Moscow's Bolshoi Theatre in 1877 and made little impression: the staging was weak, and some critics found the score too symphonic for ballet. It only became the ballet of ballets in 1895, in Marius Petipa and Lev Ivanov's revival in St. Petersburg, two years after the composer's death. Its white-and-black double role, Odette and Odile danced by one ballerina, is still one of the hardest parts in dance.</p></div>
+      </div>
+      <div class="oncard">
+        <p class="label">On the card <span class="cost"><span class="pip p3">3</span><span class="pip pw">W</span></span></p>
+        
+        <ol class="chapters"><li><span class="ch">I, II</span><div><p class="fx">Create a 1/1 white Bird creature token with flying.</p><p class="tale">The lakeside acts: the swan maidens glide in and gather around Odette. The repeated chapter is the corps of swans arriving in waves, the ballet's most famous image (and its <i>Dance of the Little Swans</i>).</p></div></li><li class="flip"><span class="ch">III</span><div><p class="fx">Exile this Saga, then return it to the battlefield transformed under your control.</p><p class="tale">The curtain falls, and the composer comes out to take his bow. Tchaikovsky is a 2/4 with vigilance, watching over his ballet rather than charging in, as the Conservatory prefers.</p></div></li></ol>
+        <p class="back"><span class="label">Through the Seam</span><b>Tchaikovsky, the Romantic</b> · 2/4<span class="ab">Vigilance</span></p>
+        
+      </div>
+    </article>
+    <article class="song" id="uz02">
+      <figure><img src="site-art/songs/UZ02.jpg" alt="Belenon's musicians perform Piano Trio in G Minor." loading="lazy"><figcaption>Piano Trio in G Minor</figcaption></figure>
+      <div class="body">
+        <p class="num">Uncommon · Chamber music</p>
+        <h3>Piano Trio in G Minor</h3>
+        <p class="credit">Clara Schumann · 1846</p>
+        <p>A trio for piano, violin and cello in four movements: a stormy <i>Allegro moderato</i>, a playful <i>Scherzo</i> in the time of a minuet, a slow and singing <i>Andante</i>, and an <i>Allegretto</i> finale that weaves a fugue into its drive. It has no plot, only a conversation between three instruments that argue, dance, console each other and finish together.</p>
+        <div class="liner"><p class="label">Liner notes</p><p>Clara Wieck was a concert star at eleven and one of the great pianists of the nineteenth century, touring Europe for six decades. She married the composer Robert Schumann over her father's furious objection and raised eight children while performing and composing. Her Piano Trio, written in 1846, is often called her masterpiece. She doubted herself anyway, writing in her diary that a woman must not desire to compose. Her portrait was on Germany's 100-mark note.</p></div>
+      </div>
+      <div class="oncard">
+        <p class="label">On the card <span class="cost"><span class="pip p1">1</span><span class="pip pw">W</span><span class="pip pu">U</span></span></p>
+        <p class="aside"><b>Four chapters</b> for the trio's four movements.</p>
+        <ol class="chapters"><li><span class="ch">I</span><div><p class="fx">Look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.</p><p class="tale">The <i>Allegro</i>: the opening theme, chosen from the material (look at three cards and keep one).</p></div></li><li><span class="ch">II</span><div><p class="fx">Tap up to two target creatures your opponents control.</p><p class="tale">The <i>Scherzo</i>, a dance that sweeps two partners aside (tap two creatures).</p></div></li><li><span class="ch">III</span><div><p class="fx">You gain 3 life and draw a card.</p><p class="tale">The <i>Andante</i>, the tender heart of the piece (life and a card).</p></div></li><li class="flip"><span class="ch">IV</span><div><p class="fx">Exile this Saga, then return it to the battlefield transformed under your control.</p><p class="tale">The finale brings the pianist herself to the stage. Clara grows with every other Saga you keep playing: a performer who gets better with each piece on the program.</p></div></li></ol>
+        <p class="back"><span class="label">Through the Seam</span><b>Clara, Keyboard Virtuoso</b> · 2/3<span class="ab">Clara gets +1/+1 for each other Saga you control.</span></p>
+        
+      </div>
+    </article>
+    <article class="song" id="rz01">
+      <figure><img src="site-art/songs/RZ01.jpg" alt="Belenon's musicians perform The Well-Tempered Clavier." loading="lazy"><figcaption>The Well-Tempered Clavier</figcaption></figure>
+      <div class="body">
+        <p class="num">Rare · Keyboard music</p>
+        <h3>The Well-Tempered Clavier</h3>
+        <p class="credit">Johann Sebastian Bach · 1722 and 1742</p>
+        <p>Not one piece but forty-eight: two books, each with a prelude and fugue in every one of the twenty-four major and minor keys. Each prelude is a free-flowing warm-up; each fugue takes a single short melody, the subject, and passes it from voice to voice, overlapping itself, until the whole keyboard is singing it at once.</p>
+        <div class="liner"><p class="label">Liner notes</p><p>Bach wrote the first book in 1722 for "the profit and use of musical youth desirous of learning," and the second about twenty years later. Its title points to a tuning system that let a keyboard play in every key, still a new idea then. It became the textbook of Western harmony: Mozart arranged its fugues, Beethoven played it as a boy, and Chopin warmed up with it before concerts. The first Prelude in C major, a ripple of broken chords, is one of the most played pieces ever written.</p></div>
+      </div>
+      <div class="oncard">
+        <p class="label">On the card <span class="cost"><span class="pip pw">W</span><span class="pip pw">W</span><span class="pip pu">U</span></span></p>
+        
+        <ol class="chapters"><li><span class="ch">I</span><div><p class="fx">Scry 2, then draw a card.</p><p class="tale">The prelude, which prepares its fugue: look ahead, then take a card.</p></div></li><li><span class="ch">II</span><div><p class="fx">Return up to one target Saga card from your graveyard to your hand.</p><p class="tale">The fugue: the subject comes back in voice after voice. A Saga returns to your hand to be played again.</p></div></li><li class="flip"><span class="ch">III</span><div><p class="fx">Exile this Saga, then return it to the battlefield transformed under your control.</p><p class="tale">Bach himself, who keeps the counterpoint going: each Saga you cast moves another one forward.</p></div></li></ol>
+        <p class="back"><span class="label">Through the Seam</span><b>Bach, Fugue Master</b> · 3/4<span class="ab">Whenever you cast a Saga spell, put a lore counter on up to one other target Saga you control.</span></p>
+        
+      </div>
+    </article>
+</section>
+<section class="guild" id="lyriq"><h2><span class="sigil" style="--sym:url(guild-symbols/lyriq-silhouette.png)" aria-hidden="true"></span>Lyriq Crew · Rap</h2>
+    <article class="song" id="cu03">
+      <figure><img src="site-art/songs/CU03.jpg" alt="Belenon's musicians perform If I Ruled the World." loading="lazy"><figcaption>If I Ruled the World</figcaption></figure>
+      <div class="body">
+        <p class="num">Common · Hip-hop</p>
+        <h3>If I Ruled the World</h3>
+        <p class="credit">Nas, with Lauryn Hill · 1996</p>
+        <p>Nas imagines a different world, one where the people from his neighborhood walk free, the poor share in the wealth, and nobody is held back by where they were born. Lauryn Hill sings the hook, and the whole song stays in the conditional: this is what he would do if he ran things.</p>
+        <div class="liner"><p class="label">Liner notes</p><p>Nas grew up in Queensbridge, the largest public housing project in North America, and his 1994 debut <i>Illmatic</i> is regularly named the greatest hip-hop album ever made. "If I Ruled the World (Imagine That)," from his second album <i>It Was Written</i>, was his biggest hit yet, built on Kurtis Blow's 1985 song of the same name, and it brought him to radio while Lauryn Hill was at the height of the Fugees.</p></div>
+      </div>
+      <div class="oncard">
+        <p class="label">On the card <span class="cost"><span class="pip p2">2</span><span class="pip pu">U</span></span></p>
+        
+        <ol class="chapters"><li><span class="ch">I</span><div><p class="fx">Scry 2.</p><p class="tale">The daydream: he looks ahead and pictures how the world could be arranged (scry 2).</p></div></li><li><span class="ch">II</span><div><p class="fx">Draw a card.</p><p class="tale">The dream comes true and lands in your hand (draw a card).</p></div></li><li class="flip"><span class="ch">III</span><div><p class="fx">Exile this Saga, then return it to the battlefield transformed under your control.</p><p class="tale">The poet who dreamed it: Nas, a sturdy 2/4 who guards the Crew's Contests.</p></div></li></ol>
+        <p class="back"><span class="label">Through the Seam</span><b>Nas, Street Disciple</b> · 2/4</p>
+        
+      </div>
+    </article>
+    <article class="song" id="uz04">
+      <figure><img src="site-art/songs/UZ04.jpg" alt="Belenon's musicians perform Get Ur Freak On." loading="lazy"><figcaption>Get Ur Freak On</figcaption></figure>
+      <div class="body">
+        <p class="num">Uncommon · Hip-hop</p>
+        <h3>Get Ur Freak On</h3>
+        <p class="credit">Missy Elliott · 2001</p>
+        <p>An order to the dance floor: let go, move, and don't stop. Missy boasts, taunts her rivals and rides a beat built from a twanging Punjabi string riff and tabla drums, opening with a line in Japanese.</p>
+        <div class="liner"><p class="label">Liner notes</p><p>Missy Elliott and her producer Timbaland grew up together in Virginia and spent the late 1990s making records that sounded like nothing else on the radio. "Get Ur Freak On" borrowed the sound of bhangra, the folk-dance music of Punjab, and won the Grammy for Best Female Rap Solo Performance. Missy's music videos, full of fisheye lenses and inflatable suits, made her one of the most inventive visual artists in pop. In 2019 she became the first female rapper in the Songwriters Hall of Fame.</p></div>
+      </div>
+      <div class="oncard">
+        <p class="label">On the card <span class="cost"><span class="pip pu">U</span><span class="pip pb">B</span></span></p>
+        
+        <ol class="chapters"><li><span class="ch">I</span><div><p class="fx">Surveil 2.</p><p class="tale">Timbaland digging for the beat, the tabla loop the song is built on (surveil 2).</p></div></li><li><span class="ch">II</span><div><p class="fx">Return up to one target creature to its owner's hand.</p><p class="tale">Missy calls the floor, and anyone in the way gets cleared off it (bounce a creature).</p></div></li><li class="flip"><span class="ch">III</span><div><p class="fx">Exile this Saga, then return it to the battlefield transformed under your control.</p><p class="tale">Missy herself, flying, drawing a card every time she lands a hit.</p></div></li></ol>
+        <p class="back"><span class="label">Through the Seam</span><b>Missy, Supa Dupa Fly</b> · 2/2<span class="ab">FlyingWhenever Missy deals combat damage to a player or battle, draw a card.</span></p>
+        
+      </div>
+    </article>
+    <article class="song" id="rz02">
+      <figure><img src="site-art/songs/RZ02.jpg" alt="Belenon's musicians perform Hypnotize." loading="lazy"><figcaption>Hypnotize</figcaption></figure>
+      <div class="body">
+        <p class="num">Rare · Hip-hop</p>
+        <h3>Hypnotize</h3>
+        <p class="credit">The Notorious B.I.G. · 1997</p>
+        <p>Biggie's victory lap: the money, the cars, the parties and the way he holds a room, delivered so smoothly that the listener is under his spell. The chorus, sung by Pamela Long, says it outright: he has a way of hypnotizing.</p>
+        <div class="liner"><p class="label">Liner notes</p><p>Christopher Wallace grew up in Brooklyn and became the voice of East Coast rap with <i>Ready to Die</i> in 1994. "Hypnotize" was the lead single from <i>Life After Death</i>. He was killed in Los Angeles in March 1997, days after its release, and it became his first No. 1 after his death. The beat, produced by Puff Daddy's team, is built on Herb Alpert's 1979 instrumental "Rise," and the hook borrows from Slick Rick's "La Di Da Di": sampling as tribute, the way rap has always honored its elders.</p></div>
+      </div>
+      <div class="oncard">
+        <p class="label">On the card <span class="cost"><span class="pip p1">1</span><span class="pip pu">U</span><span class="pip pu">U</span><span class="pip pb">B</span></span></p>
+        
+        <ol class="chapters"><li><span class="ch">I</span><div><p class="fx">Look at the top three cards of target opponent's library, exile one of them face down, then put the rest on the bottom of that library in a random order. You may look at and cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any type to cast that spell.</p><p class="tale">The beat is built on someone else's record: take a card from the top of an opponent's library and play it as your own (Sampling).</p></div></li><li><span class="ch">II</span><div><p class="fx">Gain control of target creature an opponent controls with mana value 3 or less.</p><p class="tale">Hypnotize: one of their creatures falls under his spell and joins you.</p></div></li><li class="flip"><span class="ch">III</span><div><p class="fx">Exile this Saga, then return it to the battlefield transformed under your control.</p><p class="tale">Biggie himself, hard to block and paid every time you win a Contest.</p></div></li></ol>
+        <p class="back"><span class="label">Through the Seam</span><b>Biggie, the Notorious</b> · 4/4<span class="ab">MenaceWhenever you win a Contest, draw two cards.</span></p>
+        
+      </div>
+    </article>
+</section>
+<section class="guild" id="headbanga"><h2><span class="sigil" style="--sym:url(guild-symbols/headbanga-silhouette.png)" aria-hidden="true"></span>Headbanga Mob · Metal</h2>
+    <article class="song" id="cb04">
+      <figure><img src="site-art/songs/CB04.jpg" alt="Belenon's musicians perform Crazy Train." loading="lazy"><figcaption>Crazy Train</figcaption></figure>
+      <div class="body">
+        <p class="num">Common · Heavy metal</p>
+        <h3>Crazy Train</h3>
+        <p class="credit">Ozzy Osbourne · 1980</p>
+        <p>Written in the shadow of the Cold War, it's about a world gone mad: people raised to fear each other, a planet arming itself to the teeth, and everyone riding a train that's heading off the rails. The madness is the point, and the riff is the train.</p>
+        <div class="liner"><p class="label">Liner notes</p><p>Ozzy was fired from Black Sabbath in 1979, the band he had helped invent heavy metal with a decade earlier. His first solo album, <i>Blizzard of Ozz</i>, opened with "Crazy Train," and its riff, by the 23-year-old guitarist Randy Rhoads, became one of the most recognizable in rock. Rhoads died in a plane crash in 1982. The bassist Bob Daisley wrote most of the words.</p></div>
+      </div>
+      <div class="oncard">
+        <p class="label">On the card <span class="cost"><span class="pip p3">3</span><span class="pip pb">B</span></span></p>
+        
+        <ol class="chapters"><li><span class="ch">I</span><div><p class="fx">Each player sacrifices a creature.</p><p class="tale">A world at war with itself, where everyone loses someone: each player sacrifices a creature, you included.</p></div></li><li><span class="ch">II</span><div><p class="fx">Amass Fanatics 2. <i>(Put two +1/+1 counters on an Army you control. It's also a Fanatic. If you don't control one, create a 0/0 black Fanatic Army creature token first.)</i></p><p class="tale">All aboard: the Mob piles onto the train (amass Fanatics 2).</p></div></li><li class="flip"><span class="ch">III</span><div><p class="fx">Exile this Saga, then return it to the battlefield transformed under your control.</p><p class="tale">The train jumps the rails, and out of the wreck steps the Prince of Darkness, a 4/3 that hits hard.</p></div></li></ol>
+        <p class="back"><span class="label">Through the Seam</span><b>Ozzy, Prince of Darkness</b> · 4/3</p>
+        
+      </div>
+    </article>
+    <article class="song" id="uz06">
+      <figure><img src="site-art/songs/UZ06.jpg" alt="Belenon's musicians perform Holy Diver." loading="lazy"><figcaption>Holy Diver</figcaption></figure>
+      <div class="body">
+        <p class="num">Uncommon · Heavy metal</p>
+        <h3>Holy Diver</h3>
+        <p class="credit">Dio · 1983</p>
+        <p>A sword-and-sorcery hymn to a mysterious savior, a diver who has spent too long in a midnight sea and returns to ride the tiger, half hero and half warning. Like most of Dio's songs, it sounds like a fantasy novel set to a gallop.</p>
+        <div class="liner"><p class="label">Liner notes</p><p>Ronnie James Dio replaced Ozzy Osbourne in Black Sabbath in 1979, then left to form his own band, Dio, whose debut album <i>Holy Diver</i> is a metal landmark. He also gave metal its salute: the raised index and little finger, the horns, which he said came from his Italian grandmother, who used it to ward off the evil eye.</p></div>
+      </div>
+      <div class="oncard">
+        <p class="label">On the card <span class="cost"><span class="pip p1">1</span><span class="pip pb">B</span><span class="pip pr">R</span></span></p>
+        
+        <ol class="chapters"><li><span class="ch">I</span><div><p class="fx">Return up to one target creature card from your graveyard to your hand.</p><p class="tale">The diver comes up out of the dark sea: a creature returns from your graveyard to your hand.</p></div></li><li><span class="ch">II</span><div><p class="fx">You may sacrifice a creature. When you do, Holy Diver deals 3 damage to any target.</p><p class="tale">Riding the tiger is dangerous: sacrifice a creature, and it hits for 3.</p></div></li><li class="flip"><span class="ch">III</span><div><p class="fx">Exile this Saga, then return it to the battlefield transformed under your control.</p><p class="tale">Ronnie, horns up, making the Mob's every loss hurt the enemy.</p></div></li></ol>
+        <p class="back"><span class="label">Through the Seam</span><b>Ronnie, Horns Up</b> · 3/3<span class="ab">MenaceWhenever another creature you control dies, Ronnie deals 1 damage to any target.</span></p>
+        
+      </div>
+    </article>
+    <article class="song" id="rz03">
+      <figure><img src="site-art/songs/RZ03.jpg" alt="Belenon's musicians perform Master of Puppets." loading="lazy"><figcaption>Master of Puppets</figcaption></figure>
+      <div class="body">
+        <p class="num">Rare · Thrash metal</p>
+        <h3>Master of Puppets</h3>
+        <p class="credit">Metallica · 1986</p>
+        <p>Addiction told from the drug's point of view: the master pulling the strings, the victim dancing to its commands, begging and obeying. More than eight minutes of thrash break into a quiet, melodic interlude in the middle, like a moment of clarity, before the master drags it back.</p>
+        <div class="liner"><p class="label">Liner notes</p><p>Metallica's third album, also called <i>Master of Puppets</i>, was the first metal recording chosen for the US Library of Congress's National Recording Registry, in 2016. It was also the last album with the bassist Cliff Burton, who died in a tour-bus crash in Sweden that September, aged 24. The band's nickname on the card comes from "The Four Horsemen," a song on their 1983 debut.</p></div>
+      </div>
+      <div class="oncard">
+        <p class="label">On the card <span class="cost"><span class="pip p1">1</span><span class="pip pb">B</span><span class="pip pb">B</span><span class="pip pr">R</span></span></p>
+        
+        <ol class="chapters"><li><span class="ch">I</span><div><p class="fx">Gain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn.</p><p class="tale">The strings take hold: steal an opponent's creature for a turn and make it fight for you.</p></div></li><li><span class="ch">II</span><div><p class="fx">Each opponent sacrifices a creature.</p><p class="tale">The master commands, and they obey, cutting their own (each opponent sacrifices a creature).</p></div></li><li class="flip"><span class="ch">III</span><div><p class="fx">Exile this Saga, then return it to the battlefield transformed under your control.</p><p class="tale">The band themselves, with haste and an appetite for sacrifices.</p></div></li></ol>
+        <p class="back"><span class="label">Through the Seam</span><b>Metallica, Four Horsemen</b> · 4/3<span class="ab">HasteSacrifice another creature: Metallica gets +2/+0 until end of turn.</span></p>
+        
+      </div>
+    </article>
+</section>
+<section class="guild" id="stadiax"><h2><span class="sigil" style="--sym:url(guild-symbols/stadiax-silhouette.png)" aria-hidden="true"></span>Stadiax Tour · Rock &#x27;n&#x27; Roll</h2>
+    <article class="song" id="cr02">
+      <figure><img src="site-art/songs/CR02.jpg" alt="Belenon's musicians perform Proud Mary." loading="lazy"><figcaption>Proud Mary</figcaption></figure>
+      <div class="body">
+        <p class="num">Common · Rock, soul</p>
+        <h3>Proud Mary</h3>
+        <p class="credit">Ike &amp; Tina Turner · 1971</p>
+        <p>A worker quits a thankless job in the city and signs on to a riverboat called the <i>Proud Mary</i>, rolling down the river with people who'll give you a hand. Ike &amp; Tina's version opens with Tina telling the crowd they'll do it nice and easy at first, and then finish rough.</p>
+        <div class="liner"><p class="label">Liner notes</p><p>John Fogerty wrote "Proud Mary" for Creedence Clearwater Revival in 1969. Ike &amp; Tina Turner made it theirs two years later, starting at half speed and then exploding, and won a Grammy for it. Tina left Ike in 1976 with almost nothing and rebuilt her career on her own, and her 1984 comeback album <i>Private Dancer</i> made her one of the biggest stars in the world, the Queen of Rock 'n' Roll.</p></div>
+      </div>
+      <div class="oncard">
+        <p class="label">On the card <span class="cost"><span class="pip p3">3</span><span class="pip pr">R</span></span></p>
+        
+        <ol class="chapters"><li><span class="ch">I</span><div><p class="fx">Discard up to one card, then draw a card.</p><p class="tale">The nice and easy opening, quitting the city job: trade a card for a fresh one.</p></div></li><li><span class="ch">II</span><div><p class="fx">Proud Mary deals 3 damage to target creature.</p><p class="tale">The rough part, the switch to full speed: 3 damage to a creature.</p></div></li><li class="flip"><span class="ch">III</span><div><p class="fx">Exile this Saga, then return it to the battlefield transformed under your control.</p><p class="tale">Rolling on the river at full steam, Tina takes the stage, a 4/3 with first strike who hits before anyone keeps up.</p></div></li></ol>
+        <p class="back"><span class="label">Through the Seam</span><b>Tina, Queen of Rock</b> · 4/3<span class="ab">First strike</span></p>
+        
+      </div>
+    </article>
+    <article class="song" id="uz08">
+      <figure><img src="site-art/songs/UZ08.jpg" alt="Belenon's musicians perform Johnny B. Goode." loading="lazy"><figcaption>Johnny B. Goode</figcaption></figure>
+      <div class="body">
+        <p class="num">Uncommon · Rock &#x27;n&#x27; roll</p>
+        <h3>Johnny B. Goode</h3>
+        <p class="credit">Chuck Berry · 1958</p>
+        <p>A country boy grows up in a log cabin in the woods near New Orleans. He can barely read or write, but he plays guitar like someone ringing a bell, and he practices by the railroad tracks while passersby stop to listen. His mother tells him he'll lead a band someday, with his name in lights.</p>
+        <div class="liner"><p class="label">Liner notes</p><p>Chuck Berry's story about himself, more or less: he changed the boy's description so radio would play it. Its opening riff taught generations to play rock guitar. In 1977 NASA put "Johnny B. Goode" on the Voyager Golden Record, so a copy is now leaving the solar system. Berry was in the first class inducted into the Rock and Roll Hall of Fame, in 1986.</p></div>
+      </div>
+      <div class="oncard">
+        <p class="label">On the card <span class="cost"><span class="pip p1">1</span><span class="pip pr">R</span><span class="pip pg">G</span></span></p>
+        
+        <ol class="chapters"><li><span class="ch">I</span><div><p class="fx">Search your library for a basic Mountain or Forest card, put it onto the battlefield tapped, then shuffle.</p><p class="tale">The log cabin back in the woods (fetch a Mountain or Forest).</p></div></li><li><span class="ch">II</span><div><p class="fx">Put two +1/+1 counters on target creature you control.</p><p class="tale">Practicing by the railroad as people stop to listen: two +1/+1 counters, getting better and better.</p></div></li><li class="flip"><span class="ch">III</span><div><p class="fx">Exile this Saga, then return it to the battlefield transformed under your control.</p><p class="tale">His mother's prophecy comes true: Chuck arrives, and his name in lights is the cards he draws as he enters.</p></div></li></ol>
+        <p class="back"><span class="label">Through the Seam</span><b>Chuck, Father of Rock</b> · 3/3<span class="ab">MenaceWhen Chuck enters, draw a card. If you control another creature with power 4 or greater, draw two cards instead.</span></p>
+        
+      </div>
+    </article>
+    <article class="song" id="rz04">
+      <figure><img src="site-art/songs/RZ04.jpg" alt="Belenon's musicians perform Bohemian Rhapsody." loading="lazy"><figcaption>Bohemian Rhapsody</figcaption></figure>
+      <div class="body">
+        <p class="num">Rare · Rock</p>
+        <h3>Bohemian Rhapsody</h3>
+        <p class="credit">Queen · 1975</p>
+        <p>A young man confesses to his mother that he has killed a man and must face what's coming. His fate is argued over in a mock opera of voices, he rages against it in a burst of hard rock, and in the end he decides that nothing really matters, as the wind blows on.</p>
+        <div class="liner"><p class="label">Liner notes</p><p>Freddie Mercury wrote it as several songs joined into one: an a cappella intro, a ballad, a guitar solo, an operatic section and a hard-rock section, then an outro, with no chorus at all. The record label thought six minutes was too long for radio; a DJ played it anyway, and it spent nine weeks at No. 1 in Britain. It topped the charts again in 1991 after Mercury's death, and climbed to No. 2 in the US when <i>Wayne's World</i> put it on screen in 1992.</p></div>
+      </div>
+      <div class="oncard">
+        <p class="label">On the card <span class="cost"><span class="pip p1">1</span><span class="pip pr">R</span><span class="pip pr">R</span><span class="pip pg">G</span></span></p>
+        <p class="aside"><b>Five chapters</b> for the song's sections.</p>
+        <ol class="chapters"><li><span class="ch">I</span><div><p class="fx">Scry 2.</p><p class="tale">The intro: is this real life or fantasy? Look ahead and decide (scry 2).</p></div></li><li><span class="ch">II</span><div><p class="fx">Target creature you control fights up to one target creature you don't control.</p><p class="tale">The ballad's confession: he just killed a man (a fight).</p></div></li><li><span class="ch">III</span><div><p class="fx">Create two 1/1 colorless Musician creature tokens.</p><p class="tale">The opera: a chorus of voices argues over his soul (two Musician tokens).</p></div></li><li><span class="ch">IV</span><div><p class="fx">Bohemian Rhapsody deals 4 damage divided as you choose among any number of targets.</p><p class="tale">The hard-rock climax explodes (4 damage, divided).</p></div></li><li class="flip"><span class="ch">V</span><div><p class="fx">Exile this Saga, then return it to the battlefield transformed under your control.</p><p class="tale">The outro ends on the wind, and on Belenon the wind is what carries Freddie through the Seam.</p></div></li></ol>
+        <p class="back"><span class="label">Through the Seam</span><b>Freddie, the Champion</b> · 4/4<span class="ab">TrampleOther creatures you control with power 4 or greater have haste.</span></p>
+        
+      </div>
+    </article>
+</section>
+<section class="guild" id="twangwood"><h2><span class="sigil" style="--sym:url(guild-symbols/twangwood-silhouette.png)" aria-hidden="true"></span>Twangwood Jamboree · Country</h2>
+    <article class="song" id="cg02">
+      <figure><img src="site-art/songs/CG02.jpg" alt="Belenon's musicians perform Ring of Fire." loading="lazy"><figcaption>Ring of Fire</figcaption></figure>
+      <div class="body">
+        <p class="num">Common · Country</p>
+        <h3>Ring of Fire</h3>
+        <p class="credit">Johnny Cash · 1963</p>
+        <p>Falling in love as falling into a burning ring of fire: the deeper you go, the higher the flames rise, and you wouldn't climb out even if you could.</p>
+        <div class="liner"><p class="label">Liner notes</p><p>June Carter wrote it with Merle Kilgore about falling for Johnny Cash, who was married at the time. Her sister Anita recorded it first. Cash said the mariachi horns came to him in a dream, and his version spent seven weeks at No. 1 on the country chart. Johnny and June married in 1968 and performed together for the rest of their lives. He wore black, he said, for the poor and the beaten-down.</p></div>
+      </div>
+      <div class="oncard">
+        <p class="label">On the card <span class="cost"><span class="pip p1">1</span><span class="pip pg">G</span></span></p>
+        
+        <ol class="chapters"><li><span class="ch">I, II</span><div><p class="fx">Put a +1/+1 counter on target creature you control.</p><p class="tale">The flames go higher, and so does a creature: a +1/+1 counter each time. The same chapter twice is falling deeper with no way out.</p></div></li><li class="flip"><span class="ch">III</span><div><p class="fx">Exile this Saga, then return it to the battlefield transformed under your control.</p><p class="tale">The Man in Black arrives, the one the song was written about.</p></div></li></ol>
+        <p class="back"><span class="label">Through the Seam</span><b>Johnny, the Man in Black</b> · 2/3</p>
+        
+      </div>
+    </article>
+    <article class="song" id="uz10">
+      <figure><img src="site-art/songs/UZ10.jpg" alt="Belenon's musicians perform I Fall to Pieces." loading="lazy"><figcaption>I Fall to Pieces</figcaption></figure>
+      <div class="body">
+        <p class="num">Uncommon · Country</p>
+        <h3>I Fall to Pieces</h3>
+        <p class="credit">Patsy Cline · 1961</p>
+        <p>Her lover has left and tells her to forget him and move on, to just be friends. She tries, and she can manage it until she sees him again, and then she falls to pieces.</p>
+        <div class="liner"><p class="label">Liner notes</p><p>Written by Hank Cochran and Harlan Howard and produced by Owen Bradley, it was Patsy Cline's first No. 1 on the country chart and crossed over to pop, a model for the smooth Nashville sound. While it was climbing, she was nearly killed in a car crash, and she came back to the Grand Ole Opry stage on crutches. She died in a plane crash in 1963, at 30. In 1973 she became the first woman elected to the Country Music Hall of Fame.</p></div>
+      </div>
+      <div class="oncard">
+        <p class="label">On the card <span class="cost"><span class="pip p1">1</span><span class="pip pg">G</span><span class="pip pw">W</span></span></p>
+        
+        <ol class="chapters"><li><span class="ch">I</span><div><p class="fx">Put a +1/+1 counter on each of up to two target creatures you control.</p><p class="tale">Told to forget him, she holds herself together: counters on up to two creatures.</p></div></li><li><span class="ch">II</span><div><p class="fx">Destroy up to one target artifact or enchantment an opponent controls.</p><p class="tale">Then she sees him again, and something shatters (destroy an artifact or enchantment).</p></div></li><li class="flip"><span class="ch">III</span><div><p class="fx">Exile this Saga, then return it to the battlefield transformed under your control.</p><p class="tale">Patsy herself, and with her the band doesn't fall to pieces: every creature with a counter tramples on.</p></div></li></ol>
+        <p class="back"><span class="label">Through the Seam</span><b>Patsy, Grand Ole Opry Star</b> · 2/2<span class="ab">When Patsy enters, put a +1/+1 counter on target creature you control.Creatures you control with +1/+1 counters on them have trample.</span></p>
+        
+      </div>
+    </article>
+    <article class="song" id="rz05">
+      <figure><img src="site-art/songs/RZ05.jpg" alt="Belenon's musicians perform Coat of Many Colors." loading="lazy"><figcaption>Coat of Many Colors</figcaption></figure>
+      <div class="body">
+        <p class="num">Rare · Country</p>
+        <h3>Coat of Many Colors</h3>
+        <p class="credit">Dolly Parton · 1971</p>
+        <p>A poor girl's mother sews her a winter coat from a box of rags in every color, telling her the Bible story of Joseph's coat of many colors as she works. At school the other children laugh at her patchwork, but she knows she's rich, because the coat was made with love.</p>
+        <div class="liner"><p class="label">Liner notes</p><p>Dolly Parton grew up one of twelve children in a one-room cabin in Tennessee's Smoky Mountains, and the story is her own. She wrote the song on a tour bus, on the back of a dry-cleaning receipt, and has called it her favorite of the thousands she has written. The receipt is framed at Dollywood.</p></div>
+      </div>
+      <div class="oncard">
+        <p class="label">On the card <span class="cost"><span class="pip pg">G</span><span class="pip pg">G</span><span class="pip pw">W</span></span></p>
+        
+        <ol class="chapters"><li><span class="ch">I</span><div><p class="fx">Search your library for up to two basic land cards with different names, reveal them, put them into your hand, then shuffle.</p><p class="tale">The box of rags in every color: two basic lands of different types.</p></div></li><li><span class="ch">II</span><div><p class="fx">Draw a card for each color among permanents you control.</p><p class="tale">Mama sews them into a coat while telling Joseph's story, and the more colors in it, the richer it is (a card for each color among your permanents).</p></div></li><li class="flip"><span class="ch">III</span><div><p class="fx">Exile this Saga, then return it to the battlefield transformed under your control.</p><p class="tale">Dolly wears it to school. They laugh; she knows better. Dolly enters, and every enchantment after her brings another friend.</p></div></li></ol>
+        <p class="back"><span class="label">Through the Seam</span><b>Dolly, Iron Butterfly</b> · 3/4<span class="ab">VigilanceWhenever an enchantment you control enters, create a 1/1 colorless Musician creature token.</span></p>
+        
+      </div>
+    </article>
+</section>
+<section class="guild" id="gospelle"><h2><span class="sigil" style="--sym:url(guild-symbols/gospelle-silhouette.png)" aria-hidden="true"></span>Gospelle Choir · Soul</h2>
+    <article class="song" id="cb06">
+      <figure><img src="site-art/songs/CB06.jpg" alt="Belenon's musicians perform The Tears of a Clown." loading="lazy"><figcaption>The Tears of a Clown</figcaption></figure>
+      <div class="body">
+        <p class="num">Common · Motown soul</p>
+        <h3>The Tears of a Clown</h3>
+        <p class="credit">Smokey Robinson &amp; the Miracles · 1967 (a hit in 1970)</p>
+        <p>After a breakup, the singer keeps smiling in public and plays the life of the party, but like the clown Pagliacci in the opera, who laughs on stage while his heart breaks, he is crying behind the mask.</p>
+        <div class="liner"><p class="label">Liner notes</p><p>The music began with a young Stevie Wonder and Hank Cosby, who brought Smokey Robinson a circus-like melody for bassoon and calliope that they'd written for a Motown Christmas party. Smokey heard a circus and wrote about a clown. The Miracles recorded it in 1967, and it sat on an album until it was released as a single in 1970 and went to No. 1 in Britain and the US. Bob Dylan supposedly called Smokey America's greatest living poet.</p></div>
+      </div>
+      <div class="oncard">
+        <p class="label">On the card <span class="cost"><span class="pip p2">2</span><span class="pip pb">B</span></span></p>
+        
+        <ol class="chapters"><li><span class="ch">I</span><div><p class="fx">You gain 3 life.</p><p class="tale">The painted smile: on the surface he looks better than ever (you gain 3 life).</p></div></li><li><span class="ch">II</span><div><p class="fx">Each opponent loses 2 life.</p><p class="tale">The tears behind it, which spill out and hurt the people around him (each opponent loses 2 life).</p></div></li><li class="flip"><span class="ch">III</span><div><p class="fx">Exile this Saga, then return it to the battlefield transformed under your control.</p><p class="tale">The clown takes off his makeup, and Smokey stands there as himself.</p></div></li></ol>
+        <p class="back"><span class="label">Through the Seam</span><b>Smokey, the Miracle Man</b> · 3/3</p>
+        
+      </div>
+    </article>
+    <article class="song" id="uz12">
+      <figure><img src="site-art/songs/UZ12.jpg" alt="Belenon's musicians perform Stop! In the Name of Love." loading="lazy"><figcaption>Stop! In the Name of Love</figcaption></figure>
+      <div class="body">
+        <p class="num">Uncommon · Motown soul</p>
+        <h3>Stop! In the Name of Love</h3>
+        <p class="credit">The Supremes · 1965</p>
+        <p>She knows he's heading out to see the other woman, and she begs him to stop and think it over before he breaks her heart.</p>
+        <div class="liner"><p class="label">Liner notes</p><p>Written by Motown's hit factory of Holland–Dozier–Holland, it was the Supremes' fourth No. 1 in a row. Diana Ross, Mary Wilson and Florence Ballard grew up in Detroit's Brewster housing project and became the most successful American vocal group of the 1960s, with twelve No. 1 hits. Their raised-palm stop on the chorus became one of the most famous dance moves in pop.</p></div>
+      </div>
+      <div class="oncard">
+        <p class="label">On the card <span class="cost"><span class="pip p1">1</span><span class="pip pw">W</span><span class="pip pb">B</span></span></p>
+        
+        <ol class="chapters"><li><span class="ch">I</span><div><p class="fx">Tap up to two target creatures your opponents control.</p><p class="tale">Stop! The raised hand halts two creatures (tap them).</p></div></li><li><span class="ch">II</span><div><p class="fx">Each opponent loses 2 life and you gain 2 life.</p><p class="tale">Think it over: the plea hurts him more than her (drain 2).</p></div></li><li class="flip"><span class="ch">III</span><div><p class="fx">Exile this Saga, then return it to the battlefield transformed under your control.</p><p class="tale">The trio themselves, gathering backup singers whenever you gain life.</p></div></li></ol>
+        <p class="back"><span class="label">Through the Seam</span><b>The Supremes, Royalty</b> · 2/3<span class="ab">Whenever you gain life, create a 1/1 colorless Musician creature token. This ability triggers only once each turn.</span></p>
+        
+      </div>
+    </article>
+    <article class="song" id="rz06">
+      <figure><img src="site-art/songs/RZ06.jpg" alt="Belenon's musicians perform Superstition." loading="lazy"><figcaption>Superstition</figcaption></figure>
+      <div class="body">
+        <p class="num">Rare · Funk, soul</p>
+        <h3>Superstition</h3>
+        <p class="credit">Stevie Wonder · 1972</p>
+        <p>A catalog of bad omens: broken mirrors, seven years of bad luck, writing on the wall. And a warning: when you believe in things you don't understand, you suffer.</p>
+        <div class="liner"><p class="label">Liner notes</p><p>Stevie Wonder signed with Motown at eleven, as Little Stevie Wonder, and had a No. 1 hit at thirteen. "Superstition," with its grinding clavinet riff (Stevie played most of the instruments himself), was meant for the guitarist Jeff Beck, but Motown released Stevie's version first, and it went to No. 1 in 1973. He'd already helped write <i>The Tears of a Clown</i> for Smokey Robinson, so the Choir's common and rare legends share a songwriter.</p></div>
+      </div>
+      <div class="oncard">
+        <p class="label">On the card <span class="cost"><span class="pip p1">1</span><span class="pip pw">W</span><span class="pip pb">B</span></span></p>
+        
+        <ol class="chapters"><li><span class="ch">I</span><div><p class="fx">Each opponent loses 2 life and you gain 2 life.</p><p class="tale">The broken mirror's bad luck falls on them (drain 2).</p></div></li><li><span class="ch">II</span><div><p class="fx">You draw two cards and you lose 2 life.</p><p class="tale">Believing what you don't understand makes you suffer: knowledge at a price (draw two, lose 2 life).</p></div></li><li class="flip"><span class="ch">III</span><div><p class="fx">Exile this Saga, then return it to the battlefield transformed under your control.</p><p class="tale">Stevie and his clavinet, growing with every breath of the Choir.</p></div></li></ol>
+        <p class="back"><span class="label">Through the Seam</span><b>Stevie, Boy Genius</b> · 2/3<span class="ab">LifelinkWhenever you gain a breath, put a +1/+1 counter on Stevie.</span></p>
+        
+      </div>
+    </article>
+</section>
+<section class="guild" id="improvisari"><h2><span class="sigil" style="--sym:url(guild-symbols/improvisari-silhouette.png)" aria-hidden="true"></span>The Improvisari · Jazz</h2>
+    <article class="song" id="cr03">
+      <figure><img src="site-art/songs/CR03.jpg" alt="Belenon's musicians perform Mack the Knife." loading="lazy"><figcaption>Mack the Knife</figcaption></figure>
+      <div class="body">
+        <p class="num">Common · Jazz</p>
+        <h3>Mack the Knife</h3>
+        <p class="credit">Ella Fitzgerald · 1960</p>
+        <p>A murder ballad about Macheath, a dapper criminal whose knife stays out of sight while bodies turn up all over town. Nobody can ever prove a thing.</p>
+        <div class="liner"><p class="label">Liner notes</p><p>The song began as "Die Moritat von Mackie Messer" in Kurt Weill and Bertolt Brecht's <i>Threepenny Opera</i> (Berlin, 1928). Louis Armstrong and Bobby Darin made it an American hit. When Ella Fitzgerald sang it live in Berlin in February 1960, she forgot the words partway through and made up new ones on the spot, even singing about forgetting them. The live record won her two Grammys. She sang for nearly sixty years and was called the First Lady of Song.</p></div>
+      </div>
+      <div class="oncard">
+        <p class="label">On the card <span class="cost"><span class="pip p1">1</span><span class="pip pr">R</span></span></p>
+        
+        <ol class="chapters"><li><span class="ch">I</span><div><p class="fx">Mack the Knife deals 2 damage to target creature or planeswalker.</p><p class="tale">Mack's knife, quick and quiet (2 damage).</p></div></li><li><span class="ch">II</span><div><p class="fx">Exile the top card of your library. Until end of turn, you may play that card.</p><p class="tale">The forgotten lyrics: Ella reaches into the unknown and invents a verse, and you play a card you didn't plan on.</p></div></li><li class="flip"><span class="ch">III</span><div><p class="fx">Exile this Saga, then return it to the battlefield transformed under your control.</p><p class="tale">Ella herself, the First Lady of Song.</p></div></li></ol>
+        <p class="back"><span class="label">Through the Seam</span><b>Ella, First Lady of Song</b> · 2/2</p>
+        
+      </div>
+    </article>
+    <article class="song" id="uz14">
+      <figure><img src="site-art/songs/UZ14.jpg" alt="Belenon's musicians perform The Saints." loading="lazy"><figcaption>The Saints</figcaption></figure>
+      <div class="body">
+        <p class="num">Uncommon · Jazz, New Orleans</p>
+        <h3>The Saints</h3>
+        <p class="credit">Louis Armstrong · 1938</p>
+        <p>"When the Saints Go Marching In" is a hymn about Judgment Day: the singer hopes to be among the saints when they march into heaven. In New Orleans it belongs to the jazz funeral, where a brass band leads the mourners to the cemetery with a slow dirge and then, on the way back, breaks into a joyous strut as the second line dances behind.</p>
+        <div class="liner"><p class="label">Liner notes</p><p>Louis Armstrong grew up in New Orleans, learned the cornet in a home for boys, and became the most influential soloist in jazz. His 1938 recording turned an old spiritual into a jazz standard. In the 1950s the US State Department sent him around the world as a goodwill ambassador, Ambassador Satch, and he helped make <i>Mack the Knife</i> an American hit as well.</p></div>
+      </div>
+      <div class="oncard">
+        <p class="label">On the card <span class="cost"><span class="pip p2">2</span><span class="pip pu">U</span><span class="pip pr">R</span></span></p>
+        
+        <ol class="chapters"><li><span class="ch">I</span><div><p class="fx">Create two 1/1 colorless Musician creature tokens.</p><p class="tale">The brass band gathers at the church and plays the slow march to the cemetery (two Musicians).</p></div></li><li><span class="ch">II</span><div><p class="fx">Creatures you control get +1/+0 and gain haste until end of turn.</p><p class="tale">On the way back, the second line breaks loose and the march becomes a dance: your team gets +1/+0 and haste.</p></div></li><li class="flip"><span class="ch">III</span><div><p class="fx">Exile this Saga, then return it to the battlefield transformed under your control.</p><p class="tale">The saints come marching in, Satchmo at their head, and every Musician plays better with him leading.</p></div></li></ol>
+        <p class="back"><span class="label">Through the Seam</span><b>Satchmo, Jazz Ambassador</b> · 2/3<span class="ab">Other Musicians you control get +1/+1.</span></p>
+        
+      </div>
+    </article>
+    <article class="song" id="rz07">
+      <figure><img src="site-art/songs/RZ07.jpg" alt="Belenon's musicians perform Ornithology." loading="lazy"><figcaption>Ornithology</figcaption></figure>
+      <div class="body">
+        <p class="num">Rare · Bebop</p>
+        <h3>Ornithology</h3>
+        <p class="credit">Charlie Parker · 1946</p>
+        <p>No words, only flight. Bebop tunes open with the head, the melody played by the horns together, then the players take turns soloing over the chords before the head returns. "Ornithology" sets a new, darting melody over the chords of the old standard "How High the Moon."</p>
+        <div class="liner"><p class="label">Liner notes</p><p>Charlie Parker, nicknamed Yardbird or just Bird, helped invent bebop in 1940s New York: fast, harmonically daring jazz for listening instead of dancing. Writing new melodies over an existing song's chords, a <i>contrafact</i>, was a favorite bebop trick. "Ornithology," written with the trumpeter Benny Harris, has a bird joke for a title and was recorded in 1946 with a 19-year-old Miles Davis on trumpet. New York's famous jazz club Birdland was named after Parker.</p></div>
+      </div>
+      <div class="oncard">
+        <p class="label">On the card <span class="cost"><span class="pip p1">1</span><span class="pip pu">U</span><span class="pip pr">R</span></span></p>
+        
+        <ol class="chapters"><li><span class="ch">I, II</span><div><p class="fx">Create a 1/1 blue Bird creature token with flying.</p><p class="tale">The head, played in unison by two horns, Parker and Miles: two Birds take off.</p></div></li><li class="flip"><span class="ch">III</span><div><p class="fx">Until end of turn, whenever you cast an instant or sorcery spell, copy it. You may choose new targets for the copy. Exile this Saga, then return it to the battlefield transformed under your control.</p><p class="tale">The contrafact: new lines over borrowed changes, so every spell you cast this turn is copied. Then Bird takes the solo.</p></div></li></ol>
+        <p class="back"><span class="label">Through the Seam</span><b>Bird, Bebop Pioneer</b> · 2/3<span class="ab">FlyingWhenever you cast an instant or sorcery spell, if you have three or more breaths, draw a card. This ability triggers only once each turn.</span></p>
+        
+      </div>
+    </article>
+</section>
+<section class="guild" id="loopwerk"><h2><span class="sigil" style="--sym:url(guild-symbols/loopwerk-silhouette.png)" aria-hidden="true"></span>Loopwerk Collective · Electronic</h2>
+    <article class="song" id="cg03">
+      <figure><img src="site-art/songs/CG03.jpg" alt="Belenon's musicians perform The Robots." loading="lazy"><figcaption>The Robots</figcaption></figure>
+      <div class="body">
+        <p class="num">Common · Electronic</p>
+        <h3>The Robots</h3>
+        <p class="credit">Kraftwerk · 1978</p>
+        <p>In flat, vocoded voices, the robots describe themselves: they charge their batteries, they're programmed, and they work and dance on command.</p>
+        <div class="liner"><p class="label">Liner notes</p><p>Kraftwerk formed in Düsseldorf in 1970 and built much of their own electronic equipment. Their records, from <i>Autobahn</i> to <i>The Man-Machine</i> (which opens with "The Robots"), are the roots of synth-pop, techno and early hip-hop (Afrika Bambaataa built "Planet Rock" from two of their tracks). For the song's later performances, the band had robot mannequins of themselves built and sent them on stage in their place.</p></div>
+      </div>
+      <div class="oncard">
+        <p class="label">On the card <span class="cost"><span class="pip p3">3</span><span class="pip pg">G</span></span></p>
+        
+        <ol class="chapters"><li><span class="ch">I</span><div><p class="fx">Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.</p><p class="tale">Charging the battery: more energy, which in Magic is mana.</p></div></li><li><span class="ch">II</span><div><p class="fx">Create two 1/1 colorless Musician creature tokens.</p><p class="tale">The robots switch on and start to play (two Musicians).</p></div></li><li class="flip"><span class="ch">III</span><div><p class="fx">Exile this Saga, then return it to the battlefield transformed under your control.</p><p class="tale">The man-machine behind the robots: Kraftwerk, a steady 3/4.</p></div></li></ol>
+        <p class="back"><span class="label">Through the Seam</span><b>Kraftwerk, Man-Machine</b> · 3/4</p>
+        
+      </div>
+    </article>
+    <article class="song" id="uz16">
+      <figure><img src="site-art/songs/UZ16.jpg" alt="Belenon's musicians perform Around the World." loading="lazy"><figcaption>Around the World</figcaption></figure>
+      <div class="body">
+        <p class="num">Uncommon · French house</p>
+        <h3>Around the World</h3>
+        <p class="credit">Daft Punk · 1997</p>
+        <p>Two words and a groove. The title is the only lyric, repeated 144 times on the album version over a looping bass line, and the song is all about the loop: the same thing again and again, and it keeps getting better.</p>
+        <div class="liner"><p class="label">Liner notes</p><p>Thomas Bangalter and Guy-Manuel de Homem-Christo met at school in Paris and named Daft Punk after a review that called their earlier band "daft punky thrash." "Around the World" was on their debut album, <i>Homework</i>. Michel Gondry's video put five troupes of dancers on a spinning stage, each dancing one instrument's part: robots, athletes, synchronized swimmers, and skeletons and mummies. The duo later hid behind their famous robot helmets.</p></div>
+      </div>
+      <div class="oncard">
+        <p class="label">On the card <span class="cost"><span class="pip p1">1</span><span class="pip pb">B</span><span class="pip pg">G</span></span></p>
+        
+        <ol class="chapters"><li><span class="ch">I</span><div><p class="fx">Mill three cards.</p><p class="tale">The record starts to spin (mill three).</p></div></li><li><span class="ch">II</span><div><p class="fx">Return up to one target creature card from your graveyard to your hand.</p><p class="tale">The skeletons and mummies join the dance: a creature returns from your graveyard.</p></div></li><li class="flip"><span class="ch">III</span><div><p class="fx">Exile this Saga, then return it to the battlefield transformed under your control.</p><p class="tale">The robots who made the loop. Every time a Saga reaches its last chapter, they make your whole team stronger.</p></div></li></ol>
+        <p class="back"><span class="label">Through the Seam</span><b>Daft Punk, Robot Duo</b> · 3/3<span class="ab">Whenever the final chapter ability of a Saga you control triggers, put a +1/+1 counter on each creature you control.</span></p>
+        
+      </div>
+    </article>
+    <article class="song" id="rz08">
+      <figure><img src="site-art/songs/RZ08.jpg" alt="Belenon's musicians perform Army of Me." loading="lazy"><figcaption>Army of Me</figcaption></figure>
+      <div class="body">
+        <p class="num">Rare · Electronic, industrial pop</p>
+        <h3>Army of Me</h3>
+        <p class="credit">Björk · 1995</p>
+        <p>A warning to someone who won't stop feeling sorry for themselves: stand up, sort yourself out, and quit complaining, or face an army of me.</p>
+        <div class="liner"><p class="label">Liner notes</p><p>Björk was a child star in Iceland and sang with the Sugarcubes before going solo. "Army of Me," the opening track of her second album <i>Post</i>, was co-written with Graham Massey of 808 State, and Björk has said she wrote it about her brother. Its video was also directed by Michel Gondry, who made Daft Punk's <i>Around the World</i>, so the Loopwerk's two legends share a director.</p></div>
+      </div>
+      <div class="oncard">
+        <p class="label">On the card <span class="cost"><span class="pip p1">1</span><span class="pip pb">B</span><span class="pip pg">G</span></span></p>
+        
+        <ol class="chapters"><li><span class="ch">I</span><div><p class="fx">Each opponent sacrifices a creature.</p><p class="tale">The warning: one more complaint, and someone pays (each opponent sacrifices a creature).</p></div></li><li><span class="ch">II</span><div><p class="fx">Create a token that's a copy of target nonlegendary creature you control.</p><p class="tale">The army starts forming, one of you becoming two (copy a creature).</p></div></li><li class="flip"><span class="ch">III</span><div><p class="fx">Exile this Saga, then return it to the battlefield transformed under your control.</p><p class="tale">The army of me: Björk herself, and every Saga after her brings a fallen friend back.</p></div></li></ol>
+        <p class="back"><span class="label">Through the Seam</span><b>Björk, Avant-Garde Icon</b> · 2/3<span class="ab">DeathtouchWhenever a Saga you control enters, return up to one target creature card with mana value 3 or less from your graveyard to the battlefield.</span></p>
+        
+      </div>
+    </article>
+</section>
+<section class="guild" id="anarkos"><h2><span class="sigil" style="--sym:url(guild-symbols/anarkos-silhouette.png)" aria-hidden="true"></span>Anarkos Riot · Punk</h2>
+    <article class="song" id="cw07">
+      <figure><img src="site-art/songs/CW07.jpg" alt="Belenon's musicians perform Blitzkrieg Bop!." loading="lazy"><figcaption>Blitzkrieg Bop!</figcaption></figure>
+      <div class="body">
+        <p class="num">Common · Punk rock</p>
+        <h3>Blitzkrieg Bop!</h3>
+        <p class="credit">The Ramones · 1976</p>
+        <p>A punk show seen from the crowd: the kids line up, pile in and lose their minds as the band tears through its chant at full speed.</p>
+        <div class="liner"><p class="label">Liner notes</p><p>Four kids from Queens, all using the surname Ramone, played two-minute songs at blistering tempos at CBGB in New York and helped start punk rock. "Blitzkrieg Bop" opened their 1976 debut album and became the most famous chant in punk, still shouted at sports arenas today. They counted off every song the same way, and few lasted much past two minutes.</p></div>
+      </div>
+      <div class="oncard">
+        <p class="label">On the card <span class="cost"><span class="pip p1">1</span><span class="pip pw">W</span></span></p>
+        
+        <ol class="chapters"><li><span class="ch">I</span><div><p class="fx">Create a 1/1 colorless Musician creature token.</p><p class="tale">The kids line up outside the show (a Musician).</p></div></li><li><span class="ch">II</span><div><p class="fx">Creatures you control get +1/+0 until end of turn.</p><p class="tale">The count-in, and the pit goes wild: everyone hits harder.</p></div></li><li class="flip"><span class="ch">III</span><div><p class="fx">Exile this Saga, then return it to the battlefield transformed under your control.</p><p class="tale">The band that started it all, with first strike: faster than anyone else.</p></div></li></ol>
+        <p class="back"><span class="label">Through the Seam</span><b>The Ramones, Fast &amp; Loud</b> · 2/2<span class="ab">First strike</span></p>
+        
+      </div>
+    </article>
+    <article class="song" id="uz18">
+      <figure><img src="site-art/songs/UZ18.jpg" alt="Belenon's musicians perform God Save the Queen." loading="lazy"><figcaption>God Save the Queen</figcaption></figure>
+      <div class="body">
+        <p class="num">Uncommon · Punk rock</p>
+        <h3>God Save the Queen</h3>
+        <p class="credit">Sex Pistols · 1977</p>
+        <p>A sneering "anthem" aimed at the monarchy and a country that, the song says, offers young people no future. It was the song's working title, too.</p>
+        <div class="liner"><p class="label">Liner notes</p><p>The Sex Pistols released it during Queen Elizabeth II's Silver Jubilee in 1977. The BBC banned it and many shops wouldn't stock it, but it reached No. 2 on the official chart, and many believe it really sold enough to be No. 1. That June the band played it on a boat on the River Thames, passing the Houses of Parliament, until police raided the boat. Sid Vicious had joined weeks earlier and could barely play the bass, which didn't matter to anyone.</p></div>
+      </div>
+      <div class="oncard">
+        <p class="label">On the card <span class="cost"><span class="pip p1">1</span><span class="pip pr">R</span><span class="pip pw">W</span></span></p>
+        
+        <ol class="chapters"><li><span class="ch">I</span><div><p class="fx">Create two 1/1 colorless Musician creature tokens.</p><p class="tale">The Jubilee boat party fills up on the Thames (two Musicians).</p></div></li><li><span class="ch">II</span><div><p class="fx">Attach up to one target Equipment you control to target creature you control. That creature gains haste until end of turn.</p><p class="tale">Somebody hands the new kid an instrument and they play anyway (attach an Equipment, with haste).</p></div></li><li class="flip"><span class="ch">III</span><div><p class="fx">Exile this Saga, then return it to the battlefield transformed under your control.</p><p class="tale">Sid, who couldn't really play, and gives every equipped bandmate speed.</p></div></li></ol>
+        <p class="back"><span class="label">Through the Seam</span><b>Sid, No Future</b> · 3/2<span class="ab">HasteEquipped creatures you control get +1/+0 and have haste.</span></p>
+        
+      </div>
+    </article>
+    <article class="song" id="rz09">
+      <figure><img src="site-art/songs/RZ09.jpg" alt="Belenon's musicians perform Because the Night." loading="lazy"><figcaption>Because the Night</figcaption></figure>
+      <div class="body">
+        <p class="num">Rare · Punk, rock</p>
+        <h3>Because the Night</h3>
+        <p class="credit">Patti Smith Group · 1978</p>
+        <p>Desire that aches through the day and finally has its way at night, because the night belongs to lovers, and no one can hurt them then.</p>
+        <div class="liner"><p class="label">Liner notes</p><p>Bruce Springsteen, recording in the same New York studio, started the song and gave the unfinished tape to Patti Smith. She wrote her own words, and it became her biggest hit. A poet before she was a singer, Patti Smith made <i>Horses</i> (1975), one of the founding punk records, and later won the National Book Award for her memoir <i>Just Kids</i>. Her nickname is the punk poet laureate.</p></div>
+      </div>
+      <div class="oncard">
+        <p class="label">On the card <span class="cost"><span class="pip p1">1</span><span class="pip pr">R</span><span class="pip pw">W</span></span></p>
+        
+        <ol class="chapters"><li><span class="ch">I</span><div><p class="fx">Put a +1/+1 counter on each of up to two target creatures you control.</p><p class="tale">Desire builds through the day (counters on two creatures).</p></div></li><li><span class="ch">II</span><div><p class="fx">Exile target tapped creature an opponent controls.</p><p class="tale">Night falls, and no one can hurt them now: exile a tapped creature that came at you.</p></div></li><li class="flip"><span class="ch">III</span><div><p class="fx">Exile this Saga, then return it to the battlefield transformed under your control.</p><p class="tale">The night belongs to Patti, a mentor who grows stronger with every fight.</p></div></li></ol>
+        <p class="back"><span class="label">Through the Seam</span><b>Patti, Punk Poet Laureate</b> · 3/3<span class="ab">MentorAt the beginning of combat on your turn, put a +1/+1 counter on Patti.</span></p>
+        
+      </div>
+    </article>
+</section>
+<section class="guild" id="deltari"><h2><span class="sigil" style="--sym:url(guild-symbols/deltari-silhouette.png)" aria-hidden="true"></span>Deltari Wanderers · Blues</h2>
+    <article class="song" id="cu06">
+      <figure><img src="site-art/songs/CU06.jpg" alt="Belenon's musicians perform Backwater Blues." loading="lazy"><figcaption>Backwater Blues</figcaption></figure>
+      <div class="body">
+        <p class="num">Common · Blues</p>
+        <h3>Backwater Blues</h3>
+        <p class="credit">Bessie Smith · 1927</p>
+        <p>It rains for five days and nights. The river rises, the singer's house is swept away, and she ends up on a hill, looking down at a home she can never go back to.</p>
+        <div class="liner"><p class="label">Liner notes</p><p>Bessie Smith, the Empress of the Blues, was the best-selling blues singer of the 1920s. She wrote "Backwater Blues" after a flood and recorded it in February 1927 with James P. Johnson on piano. That spring, the Great Mississippi Flood drove hundreds of thousands of people from their homes, and her song became the sound of that disaster. She died in a car crash in 1937.</p></div>
+      </div>
+      <div class="oncard">
+        <p class="label">On the card <span class="cost"><span class="pip p3">3</span><span class="pip pu">U</span></span></p>
+        
+        <ol class="chapters"><li><span class="ch">I</span><div><p class="fx">Draw a card.</p><p class="tale">Days of rain, and the water keeps rising (a card).</p></div></li><li><span class="ch">II</span><div><p class="fx">Return up to one target creature an opponent controls to its owner's hand.</p><p class="tale">The flood washes the house away: a creature is swept off the battlefield.</p></div></li><li class="flip"><span class="ch">III</span><div><p class="fx">Exile this Saga, then return it to the battlefield transformed under your control.</p><p class="tale">Bessie on the hill, the Empress of the Blues, singing about what the water took.</p></div></li></ol>
+        <p class="back"><span class="label">Through the Seam</span><b>Bessie, Empress of the Blues</b> · 3/4</p>
+        
+      </div>
+    </article>
+    <article class="song" id="uz20">
+      <figure><img src="site-art/songs/UZ20.jpg" alt="Belenon's musicians perform Got My Mojo Working." loading="lazy"><figcaption>Got My Mojo Working</figcaption></figure>
+      <div class="body">
+        <p class="num">Uncommon · Chicago blues</p>
+        <h3>Got My Mojo Working</h3>
+        <p class="credit">Muddy Waters · 1957</p>
+        <p>He's traveled down to Louisiana to get a mojo, a good-luck charm, and it's working on everyone, except the one woman he wants.</p>
+        <div class="liner"><p class="label">Liner notes</p><p>Written by Preston Foster and first recorded by Ann Cole, it became Muddy Waters's signature, above all in the electrifying version he played at the 1960 Newport Jazz Festival. Muddy left the Mississippi Delta for Chicago in 1943, plugged the Delta blues into an amplifier and set the course for rock 'n' roll. The Rolling Stones named themselves after his song "Rollin' Stone."</p></div>
+      </div>
+      <div class="oncard">
+        <p class="label">On the card <span class="cost"><span class="pip p1">1</span><span class="pip pg">G</span><span class="pip pu">U</span></span></p>
+        
+        <ol class="chapters"><li><span class="ch">I</span><div><p class="fx">Search your library for a basic land card, reveal it, put it into your hand, then shuffle.</p><p class="tale">Down to Louisiana for a mojo hand (find a basic land).</p></div></li><li><span class="ch">II</span><div><p class="fx">Put a +1/+1 counter on each creature you control.</p><p class="tale">The mojo's working: every creature you control grows.</p></div></li><li class="flip"><span class="ch">III</span><div><p class="fx">Exile this Saga, then return it to the battlefield transformed under your control.</p><p class="tale">But it just won't work on you: Muddy arrives and sends that one creature home.</p></div></li></ol>
+        <p class="back"><span class="label">Through the Seam</span><b>Muddy, Rollin&#x27; Stone</b> · 3/3<span class="ab">When Muddy enters, return up to one target creature an opponent controls to its owner's hand.</span></p>
+        
+      </div>
+    </article>
+    <article class="song" id="rz10">
+      <figure><img src="site-art/songs/RZ10.jpg" alt="Belenon's musicians perform The Thrill Is Gone." loading="lazy"><figcaption>The Thrill Is Gone</figcaption></figure>
+      <div class="body">
+        <p class="num">Rare · Blues</p>
+        <h3>The Thrill Is Gone</h3>
+        <p class="credit">B.B. King · 1969</p>
+        <p>The thrill of a love has faded and finally gone. She did him wrong, and now he's free from her spell. She'll be sorry someday, but he's done hurting.</p>
+        <div class="liner"><p class="label">Liner notes</p><p>Roy Hawkins first recorded it in 1951. B.B. King's slow-burning 1969 version, with a string section, won him a Grammy and became his signature song, played at nearly every show for the rest of his life. He named all his guitars Lucille, after a woman two men fought over in a dance hall fire, to remind himself never to do something that foolish again.</p></div>
+      </div>
+      <div class="oncard">
+        <p class="label">On the card <span class="cost"><span class="pip p1">1</span><span class="pip pg">G</span><span class="pip pu">U</span></span></p>
+        
+        <ol class="chapters"><li><span class="ch">I</span><div><p class="fx">Return up to one target nonland permanent to its owner's hand.</p><p class="tale">The thrill is gone, and so is whatever you send away (bounce a nonland permanent).</p></div></li><li><span class="ch">II</span><div><p class="fx">Draw two cards.</p><p class="tale">Free from her spell, he sees clearly again (draw two).</p></div></li><li class="flip"><span class="ch">III</span><div><p class="fx">Exile this Saga, then return it to the battlefield transformed under your control.</p><p class="tale">B.B. and Lucille, the King of the Blues, getting stronger with every breath of the blues.</p></div></li></ol>
+        <p class="back"><span class="label">Through the Seam</span><b>B.B., King of the Blues</b> · 3/3<span class="ab">Ward <span class="pip p2">2</span>As long as you have three or more breaths, B.B. gets +2/+2.</span></p>
+        
+      </div>
+    </article>
+</section>
+<section class="guild" id="finale"><h2>Finale</h2>
+    <article class="song" id="mz01">
+      <figure><img src="site-art/songs/MZ01.jpg" alt="Belenon's musicians perform Requiem in D Minor." loading="lazy"><figcaption>Requiem in D Minor</figcaption></figure>
+      <div class="body">
+        <p class="num">Mythic rare · Requiem mass</p>
+        <h3>Requiem in D Minor</h3>
+        <p class="credit">Wolfgang Amadeus Mozart · 1791</p>
+        <p>A mass for the dead in many parts: the <i>Introitus</i>, praying for eternal rest; the <i>Dies irae</i>, the day of wrath; and the <i>Lacrimosa</i>, the day of tears. Mozart never finished it.</p>
+        <div class="liner"><p class="label">Liner notes</p><p>In 1791 a stranger brought Mozart an anonymous commission for a requiem. It came from Count Walsegg, who meant to pass it off as his own work in memory of his late wife. Mozart fell ill while writing it and died that December, at 35, eight bars into the <i>Lacrimosa</i>. His student Franz Xaver Süssmayr finished it. The legend that grew up, that Mozart believed he was writing his own requiem, inspired Peter Shaffer's play and the film <i>Amadeus</i>, which made Antonio Salieri his rival.</p></div>
+      </div>
+      <div class="oncard">
+        <p class="label">On the card <span class="cost"><span class="pip p1">1</span><span class="pip pr">R</span><span class="pip pw">W</span></span></p>
+        
+        <ol class="chapters"><li><span class="ch">I</span><div><p class="fx">Study.</p><p class="tale">The commission: a requiem begins with a study (the Study keyword).</p></div></li><li><span class="ch">II</span><div><p class="fx">Exile target nonland permanent an opponent controls.</p><p class="tale">The day of wrath, which takes something away forever (exile a nonland permanent).</p></div></li><li class="flip"><span class="ch">III</span><div><p class="fx">Exile this Saga, then return it to the battlefield transformed under your control.</p><p class="tale">The <i>Lacrimosa</i>, where the music stops where Mozart did, and he walks through the Seam.</p></div></li></ol>
+        <p class="back"><span class="label">Through the Seam</span><b>Amadeus, Prodigal Son</b> · 3/3<span class="ab">Whenever Amadeus attacks, create a 1/1 colorless Musician creature token that's tapped and attacking.When Amadeus dies, return this card to the battlefield under its owner's control.</span></p>
+        <p class="aside"><b>When Amadeus dies</b>, the card returns as the Requiem, which plays again and calls him back: a composer forever writing his own requiem.</p>
+      </div>
+    </article>
+</section>
+
+  <section class="next">
+    <h2>Keep Listening</h2>
+    <div class="btns">
+      <a class="btn" href="guilds.html">Meet the guilds</a>
+      <a class="btn ghost" href="story.html">Read the story</a>
+      <a class="btn ghost" href="card-gallery.html">View the cards</a>
+    </div>
+  </section>
+</main>
+
+<script>
+// The jump bar lights up the guild in view
+(() => {
+  const links = Object.fromEntries([...document.querySelectorAll(".jump a")].map(a => [a.hash.slice(1), a]));
+  const ids = Object.keys(links).filter(id => document.getElementById(id));
+  let lit = null;
+  const mark = () => {
+    let cur = null;
+    for (const id of ids) if (document.getElementById(id).getBoundingClientRect().top <= innerHeight * 0.33) cur = id;
+    if (cur === lit) return;
+    if (lit) links[lit].classList.remove("on");
+    if (cur) { links[cur].classList.add("on"); links[cur].scrollIntoView({ block: "nearest", inline: "nearest" }); }
+    lit = cur;
+  };
+  addEventListener("scroll", mark, { passive: true });
+  // a #guild or #code link from another page lands on it once the images above have loaded
+  const jumpToHash = () => { const t = location.hash && document.getElementById(location.hash.slice(1)); if (t) t.scrollIntoView({ behavior: "instant" }); };
+  addEventListener("load", () => setTimeout(() => { jumpToHash(); mark(); }, 300));
+})();
+</script>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..100,500..900&family=Open+Sans:wght@400..700&display=swap">
+<style>
+.site-subnav { background: #0d0e13; border-top: 1px solid #2c303c; padding: 28px 16px 8px; text-align: center; }
+.site-subnav h2 { margin: 0 0 14px; color: #e8b64c; font: 800 1rem/1 "Mona Sans", "Arial Narrow", sans-serif; font-stretch: 92%; text-transform: uppercase; letter-spacing: normal; border: 0; padding: 0; }
+.site-subnav ul { list-style: none; margin: 0 auto; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; max-width: 1000px; }
+.site-subnav a, .site-subnav span { display: block; padding: 9px 16px; border-radius: 999px; font: 700 1rem/1 "Mona Sans", "Arial Narrow", sans-serif; font-stretch: 92%;
+  text-transform: uppercase; text-decoration: none; color: #f1ede4; box-shadow: inset 0 0 0 1.5px #e8b64c; }
+.site-subnav a:hover { background: #e8b64c; color: #1a1206; }
+.site-subnav span { color: #b9b4a8; box-shadow: inset 0 0 0 1.5px #2c303c; }
+.site-foot { background: #0d0e13; color: #b9b4a8; padding: 20px 16px 36px; font: 14px/1.5 "Open Sans", Helvetica, Arial, sans-serif; text-align: center; }
+</style>
+<nav class="site-subnav" aria-label="More from Belenon"><h2>Explore Belenon</h2><ul><li><a href="index.html">Home</a></li><li><a href="story.html">The Story</a></li><li><span aria-current="page">The Songbook</span></li><li><a href="guilds.html">The Guilds</a></li><li><a href="mechanics-article.html">Mechanics</a></li><li><a href="draft-archetypes.html">Draft Archetypes</a></li><li><a href="card-gallery.html">Card Gallery</a></li><li><a href="showcase-article.html">Showcase Treatments</a></li><li><a href="sample-pack.html">Crack a Pack</a></li></ul></nav>
+<footer class="wrap">Unofficial fan content, not approved or endorsed by Wizards of the Coast. Magic: The Gathering is a trademark of Wizards of the Coast LLC.</footer>
+</html>

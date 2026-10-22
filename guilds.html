@@ -110,17 +110,17 @@
 .site-subnav span { color: #b9b4a8; box-shadow: inset 0 0 0 1.5px #2c303c; }
 .site-foot { background: #0d0e13; color: #b9b4a8; padding: 20px 16px 36px; font: 14px/1.5 "Open Sans", Helvetica, Arial, sans-serif; text-align: center; }
 </style>
-<nav class="site-subnav" aria-label="More from Belenon"><h2>Explore Belenon</h2><ul><li><a href="index.html">Home</a></li><li><a href="story.html">The Story</a></li><li><span aria-current="page">The Guilds</span></li><li><a href="mechanics-article.html">Mechanics</a></li><li><a href="draft-archetypes.html">Draft Archetypes</a></li><li><a href="card-gallery.html">Card Gallery</a></li><li><a href="showcase-article.html">Showcase Treatments</a></li><li><a href="sample-pack.html">Crack a Pack</a></li></ul></nav>
+<nav class="site-subnav" aria-label="More from Belenon"><h2>Explore Belenon</h2><ul><li><a href="index.html">Home</a></li><li><a href="story.html">The Story</a></li><li><a href="songbook.html">The Songbook</a></li><li><span aria-current="page">The Guilds</span></li><li><a href="mechanics-article.html">Mechanics</a></li><li><a href="draft-archetypes.html">Draft Archetypes</a></li><li><a href="card-gallery.html">Card Gallery</a></li><li><a href="showcase-article.html">Showcase Treatments</a></li><li><a href="sample-pack.html">Crack a Pack</a></li></ul></nav>
 <footer class="wrap">Unofficial fan content, not approved or endorsed by Wizards of the Coast. Magic: The Gathering is a trademark of Wizards of the Coast LLC.</footer>
 
-<script src="guilds.js?v=2696044a"></script>
+<script src="guilds.js?v=1e585213"></script>
 <script>
 const byId = Object.fromEntries(GUILDS.map(g => [g.id, g]));
 const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
 // Each contest is the challenger's battle card; site-art/battles/<challenger>.jpg is that card rendered from the gallery
 const rival = (label, other, [challenger, , contest, why]) => `<div class="rival"><p class="label">${label}</p>
   <h4><a href="#${other.id}">${esc(other.name)}</a></h4><p class="contest"><span tabindex="0">${esc(contest)}</span><span class="battle-pop" aria-hidden="true">
-  <img data-src="site-art/battles/${challenger}.jpg?v=df76f64c" alt=""></span></p><p>${esc(why)}</p></div>`;
+  <img data-src="site-art/battles/${challenger}.jpg?v=5629fe49" alt=""></span></p><p>${esc(why)}</p></div>`;
 
 document.getElementById("jump").innerHTML = GUILDS.map(g =>
   `<li><a href="#${g.id}" title="${esc(g.name)}"><img src="site-art/emblems/${g.id}.jpg" alt="${esc(g.name)}"></a></li>`).join("");
@@ -136,7 +136,7 @@ document.getElementById("guilds").innerHTML = GUILDS.map(g => {
     </div>
     <p class="creed">“${esc(g.creed)}”</p>
     <div class="body">
-      <figure><img src="site-art/guilds/${g.id}.jpg?v=df76f64c" alt="Card art for ${esc(g.art)}" loading="lazy"><figcaption>${esc(g.art)}</figcaption></figure>
+      <figure><img src="site-art/guilds/${g.id}.jpg?v=5629fe49" alt="Card art for ${esc(g.art)}" loading="lazy"><figcaption>${esc(g.art)}</figcaption></figure>
       <div>
         <h3>Who they are</h3><p>${esc(g.who)}</p>
         <h3>At the Gale</h3><p>${esc(g.gale)}</p>
@@ -175,7 +175,7 @@ const cardPop = document.body.appendChild(Object.assign(document.createElement("
   innerHTML: '<img alt="">' }));
 const showCard = e => {
   const t = e.currentTarget, r = t.getBoundingClientRect(), img = cardPop.firstChild, w = cardPop.offsetWidth, h = w * 698 / 500;
-  img.src = `site-art/performers/${t.dataset.card}.jpg?v=df76f64c`;
+  img.src = `site-art/performers/${t.dataset.card}.jpg?v=5629fe49`;
   const bars = document.querySelector(".jump").getBoundingClientRect().bottom;
   const top = r.top - bars >= h + 12 ? r.top - h - 10 : r.bottom + 10;
   cardPop.style.left = Math.max(8, Math.min(innerWidth - w - 8, r.left + r.width / 2 - w / 2)) + "px";
