@@ -760,9 +760,9 @@ body { background: var(--bg); color: var(--ink); font-family: var(--ui); font-si
 .etude .tb-top { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; justify-content: safe center; }
 .mastered-band { flex: none; display: flex; align-items: stretch; gap: 2cqw; min-height: 10cqw; margin: .25em -1.8cqw 0 -1.6cqw; padding: 0 1.8cqw 0 0;
   background: linear-gradient(180deg, rgba(20,24,40,.10), rgba(20,24,40,.05)); border-top: .35cqw solid rgba(0,0,0,.45); }
-.mastered-band .mtab { flex: none; width: 13.5cqw; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .3cqw; padding-right: 2cqw; box-sizing: border-box;
+.mastered-band .mtab { flex: none; width: 15.5cqw; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .3cqw; padding: 0 2.6cqw 0 1.4cqw; box-sizing: border-box;  /* left padding keeps MASTERED off the frame edge (2026-10-23) */
   background: linear-gradient(180deg, #2b2e36, #0e0f12); color: #f6f6f4; clip-path: polygon(0 0, 82% 0, 100% 50%, 82% 100%, 0 100%); overflow: hidden; }
-.mastered-band .mtab b { line-height: 1; font-family: "Beleren SC", var(--card-name); font-weight: 700; font-size: 2.2cqw; letter-spacing: .06em; text-transform: uppercase; }
+.mastered-band .mtab b { line-height: 1; font-family: "Beleren SC", var(--card-name); font-weight: 700; font-size: 2.2cqw; letter-spacing: .03em; text-transform: uppercase; white-space: nowrap; }
 .mastered-band .mtab span { font-family: var(--card-name); font-weight: 700; font-size: 6cqw; line-height: .9; }
 .mastered-band .mtext { padding: 1cqw 0; display: flex; flex-direction: column; justify-content: center; }
 .mastered-band p { margin: 0; }
