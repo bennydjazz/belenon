@@ -1579,7 +1579,10 @@ body { background: var(--bg); font-family: var(--body); margin: 0; }
       // a Saga creature front keeps its chapters above the P/T tab: scrollHeight ignores the bottom padding that reserves it, so measure
       const clearsTab = () => { if (!box.closest(".flip")) return true; const last = box.lastElementChild; if (!last) return true;
         return last.getBoundingClientRect().bottom <= box.getBoundingClientRect().bottom - parseFloat(getComputedStyle(box).paddingBottom) + 1; };
-      const over = () => box.scrollHeight > box.clientHeight + 1 || !clearsTab() || [...box.querySelectorAll(":scope > .tb-top")].some(t => t.scrollHeight > t.clientHeight + 1);
+      // centred text that overflows even a pixel spills upward onto the text box's top rule (Join the band cards, 2026-10-23), so the first line must clear the top padding
+      const clearsTop = () => { const first = box.firstElementChild; if (!first) return true;
+        return first.getBoundingClientRect().top >= box.getBoundingClientRect().top + parseFloat(getComputedStyle(box).paddingTop) - .5; };
+      const over = () => box.scrollHeight > box.clientHeight || !clearsTop() || !clearsTab() || [...box.querySelectorAll(":scope > .tb-top")].some(t => t.scrollHeight > t.clientHeight + 1);
       while (over() && size > min) { size -= .25; box.style.fontSize = size + "px"; }
     };
     // does any line of text reach into the P/T box? (a small gap, as printed, counts as touching)
