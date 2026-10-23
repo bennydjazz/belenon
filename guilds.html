@@ -120,7 +120,7 @@ const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
 // Each contest is the challenger's battle card; site-art/battles/<challenger>.jpg is that card rendered from the gallery
 const rival = (label, other, [challenger, , contest, why]) => `<div class="rival"><p class="label">${label}</p>
   <h4><a href="#${other.id}">${esc(other.name)}</a></h4><p class="contest"><span tabindex="0">${esc(contest)}</span><span class="battle-pop" aria-hidden="true">
-  <img data-src="site-art/battles/${challenger}.jpg?v=484d7ede" alt=""></span></p><p>${esc(why)}</p></div>`;
+  <img data-src="site-art/battles/${challenger}.jpg?v=87481095" alt=""></span></p><p>${esc(why)}</p></div>`;
 
 document.getElementById("jump").innerHTML = GUILDS.map(g =>
   `<li><a href="#${g.id}" title="${esc(g.name)}"><img src="site-art/emblems/${g.id}.jpg" alt="${esc(g.name)}"></a></li>`).join("");
@@ -136,7 +136,7 @@ document.getElementById("guilds").innerHTML = GUILDS.map(g => {
     </div>
     <p class="creed">“${esc(g.creed)}”</p>
     <div class="body">
-      <figure><img src="site-art/guilds/${g.id}.jpg?v=484d7ede" alt="Card art for ${esc(g.art)}" loading="lazy"><figcaption>${esc(g.art)}</figcaption></figure>
+      <figure><img src="site-art/guilds/${g.id}.jpg?v=87481095" alt="Card art for ${esc(g.art)}" loading="lazy"><figcaption>${esc(g.art)}</figcaption></figure>
       <div>
         <h3>Who they are</h3><p>${esc(g.who)}</p>
         <h3>At the Gale</h3><p>${esc(g.gale)}</p>
@@ -175,7 +175,7 @@ const cardPop = document.body.appendChild(Object.assign(document.createElement("
   innerHTML: '<img alt="">' }));
 const showCard = e => {
   const t = e.currentTarget, r = t.getBoundingClientRect(), img = cardPop.firstChild, w = cardPop.offsetWidth, h = w * 698 / 500;
-  img.src = `site-art/performers/${t.dataset.card}.jpg?v=484d7ede`;
+  img.src = `site-art/performers/${t.dataset.card}.jpg?v=87481095`;
   const bars = document.querySelector(".jump").getBoundingClientRect().bottom;
   const top = r.top - bars >= h + 12 ? r.top - h - 10 : r.bottom + 10;
   cardPop.style.left = Math.max(8, Math.min(innerWidth - w - 8, r.left + r.width / 2 - w / 2)) + "px";

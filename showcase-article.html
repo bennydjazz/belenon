@@ -743,7 +743,7 @@ body { background: var(--bg); color: var(--ink); font-family: var(--ui); font-si
    target number on its bowl. The defense symbol stays alone in the corner. */
 .contest-mark { position: absolute; left: 14.4cqw; top: 3.73cqw; width: 9.6cqw; height: 9.6cqw; }
 .contest-mark svg, .win-cup svg { width: 100%; height: 100%; display: block; }
-.battle-land .textbox.contest { padding: 0; justify-content: flex-start; }
+.battle-land .textbox.contest { padding: 0; justify-content: flex-start; overflow: visible; }  /* the win cup stands a little proud of the band's foot by design; fit() keeps the text and band inside */
 .contest .tb-top { margin: auto 0; padding: 1.07cqw 2.13cqw 1.33cqw 1.87cqw; }
 .contest .tb-top p { margin: 0 0 .28em; } .contest .tb-top p:last-child { margin-bottom: 0; }
 .win-band { flex: none; display: flex; align-items: center; gap: 2.13cqw; padding: .8cqw 2.13cqw .8cqw 1.6cqw; min-height: 7.5cqw; box-sizing: border-box;
@@ -1570,11 +1570,10 @@ body { background: var(--bg); font-family: var(--body); margin: 0; }
       const clearsTop = () => { const cs = getComputedStyle(box); if (cs.justifyContent !== "center") return true;
         const first = [...box.children].find(e => !["absolute", "fixed"].includes(getComputedStyle(e).position)); if (!first) return true;
         return first.getBoundingClientRect().top >= box.getBoundingClientRect().top + parseFloat(cs.paddingTop) - .5; };
-      // a Contest's win cup pokes past its band on purpose, so measure the text itself there, not the box's scroll height
+      // a Contest's text and win band must fit; its cup may stand proud of the band (the box shows overflow), so it isn't measured
       const textOver = () => { if (!box.classList.contains("contest")) return box.scrollHeight > box.clientHeight;
-        // layout coordinates (offsetTop) ignore the battle's rotation; walk up to the text box
-        const bottomIn = e => { let y = e.offsetHeight; for (let n = e; n && n !== box; n = n.offsetParent) { y += n.offsetTop; if (n.offsetParent && !box.contains(n.offsetParent) && n.offsetParent !== box) { y -= box.offsetTop; break; } } return y; };
-        return [...box.querySelectorAll("p")].some(e => bottomIn(e) > box.clientHeight + .5); };
+        const bottom = e => { let y = e.offsetHeight; for (let n = e; n && n !== box; n = n.offsetParent) y += n.offsetTop; return y; };
+        return [...box.querySelectorAll("p, .win-band")].some(e => bottom(e) > box.clientHeight + .5); };
       const over = () => textOver() || !clearsTop() || !clearsTab() || [...box.querySelectorAll(":scope > .tb-top")].some(t => t.scrollHeight > t.clientHeight + 1);
       while (over() && size > min) { size -= .25; box.style.fontSize = size + "px"; }
     };
