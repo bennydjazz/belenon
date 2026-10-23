@@ -759,7 +759,7 @@ body { background: var(--bg); color: var(--ink); font-family: var(--ui); font-si
 .etude .textbox.has-band { justify-content: flex-start; padding-bottom: 0; }
 .etude .tb-top { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; justify-content: safe center; }
 .mastered-band { flex: none; display: flex; align-items: stretch; gap: 2cqw; min-height: 10cqw; margin: .25em -1.8cqw 0 -1.6cqw; padding: 0 1.8cqw 0 0;
-  background: linear-gradient(180deg, rgba(20,24,40,.10), rgba(20,24,40,.05)); border-top: .35cqw solid rgba(0,0,0,.45); }
+  background: linear-gradient(180deg, rgba(20,24,40,.06), rgba(20,24,40,0)), var(--band-tint, linear-gradient(rgba(20,24,40,.06), rgba(20,24,40,.06))); border-top: .35cqw solid rgba(0,0,0,.45); }
 .mastered-band .mtab { flex: none; width: 15.5cqw; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .3cqw; padding: 0 2.6cqw 0 1.4cqw; margin: .8cqw 0; box-sizing: border-box;  /* left padding keeps MASTERED off the frame edge; equal top and bottom margins centre the tab in the band (2026-10-23) */
   background: linear-gradient(180deg, #2b2e36, #0e0f12); color: #f6f6f4; clip-path: polygon(0 0, 82% 0, 100% 50%, 82% 100%, 0 100%); overflow: hidden; }
 .mastered-band .mtab b { line-height: 1; font-family: "Beleren SC", var(--card-name); font-weight: 700; font-size: 2.2cqw; letter-spacing: .03em; text-transform: uppercase; white-space: nowrap; }
@@ -1110,6 +1110,15 @@ body { background: var(--bg); color: var(--ink); font-family: var(--ui); font-si
 
   const CH = { I: 1, II: 2, III: 3, IV: 4, V: 5, VI: 6 };
   const MASTERED = /^<b>Mastered (\d+)\+ —<\/b>\s*(.*)$/;
+  // The Mastered band takes a light tint of the card's colours, as Spacecraft's Station band does (2026-10-23): a hybrid
+  // Technique blends its first colour into its second across the band, like its frame (40-60 split, first colour on the left)
+  const BAND_TINT = { W: "rgba(214,190,120,.24)", U: "rgba(46,110,184,.18)", B: "rgba(48,40,58,.20)", R: "rgba(196,58,40,.18)", G: "rgba(44,124,62,.18)" };
+  function bandTint(cost) {
+    const cols = [...new Set((cost || "").match(/[WUBRG]/g) || [])];
+    if (!cols.length) return "";
+    const a = BAND_TINT[cols[0]], b = BAND_TINT[cols[1] || cols[0]];
+    return `--band-tint:linear-gradient(90deg, ${a} 0 40%, ${b} 60% 100%)`;
+  }
   function rulesHTML(face, saga) {
     // a vanilla face (a P/T or flavor, no rules): just the flavor, with no flavor bar above it, as printed
     if (!face.text) return face.flavor || /^\d+\/\d+$/.test(face.pt || "") ? flavorHTML(face).replace('<div class="flavor-bar" aria-hidden="true"></div>', "") : "<p><i>Rules text to come.</i></p>";
@@ -1117,7 +1126,7 @@ body { background: var(--bg); color: var(--ink); font-family: var(--ui); font-si
     if (!saga && /\bTechnique\b/.test(face.type) && lines(face).some(l => MASTERED.test(l))) {
       const all = lines(face), k = all.findIndex(l => MASTERED.test(l)), m = all[k].match(MASTERED);
       const para = l => `<p${/^•/.test(l) ? ' class="mode"' : ""}>${withPips(l)}</p>`;
-      return `<div class="tb-top">${all.slice(0, k).map(para).join("")}</div><div class="mastered-band"><div class="mtab"><b>Mastered</b><span>${m[1]}+</span></div><div class="mtext">${[m[2], ...all.slice(k + 1)].map(para).join("")}</div></div>` + flavorHTML(face);
+      return `<div class="tb-top">${all.slice(0, k).map(para).join("")}</div><div class="mastered-band" style="${bandTint(face.cost)}"><div class="mtab"><b>Mastered</b><span>${m[1]}+</span></div><div class="mtext">${[m[2], ...all.slice(k + 1)].map(para).join("")}</div></div>` + flavorHTML(face);
     }
     return lines(face).map(l => {
       const m = saga && l.match(ROMAN);
