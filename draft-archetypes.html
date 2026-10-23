@@ -1580,8 +1580,10 @@ body { background: var(--bg); font-family: var(--body); margin: 0; }
       const clearsTab = () => { if (!box.closest(".flip")) return true; const last = box.lastElementChild; if (!last) return true;
         return last.getBoundingClientRect().bottom <= box.getBoundingClientRect().bottom - parseFloat(getComputedStyle(box).paddingBottom) + 1; };
       // centred text that overflows even a pixel spills upward onto the text box's top rule (Join the band cards, 2026-10-23), so the first line must clear the top padding
-      const clearsTop = () => { const first = box.firstElementChild; if (!first) return true;
-        return first.getBoundingClientRect().top >= box.getBoundingClientRect().top + parseFloat(getComputedStyle(box).paddingTop) - .5; };
+      // only centred boxes spill upward; Sagas start at the top and their chapter rail sits above the padding on purpose
+      const clearsTop = () => { const cs = getComputedStyle(box); if (cs.justifyContent !== "center") return true;
+        const first = [...box.children].find(e => !["absolute", "fixed"].includes(getComputedStyle(e).position)); if (!first) return true;
+        return first.getBoundingClientRect().top >= box.getBoundingClientRect().top + parseFloat(cs.paddingTop) - .5; };
       const over = () => box.scrollHeight > box.clientHeight || !clearsTop() || !clearsTab() || [...box.querySelectorAll(":scope > .tb-top")].some(t => t.scrollHeight > t.clientHeight + 1);
       while (over() && size > min) { size -= .25; box.style.fontSize = size + "px"; }
     };
